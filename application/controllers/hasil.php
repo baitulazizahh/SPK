@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Hasil extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,16 +20,16 @@ class Admin extends CI_Controller {
 	 */
 	public function index()
 	{
-		// $this->load->model('m_home');
-		// $data['nilai'] = $this->m_penilaian->tampil_data()->result();
-		$data['title']= 'Admin';
+		// $this->load->model('m_perhitungan');
+		// $data['alternatif'] = $this->m_perhitungan->tampil_data()->result();
+		$title['title']= 'Hasil akhir';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
-		$this->load->view('templates/topbar',$user);
-		$this->load->view('home');
+		$this->load->view('templates/topbar', $user);
+		$this->load->view('hasil');
 		// $this->load->view('templates/footer');
 		
 	}

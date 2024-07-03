@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Penilaian extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,19 +18,34 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+
+	public function __construct() {
+        parent::__construct();
+        $this->load->model('m_penilaian');
+    }
 	public function index()
 	{
-		// $this->load->model('m_home');
-		// $data['nilai'] = $this->m_penilaian->tampil_data()->result();
-		$data['title']= 'Admin';
+		$title['title']= 'Penilaian';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
-		$this->load->view('templates/header',$data);
+		$this->load->model('m_penilaian');
+		$data['nilai'] = $this->m_penilaian->tampil_data()->result();
+		
+
+		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
-		$this->load->view('templates/topbar',$user);
-		$this->load->view('home');
+		$this->load->view('templates/topbar', $user);
+		$this->load->view('penilaian', $data);
 		// $this->load->view('templates/footer');
 		
 	}
+
+	public function hapus($id){
+        $where = array ('id_penilaian'=> $id);
+        $this->m_penilaian->hapus_data($where,'tb_penilaian');
+        redirect('penilaian/index');
+
+    }
+
 }

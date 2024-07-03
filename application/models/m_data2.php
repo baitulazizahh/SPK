@@ -1,12 +1,12 @@
 <?php 
 
-class M_data extends CI_Model{
+class M_alternatif extends CI_Model{
     public function tampil_data(){
-        return $this->db->get('tb_kriteria');
+        return $this->db->get('tb_alternatif');
     }
 
     public function input_data($data){
-        return $this->db->insert('tb_kriteria', $data);
+        return $this->db->insert('tb_alternatif', $data);
      }
 
     public function hapus_data($where, $table){
