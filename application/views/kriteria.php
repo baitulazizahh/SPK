@@ -40,11 +40,6 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Kriteria</h1>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
-
-                        <!-- <a href="list-kriteria.php" class="btn btn-primary ">
-                            <span class="icon text-white-70"><i class="fas fa-plus"></i></span>
-                            <span class="text"> Tambah data</span>
-                        </a> -->
                     </div>
                     
                     <!-- DataTales Example -->
@@ -71,7 +66,7 @@
                                         <tr>
                                             <td class="text-center"><?php echo $data->id_kriteria ?></td>
                                             <td><?php echo $data->nama_kriteria ?></td>
-                                            <td><?php echo $data->jenis_kriteria ?></td>
+                                            <td class="text-center"><?php echo $data->jenis_kriteria ?></td>
                                             <td class="text-center"><?php echo $data->bobot ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->

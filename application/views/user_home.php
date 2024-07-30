@@ -23,24 +23,82 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Alternatif</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th>Nama Usaha</th>
+                                            <th>Status</th>
+                                            <th>Detail Permohonan</th>
                                         </tr>
                                        
                                     </thead>
                                     <tbody>
-                                    
-                                       
+                                        <tr>
+                                            <td class= "text-center">1</td>
+                                            <td>Usaha</td>
+                                            <td class= ><div class="status-containe text-center">
+                                                <div class="status diterima">Diterima</div></div>
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class= "text-center">1</td>
+                                            <td>Usaha</td>
+                                            <td class= ><div class="status-containe text-center">
+                                                <div class="status diproses">Diproses</div></div>
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class= "text-center">1</td>
+                                            <td>Usaha</td>
+                                            <td class= ><div class="status-containe text-center">
+                                                <div class="status ditolak">Ditolak</div></div>
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <!DOCTYPE html>
+<html lang="en">
+
+    <style>
+         .status {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 0px;
+            font-size: 12px;
+            border-radius: 10px;
+            color: #fff;
+            text-align: center;
+            font-family: inherit;
+        }
+        .status.diterima {
+            background-color: #28a745;
+        }
+        .status.ditolak {
+            background-color: #dc3545;
+        }
+        .status.diproses {
+            background-color: #ffc107;
+            color: #000;
+        }
+    </style>
+
+<body>
+    <div class="status-container">
+        <div class="status diterima">Diterima</div>
+        <div class="status ditolak">Ditolak</div>
+        <div class="status diproses">Diproses</div>
+    </div>
+</body>
+</html>
 
                 </div>
                 <!-- /.container-fluid -->

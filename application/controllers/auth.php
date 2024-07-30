@@ -34,49 +34,59 @@ class Auth extends CI_Controller {
     private function _login(){
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-
-        $user =$this->db->get_where('tb_user', ['email' => $email])->row_array();
+    
        
-        //jika user ada di database
+    
+        // Mengambil data user dari database
+        $user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
+        
+      
         if($user){
-            //jika user aktif
-            if($user['is_active']==1){
-                // cek passsword
+            if($user['is_active'] == 1){
+                // // Debugging: Menampilkan hasil password verification
+                // echo "<h3>Debugging Password Verification</h3>";
+                // $is_password_correct = password_verify($password, $user['password']);
+                // var_dump($is_password_correct);
+                // if($is_password_correct) {
+                //     $data = [
+                //         'email' => $user['email'],
+                //         'id_role' => $user['id_role'],
+                //     ];
+                //     $this->session->set_userdata($data);
+                //     echo "Redirecting...";
+                //     if($user['id_role'] == 1) {
+                //         redirect('admin');
+                //     } else {
+                //         redirect('user');
+                //     }
                 if(password_verify($password, $user['password'])){
-                    $data =[
-                        'email' =>$user['email'],
-                        'id_role' =>$user['id_role'],
+                    $data = [
+                        'email' => $user['email'],
+                        'id_role' => $user['id_role'],
                     ];
                     $this->session->set_userdata($data);
-                    if($user['id_role']==1){
+                    if($user['id_role'] == 1){
                         redirect('admin');
-                    }
-                    else{
+                    } else {
                         redirect('user');
                     }
-                   
-
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Password salah!
-              </div>');
-                redirect('auth');
+                    echo "Password salah!";
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
+                    redirect('auth');
                 }
-            }
-            else{
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-                Email belum diaktivasi!
-              </div>');
+            } else {
+                echo "Email belum diaktivasi!";
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum diaktivasi!</div>');
                 redirect('auth');
             }
-
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Email belum terdaftar!
-          </div>');
+            echo "Email belum terdaftar!";
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar!</div>');
             redirect('auth');
         }
     }
+    
 
     public function registration(){
 
