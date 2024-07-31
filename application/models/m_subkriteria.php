@@ -19,6 +19,11 @@ class M_subkriteria extends CI_Model{
             $this->db->where($where);
             $this->db->delete($table);
         }
+        public function update_data($id_subkriteria, $data) {
+            $this->db->where('id_subkriteria', $id_subkriteria);
+            return $this->db->update('tb_subkriteria', $data);
+        }
+        
     
 }
 ?>

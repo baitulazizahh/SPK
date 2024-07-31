@@ -53,7 +53,7 @@ class Subkriteria extends CI_Controller {
 			$this->load->view('templates/sidebar');
 			$this->load->view('templates/topbar', $data2);
 			$this->load->view('subkriteria', $data);
-			$this->load->view('templates/footer');
+			// $this->load->view('templates/footer');
 
 		}
 	
@@ -82,6 +82,30 @@ class Subkriteria extends CI_Controller {
 			redirect('subkriteria/index');
 	
 		}
+
+
+		public function update() {
+			$id_subkriteria = $this->input->post('id_subkriteria');
+			$nama_subkriteria = $this->input->post('nama_subkriteria');
+			$nilai = $this->input->post('nilai');
+		
+			$data = array(
+				'nama_subkriteria' => $nama_subkriteria,
+				'nilai' => $nilai
+			);
+		
+			$this->load->model('m_subkriteria');
+			$update = $this->m_subkriteria->update_data($id_subkriteria, $data);
+		
+			// if ($update) {
+			// 	$this->session->set_flashdata('message', 'Data berhasil diperbarui.');
+			// } else {
+			// 	$this->session->set_flashdata('message', 'Gagal memperbarui data.');
+			// }
+		
+			redirect('subkriteria');
+		}
+		
 	}
 	
 	
