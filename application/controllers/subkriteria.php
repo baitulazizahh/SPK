@@ -22,9 +22,7 @@ class Subkriteria extends CI_Controller {
 	
 		public function __construct() {
 			parent::__construct();
-			$this->load->model('m_subkriteria'); // Pastikan Anda memuat model yang benar
-			// Atau jika Anda menggunakan M_subkriteria
-			// $this->load->model('m_subkriteria');
+			$this->load->model('m_subkriteria');
 			$this->load->library('form_validation');
 		}
 	
@@ -41,17 +39,21 @@ class Subkriteria extends CI_Controller {
 			$data['kriteria'] = $this->m_subkriteria->get_all_kriteria();
 	
 			// Ambil data subkriteria berdasarkan kriteria
-			$data['subkriteria'] = $this->m_subkriteria->get_all_subkriteria();
+			$subkriteria = $this->m_subkriteria->get_all_subkriteria();
 
-	
+			// Mengelompokkan subkriteria berdasarkan id kriteria
+			$subkriteria_by_kriteria= array();
+			foreach ($subkriteria as $sk){
+				$subkriteria_by_kriteria[$sk->id_kriteria][]= $sk;
+			}
+			
+			$data['subkriteria_by_kriteria'] = $subkriteria_by_kriteria;
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar');
 			$this->load->view('templates/topbar', $data2);
 			$this->load->view('subkriteria', $data);
 			$this->load->view('templates/footer');
-
-
-
 
 		}
 	
@@ -71,6 +73,14 @@ class Subkriteria extends CI_Controller {
 		
 			
 			redirect('subkriteria/index');
+		}
+
+
+		public function hapus($id_subkriteria){
+			$where =  array ('id_subkriteria'=> $id_subkriteria);
+			$this->m_subkriteria->hapus_data($where,'tb_subkriteria');
+			redirect('subkriteria/index');
+	
 		}
 	}
 	

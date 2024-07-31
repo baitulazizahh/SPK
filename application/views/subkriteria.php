@@ -13,7 +13,7 @@
                     <i class="fas fa-fw fa-calculator text-success"></i>
                     <span class="ml-2"><?= $k->nama_kriteria; ?></span>
                 </h6>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id_kriteria="<?=$k->id; ?>">
                     <i class="fa fa-plus "></i> Tambah data
                 </button>
             </div>
@@ -29,21 +29,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $filtered_subkriteria = array_filter($subkriteria, function($sk) use ($k) {
-                                return $sk->id_kriteria == $k->id_kriteria;
-                            });
+                        <?php
+                            if (isset($subkriteria_by_kriteria[$k->id])) {
+                                $subkriteria = $subkriteria_by_kriteria[$k->id];
+                                foreach ($subkriteria as $index => $sk):
                             ?>
-                            <?php foreach ($subkriteria as $index => $sk): ?>
                                 <tr>
+                                   
                                     <td class="text-center"><?= $sk->nama_subkriteria; ?></td>
                                     <td class="text-center"><?= $sk->nilai; ?></td>
                                     <td class="text-center">
-                                        <a data-toggle="modal" data-target="" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                         <a data-toggle="modal" data-target="" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    <a data-toggle="modal" data-target="#update<?= $sk->id_subkriteria;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a data-toggle="modal" data-target="#delete<?= $sk->id_subkriteria;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                                <!-- Modal Hapus-->
+                                <?php foreach ($subkriteria as $sk): ?>  
+                                        <div class="modal fade" id="delete<?= $sk->id_subkriteria;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Anda yakin ingin menghapus data?</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
+                                                        <a class="btn btn-primary" href="<?= base_url('subkriteria/hapus/').$sk->id_subkriteria;?>">Ya</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endforeach; ?>
+                                <!-- End Modal Hapus-->
+                            <?php
+                                endforeach;
+                            } else {
+                            ?>
+                                <tr>
+                                    <td colspan="4" class="text-center">Tidak ada data subkriteria</td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -65,7 +95,7 @@
       <div class="modal-body">
         <!-- <?php echo form_open_multipart('subkriteria/tambah_aksi'); ?> -->
         <form action="<?php echo base_url().'subkriteria/tambah_aksi'; ?>"method="post">
-        <input type="hidden" name="id_kriteria" value="<?= $k->id_kriteria; ?>"> <!-- Hidden input untuk id_kriteria -->    
+        <input type="hidden" name="id_kriteria"> <!-- Hidden input untuk id_kriteria -->    
         <div class="form-group">
                 <label for="">Nama Sub Kriteria</label>
                 <input type="text" name="nama_subkriteria" class="form-control"  value="<?= set_value('nama_subkriteria');?>"> 
@@ -89,27 +119,7 @@
   </div>
   <!-- End Modal Tambah -->
 
-<!-- Modal Hapus-->
-<?php foreach ($kriteria as $data): ?>  
-        <div class="modal fade" id="delete<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Anda yakin ingin menghapus data?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
-                        <a class="btn btn-primary" href="<?= base_url('kriteria/hapus/').$data->id;?>">Ya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; ?>
-  <!-- End Modal Hapus-->
+
 
   <!-- Modal Edit-->
    <?php foreach ($kriteria as $data): ?> 
@@ -182,5 +192,14 @@
             <?php if ($this->session->flashdata('modal_open')): ?>
                 $('#exampleModal').modal('show');
             <?php endif; ?>
+
+            // Mengisi input hidden id_kriteria ketika modal dibuka
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Tombol yang menekan modal
+                var id_kriteria = button.data('id_kriteria'); // Ambil nilai id_kriteria dari data-id_kriteria
+                var modal = $(this);
+                modal.find('input[name="id_kriteria"]').val(id_kriteria); // Isi input hidden dengan id_kriteria yang sesuai
+            });
+
         });
     </script>
