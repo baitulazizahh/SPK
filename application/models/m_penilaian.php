@@ -2,15 +2,12 @@
 
 class M_penilaian extends CI_Model{
 
+    
     public function tampil_data() {
-        
-            $this->db->select('tb_penilaian.*, tb_alternatif.nama_alternatif');
-            $this->db->from('tb_penilaian');
-            $this->db->join('tb_alternatif', 'tb_penilaian.id = tb_alternatif.id'); // Pastikan kolom yang dijoin sesuai
-            $query = $this->db->get();
-            return $query;
-        
-  
+        $this->db->select('tb_alternatif.id as id_penilaian, tb_alternatif.nama_alternatif');
+        $this->db->from('tb_alternatif');
+        $query = $this->db->get();
+        return $query->result();
     }
 
     

@@ -22,6 +22,7 @@ class Penilaian extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('m_penilaian');
+		$this->load->model('m_alternatif');
     }
 	public function index()
 	{
@@ -29,9 +30,10 @@ class Penilaian extends CI_Controller {
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
-		$this->load->model('m_penilaian');
-		$data['nilai'] = $this->m_penilaian->tampil_data()->result();
 		
+		// $data['alternatif'] = $this->m_alternatif->get_alternatif();
+		$data['penilaian'] = $this->m_penilaian->tampil_data(); // Mengambil data dari model
+     
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
@@ -40,6 +42,16 @@ class Penilaian extends CI_Controller {
 		// $this->load->view('templates/footer');
 		
 	}
+
+	public function tambah($id_alternatif) {
+        $data = array(
+            'id_alternatif' => $id_alternatif,
+            'nilai' => 0 // Nilai default atau sesuai kebutuhan
+        );
+
+        $this->db->insert('tb_penilaian', $data);
+        redirect('penilaian');
+    }
 
 	public function hapus($id){
         $where = array ('id_penilaian'=> $id);
