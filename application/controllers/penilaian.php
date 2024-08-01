@@ -23,6 +23,8 @@ class Penilaian extends CI_Controller {
         parent::__construct();
         $this->load->model('m_penilaian');
 		$this->load->model('m_alternatif');
+		$this->load->model('m_subkriteria');
+		$this->load->model('m_data');
     }
 	public function index()
 	{
@@ -32,8 +34,22 @@ class Penilaian extends CI_Controller {
 
 		
 		// $data['alternatif'] = $this->m_alternatif->get_alternatif();
-		$data['penilaian'] = $this->m_penilaian->tampil_data(); // Mengambil data dari model
-     
+		$data['penilaian'] = $this->m_penilaian->tampil_data();
+		$data['kriteria'] = $this->m_data->tampil_data(); // Mengambil data dari model
+		
+		 // Ambil data subkriteria untuk masing-masing kriteria
+		 foreach ($data['kriteria'] as $kriteria) {
+            $data['subkriteria'][$kriteria->id_kriteria] = $this->m_subkriteria->get_subkriteria_by_kriteria($kriteria->id_kriteria);
+        }
+		
+
+		// $data['penilaian'] = $this->m_penilaian->get_all_penilaian(); // Ambil data penilaian
+        // $data['subkriteria_c1'] = $this->m_subkriteria->get_subkriteria_by_kriteria(1); // Ambil subkriteria untuk C1
+        // $data['subkriteria_c2'] = $this->m_subkriteria->get_subkriteria_by_kriteria(2); // Ambil subkriteria untuk C2
+        // $data['subkriteria_c3'] = $this->m_subkriteria->get_subkriteria_by_kriteria(3); // Ambil subkriteria untuk C3
+        // $data['subkriteria_c4'] = $this->m_subkriteria->get_subkriteria_by_kriteria(4); // Ambil subkriteria untuk C4
+        // $data['subkriteria_c5'] = $this->m_subkriteria->get_subkriteria_by_kriteria(5); // Ambil subkriteria untuk C5
+        // $data['subkriteria_c6'] = $this->m_subkriteria->get_subkriteria_by_kriteria(6); // Ambil subkriteria untuk C6		
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');

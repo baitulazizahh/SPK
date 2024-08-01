@@ -31,7 +31,7 @@ class Kriteria extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
 	
-		$data['kriteria'] = $this->m_data->tampil_data()->result();
+		$data['kriteria'] = $this->m_data->tampil_data();
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
@@ -46,7 +46,7 @@ class Kriteria extends CI_Controller {
 		$data2['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
 			
 		// Mengambil data alternatif
-		$data['kriteria'] = $this->m_data->tampil_data()->result();
+		$data['kriteria'] = $this->m_data->tampil_data();
 	
 		// Validasi form
 		$this->form_validation->set_rules('id_kriteria', 'Id kiteria', 'required|trim');

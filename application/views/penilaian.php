@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,7 +48,7 @@
                         
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
@@ -64,10 +63,8 @@
                                                 <td class="text-center"><?php echo $no++; ?></td>
                                                 <td><?php echo $data->nama_alternatif; ?></td>
                                                 <td class="text-center">
-                                                <a ><button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit"></i></button></a>
-                                                <a ><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i></button></a>
-                                      
-                                                    
+                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -87,108 +84,69 @@
     <!-- End of Page Wrapper -->
    
    <!-- Modal Tambah-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-success">
-        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Tambah Data Peniaian</h4>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <?php echo form_open_multipart('admin/tambah_aksi'); ?>
-        <!-- <form action="<?php echo base_url().'admin/tambah_aksi'; ?>"method="post"> -->
-            <div class="form-group">
-                <label for="">Jenis Usaha (C1)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Tanggungan (C2)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Riwayat Bantuan (C3)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Pendapatan (C4)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">SKU (C5)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Kelengkapan Persyaratan (C6)</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= set_value('jenis_kriteria');?>" placeholder="--Pilih--" required  >
-                    <option>--Pilih--</option>
-                    <option>Benefit</option>
-                    <option>Cost</option>
-                    <?= form_error('jenis_alternatif','<small class="text-danger pl-1">','</small>'); ?>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>  
-        <?php echo form_close(); ?>
-      </div>
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header bg-success">
+           <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Tambah Data Peniaian</h4>
+           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+        
+         <!-- View: data_penilaian.php -->
+                                            <!-- application/views/admin/data_penilaian.php -->
+
+                                            <!-- application/views/admin/data_penilaian.php -->
+
+<div class="modal-body">
+    <?php echo form_open_multipart('admin/tambah_aksi'); ?>
+    <?php foreach ($kriteria as $k): ?>
+        <div class="form-group">
+            <label for=""><?php echo $k->nama_kriteria; ?></label>
+            <select class="form-control" name="kriteria_<?php echo $k->id_kriteria; ?>" required>
+                <option value="">--Pilih--</option>
+                <?php if (isset($subkriteria[$k->id_kriteria])): ?>
+                    <?php foreach ($subkriteria[$k->id_kriteria] as $sub): ?>
+                        <option value="<?php echo $sub->id_subkriteria; ?>"><?php echo $sub->nama_subkriteria; ?></option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </select>
+        </div>
+    <?php endforeach; ?>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
-  </div>
+    <?php echo form_close(); ?>
 </div>
-  </div>
-   
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url() ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url() ?>assets/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="<?php echo base_url() ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+          
+                  
+              
+         
+    
+     </div>
+   </div>
+ </div>
+  
 
-    <!-- Page level custom scripts -->
-    <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
-  <!-- Script open modal  -->
-  <script>
-        $(document).ready(function(){
-            <?php if ($this->session->flashdata('modal_open')): ?>
-                $('#exampleModal').modal('show');
-            <?php endif; ?>
-        });
-    </script>
-</body>
+ <!-- Bootstrap core JavaScript-->
+ <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+ <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</html>
+ <!-- Core plugin JavaScript-->
+ <script src="<?php echo base_url() ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+ <!-- Custom scripts for all pages-->
+ <script src="<?php echo base_url() ?>assets/js/sb-admin-2.min.js"></script>
+
+ <!-- Page level plugins -->
+ <script src="<?php echo base_url() ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+ <script src="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+ <!-- Page level custom scripts -->
+ <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>

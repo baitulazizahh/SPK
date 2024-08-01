@@ -2,7 +2,7 @@
 
 class M_data extends CI_Model{
     public function tampil_data(){
-        return $this->db->get('tb_kriteria');
+        return $this->db->get('tb_kriteria')->result();
     }
 
     public function input_data($data){
