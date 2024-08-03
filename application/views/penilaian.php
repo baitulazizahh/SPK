@@ -64,7 +64,7 @@
                                                 <td><?php echo $data->nama_alternatif; ?></td>
                                                 <td class="text-center">
                                                     <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit"></i></button>
-                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i></button>
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php ; ?>"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -95,40 +95,30 @@
          </div>
         
          <!-- View: data_penilaian.php -->
-                                            <!-- application/views/admin/data_penilaian.php -->
 
-                                            <!-- application/views/admin/data_penilaian.php -->
-
-<div class="modal-body">
-    <?php echo form_open_multipart('admin/tambah_aksi'); ?>
-    <?php foreach ($kriteria as $k): ?>
-        <div class="form-group">
-            <label for=""><?php echo $k->nama_kriteria; ?></label>
-            <select class="form-control" name="kriteria_<?php echo $k->id_kriteria; ?>" required>
-                <option value="">--Pilih--</option>
-                <?php if (isset($subkriteria[$k->id_kriteria])): ?>
-                    <?php foreach ($subkriteria[$k->id_kriteria] as $sub): ?>
-                        <option value="<?php echo $sub->id_subkriteria; ?>"><?php echo $sub->nama_subkriteria; ?></option>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </select>
+         <div class="modal-body">
+            <?php echo form_open_multipart('penilaian/tambah_aksi'); ?>
+            <input type="hidden" name="id_alternatif" value="">
+            <input type="hidden" name="nama_alternatif" value="">
+            <?php foreach ($kriteria as $k): ?>
+                <div class="form-group">
+                    <label for=""><?php echo $k->nama_kriteria; ?></label>
+                    <select class="form-control" name="kriteria_<?php echo $k->id_kriteria; ?>" required>
+                        <option value="">--Pilih--</option>
+                        <?php if (isset($subkriteria[$k->id])): ?>
+                            <?php foreach ($subkriteria[$k->id] as $sub): ?>
+                                <option value="<?php echo $sub->id_subkriteria; ?>"><?php echo $sub->nama_subkriteria; ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+            <?php endforeach; ?>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            <?php echo form_close(); ?>
         </div>
-    <?php endforeach; ?>
-    <div class="modal-footer">
-        <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </div>
-    <?php echo form_close(); ?>
-</div>
-
-
-
-
-          
-                  
-              
-         
-    
      </div>
    </div>
  </div>
@@ -150,3 +140,16 @@
 
  <!-- Page level custom scripts -->
  <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
+
+ <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id'); // Extract info from data-* attributes
+            var nama = button.data('nama'); // Extract nama from data-* attributes
+
+            var modal = $(this);
+            modal.find('input[name="id_alternatif"]').val(id); // Set the id_alternatif in form
+            modal.find('input[name="nama_alternatif"]').val(nama); // Set the nama_alternatif in form
+        });
+    </script>
+

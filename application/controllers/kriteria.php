@@ -40,6 +40,10 @@ class Kriteria extends CI_Controller {
 		// $this->load->view('templates/footer');
 		
 	}
+	public function get_all_kriteria() {
+		$query = $this->db->get('tb_kriteria');
+		return $query->result();
+	}
 
 	public function tambah_aksi(){
 		// Mengambil data pengguna berdasarkan email yang ada di session

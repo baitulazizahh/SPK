@@ -16,6 +16,16 @@ class M_subkriteria extends CI_Model{
             $this->db->where('id_kriteria', $id_kriteria);
             return $this->db->get('tb_subkriteria')->result();
         }
+
+        public function get_all_subkriteria_grouped() {
+            $result = $this->db->get('tb_subkriteria')->result();
+            $grouped = [];
+            foreach ($result as $sub) {
+                $grouped[$sub->id_kriteria][] = $sub;
+            }
+            return $grouped;
+        }
+
         public function input_data($data, $table) {
             $this->db->insert($table, $data);
         }

@@ -56,6 +56,7 @@ class Subkriteria extends CI_Controller {
 			// $this->load->view('templates/footer');
 
 		}
+		
 	
 		// Method tambahan untuk menyimpan subkriteria
 		public function tambah_aksi() {
@@ -75,7 +76,12 @@ class Subkriteria extends CI_Controller {
 			redirect('subkriteria/index');
 		}
 
-
+		public function input() {
+			$data['kriteria'] = $this->m_kriteria->get_all_kriteria();
+			$data['subkriteria'] = $this->m_subkriteria->get_all_subkriteria();
+			$this->load->view('subkriteria', $data);
+		}
+		
 		public function hapus($id_subkriteria){
 			$where =  array ('id_subkriteria'=> $id_subkriteria);
 			$this->m_subkriteria->hapus_data($where,'tb_subkriteria');

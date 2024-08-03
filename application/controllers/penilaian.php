@@ -36,11 +36,12 @@ class Penilaian extends CI_Controller {
 		// $data['alternatif'] = $this->m_alternatif->get_alternatif();
 		$data['penilaian'] = $this->m_penilaian->tampil_data();
 		$data['kriteria'] = $this->m_data->tampil_data(); // Mengambil data dari model
-		
+		$data['subkriteria']= $this->m_subkriteria->get_all_subkriteria_grouped();
+		$data['alternatif'] = $this->m_alternatif->tampil_data();
 		 // Ambil data subkriteria untuk masing-masing kriteria
-		 foreach ($data['kriteria'] as $kriteria) {
-            $data['subkriteria'][$kriteria->id_kriteria] = $this->m_subkriteria->get_subkriteria_by_kriteria($kriteria->id_kriteria);
-        }
+		//  foreach ($data['kriteria'] as $kriteria) {
+        //     $data['subkriteria'][$kriteria->id_kriteria] = $this->m_subkriteria->get_subkriteria_by_kriteria($kriteria->id_kriteria);
+        // }
 		
 
 		// $data['penilaian'] = $this->m_penilaian->get_all_penilaian(); // Ambil data penilaian
@@ -59,21 +60,42 @@ class Penilaian extends CI_Controller {
 		
 	}
 
-	public function tambah($id_alternatif) {
-        $data = array(
-            'id_alternatif' => $id_alternatif,
-            'nilai' => 0 // Nilai default atau sesuai kebutuhan
-        );
+	// public function tambah($id_alternatif) {
+    //     $data = array(
+    //         'id_alternatif' => $id_alternatif,
+    //         'nilai' => 0 // Nilai default atau sesuai kebutuhan
+    //     );
 
-        $this->db->insert('tb_penilaian', $data);
-        redirect('penilaian');
-    }
+    //     $this->db->insert('tb_penilaian', $data);
+    //     redirect('penilaian');
+    // }
 
 	public function hapus($id){
         $where = array ('id_penilaian'=> $id);
         $this->m_penilaian->hapus_data($where,'tb_penilaian');
         redirect('penilaian/index');
 
+    }
+
+	public function tambah_aksi() {
+        // Load model
+        $this->load->model('m_penilaian');
+
+        // Ambil data dari form
+        $data = $this->input->post();
+
+        // Siapkan data untuk disimpan ke tabel perhitungan
+        $data_penilaian = array(
+			'id_alternatif' => $data['id_alternatif'],
+            // misalnya ada input untuk nama alternatif
+            // Tambahkan field lain sesuai kebutuhan
+        );
+
+        // Simpan ke database
+        $this->m_penilaian->insert_penilaian($data_penilaian);
+
+        // Redirect kembali ke halaman sebelumnya atau halaman lain
+        redirect('perhitungan/index');
     }
 
 }
