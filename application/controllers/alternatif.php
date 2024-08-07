@@ -34,7 +34,7 @@ class Alternatif extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
 		// $this->load->model('m_alternatif');
-		$data['alternatif'] = $this->m_alternatif->tampil_data()->result();
+		$data['alternatif'] = $this->m_alternatif->tampil_data();
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
@@ -50,7 +50,7 @@ class Alternatif extends CI_Controller {
 			$data2['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
 			
 			// Mengambil data alternatif
-			$data['alternatif'] = $this->m_alternatif->tampil_data()->result();
+			$data['alternatif'] = $this->m_alternatif->tampil_data();
 		
 			// Validasi form
 			$this->form_validation->set_rules('id_alternatif', 'Id alternatif', 'required|trim');

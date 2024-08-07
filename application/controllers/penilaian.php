@@ -38,19 +38,16 @@ class Penilaian extends CI_Controller {
 		$data['kriteria'] = $this->m_data->tampil_data(); // Mengambil data dari model
 		$data['subkriteria']= $this->m_subkriteria->get_all_subkriteria_grouped();
 		$data['alternatif'] = $this->m_alternatif->tampil_data();
-		 // Ambil data subkriteria untuk masing-masing kriteria
-		//  foreach ($data['kriteria'] as $kriteria) {
-        //     $data['subkriteria'][$kriteria->id_kriteria] = $this->m_subkriteria->get_subkriteria_by_kriteria($kriteria->id_kriteria);
-        // }
-		
-
-		// $data['penilaian'] = $this->m_penilaian->get_all_penilaian(); // Ambil data penilaian
-        // $data['subkriteria_c1'] = $this->m_subkriteria->get_subkriteria_by_kriteria(1); // Ambil subkriteria untuk C1
-        // $data['subkriteria_c2'] = $this->m_subkriteria->get_subkriteria_by_kriteria(2); // Ambil subkriteria untuk C2
-        // $data['subkriteria_c3'] = $this->m_subkriteria->get_subkriteria_by_kriteria(3); // Ambil subkriteria untuk C3
-        // $data['subkriteria_c4'] = $this->m_subkriteria->get_subkriteria_by_kriteria(4); // Ambil subkriteria untuk C4
-        // $data['subkriteria_c5'] = $this->m_subkriteria->get_subkriteria_by_kriteria(5); // Ambil subkriteria untuk C5
-        // $data['subkriteria_c6'] = $this->m_subkriteria->get_subkriteria_by_kriteria(6); // Ambil subkriteria untuk C6		
+		// echo '<pre>';
+        // print_r($data['penilaian']);
+        // echo '</pre>';
+        // exit; // Stop execution here to see the output
+		 // Misalkan Anda ingin menggunakan alternatif pertama untuk form
+		 if (!empty($data['alternatif'])) {
+	
+		} else {
+			$data['id'] = null; // Atau berikan nilai default lainnya
+		}
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
@@ -78,21 +75,44 @@ class Penilaian extends CI_Controller {
     }
 
 	public function tambah_aksi() {
-        // Load model
-        $this->load->model('m_penilaian');
+		$kriteria = $this->m_data->tampil_data();
+		$id_alternatif = $this->input->post('id');
+		$c1 = $this->input->post('subkriteria_1') ?? 0;
+        $c2 = $this->input->post('subkriteria_2') ?? 0;
+        $c3 = $this->input->post('subkriteria_3') ?? 0;
+        $c4 = $this->input->post('subkriteria_4') ?? 0;
+        $c5 = $this->input->post('subkriteria_5') ?? 0;
+        $c6 = $this->input->post('subkriteria_6') ?? 0;
+	
 
-        // Ambil data dari form
-        $data = $this->input->post();
+		// Periksa apakah id_alternatif diisi
+		if (empty($id_alternatif)) {
+			// Redirect atau tampilkan pesan kesalahan jika id_alternatif kosong
+			redirect('penilaian/index');
+			return;
+		}
 
-        // Siapkan data untuk disimpan ke tabel perhitungan
-        $data_penilaian = array(
-			'id_alternatif' => $data['id_alternatif'],
-            // misalnya ada input untuk nama alternatif
-            // Tambahkan field lain sesuai kebutuhan
-        );
+		$data = array(
+			'id_alternatif' => $id_alternatif,
+			'c1' => $c1,
+			'c2' => $c2,
+			'c3' => $c3,
+			'c4' => $c4,
+			'c5' => $c5,
+			'c6' => $c6
+		);
+		
+		// foreach ($kriteria as $k) {
+		// 	$nilai_subkriteria = $this->input->post('subkriteria_' . $k->id_kriteria);
+		// 	if (!empty($nilai_subkriteria)) {
+		// 		$data_to_insert['c']= $nilai_subkriteria ;
+		// 	}
+		// }
 
+      
         // Simpan ke database
-        $this->m_penilaian->insert_penilaian($data_penilaian);
+		
+		$this->m_penilaian->insert($data, 'tb_penilaian');
 
         // Redirect kembali ke halaman sebelumnya atau halaman lain
         redirect('perhitungan/index');
