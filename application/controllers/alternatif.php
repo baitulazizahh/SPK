@@ -53,7 +53,7 @@ class Alternatif extends CI_Controller {
 			$data['alternatif'] = $this->m_alternatif->tampil_data();
 		
 			// Validasi form
-			$this->form_validation->set_rules('id_alternatif', 'Id alternatif', 'required|trim');
+			$this->form_validation->set_rules('id_alternatif2', 'Id alternatif', 'required|trim');
 			$this->form_validation->set_rules('nama_alternatif', 'Nama alternatif', 'required|trim');
 			$this->form_validation->set_message('required', '{field} harus diisi!');
 		
@@ -67,12 +67,12 @@ class Alternatif extends CI_Controller {
 				$this->session->set_flashdata('modal_open', true);
 			} else {
 				// Jika validasi berhasil, proses data untuk dimasukkan ke database
-				$id_alternatif = htmlspecialchars($this->input->post('id_alternatif', true));
+				$id_alternatif2 = htmlspecialchars($this->input->post('id_alternatif2', true));
 				$nama_alternatif = htmlspecialchars($this->input->post('nama_alternatif', true));
 		
 				// Siapkan data untuk dimasukkan ke database
 				$data = array(
-					'id_alternatif' => $id_alternatif,
+					'id_alternatif2' => $id_alternatif2,
 					'nama_alternatif' => $nama_alternatif,
 				);
 		
@@ -84,8 +84,8 @@ class Alternatif extends CI_Controller {
 			}
 		}
     
-	public function hapus($id){
-        $where = array ('id'=> $id);
+	public function hapus($id_alternatif){
+        $where = array ('id_alternatif'=> $id_alternatif);
         $this->m_alternatif->hapus_data($where,'tb_alternatif');
         redirect('alternatif/index');
 
@@ -93,20 +93,20 @@ class Alternatif extends CI_Controller {
 
 	public function update(){
 		// Ambil data dari input POST
-		$id = $this->input->post('id');
 		$id_alternatif = $this->input->post('id_alternatif');
+		$id_alternatif2 = $this->input->post('id_alternatif2');
 		$nama_alternatif = $this->input->post('nama_alternatif');
 		   
 		// Persiapkan data untuk diupdate
 		$data = array(
-			'id' => $id,
 			'id_alternatif' => $id_alternatif,
+			'id_alternatif2' => $id_alternatif2,
 			'nama_alternatif' => $nama_alternatif,
 		);
 		
 		// Kondisi untuk menentukan data yang akan diupdate
 		$where = array(
-			'id' => $id
+			'id_alternatif' => $id_alternatif
 		);
 		
 		// Panggil metode update_data di model

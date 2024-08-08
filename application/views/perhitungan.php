@@ -34,14 +34,25 @@
                                        
                                     </thead>
                                     <tbody  >
-                                        <td class="text-center">1</td>
-                                        <td>Baitul Azizah</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
+                                    <?php $no = 1; ?>
+                                    <?php if (isset($nilai) && !empty($nilai)): ?>
+                                    <?php foreach ($nilai as $n): ?>  
+                                        <tr>
+                                            <td class="text-center"><?php echo $no++; ?></td>
+                                            <td class="text-center"><?php echo $n->nama_alternatif ?></td>
+                                            <td class="text-center"><?php echo $n->c1; ?></td>
+                                            <td class="text-center"><?php echo $n->c2; ?></td>
+                                            <td class="text-center"><?php echo $n->c3; ?></td>
+                                            <td class="text-center"><?php echo $n->c4; ?></td>
+                                            <td class="text-center"><?php echo $n->c5; ?></td>
+                                            <td class="text-center"><?php echo $n->c6; ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="8" class="text-center">Data tidak ditemukan</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -67,13 +67,13 @@
                                     <tbody>
                                     <?php foreach ($alternatif as $data): ?>  
                                         <tr>
-                                            <td class="text-center"><?php echo $data->id_alternatif ?></td>
+                                            <td class="text-center"><?php echo $data->id_alternatif2 ?></td>
                                             <td><?php echo $data->nama_alternatif ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="#update<?= $data->id;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>alternatif/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a data-toggle="modal" data-target="#delete<?= $data->id;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>alternatif/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                                <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('alternatif/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
+                                                <a data-toggle="modal" data-target="#update<?= $data->id_alternatif;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>alternatif/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a data-toggle="modal" data-target="#delete<?= $data->id_alternatif;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>alternatif/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('alternatif/hapus/'.$data->id_alternatif,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>
 
                                         </tr>
@@ -108,8 +108,8 @@
         <!-- <?php echo form_open('my_controller/insert'); ?> -->
             <div class="form-group">
                 <label for="">ID Alternatif</label>
-                <input type="text" name="id_alternatif" class="form-control"  value="<?= set_value('id_alternatif');?>"> 
-                <?= form_error('id_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+                <input type="text" name="id_alternatif2" class="form-control"  value="<?= set_value('id_alternatif2');?>"> 
+                <?= form_error('id_alternatif2','<small class="text-danger pl-1">','</small>'); ?>
             </div>
             <div class="form-group">
                 <label for="">Nama Alternatif</label>
@@ -129,7 +129,7 @@
   </div>
     <!-- Modal Hapus-->
     <?php foreach ($alternatif as $data): ?>  
-        <div class="modal fade" id="delete<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="delete<?= $data->id_alternatif;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
-                        <a class="btn btn-primary" href="<?= base_url('alternatif/hapus/').$data->id;?>">Ya</a>
+                        <a class="btn btn-primary" href="<?= base_url('alternatif/hapus/').$data->id_alternatif;?>">Ya</a>
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
 
   <!-- Modal Edit-->
    <?php foreach ($alternatif as $data): ?> 
-    <div class="modal fade" id="update<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="update<?= $data->id_alternatif;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header bg-success">
@@ -166,12 +166,12 @@
             <!-- <form action="<?php echo base_url().'admin/update'; ?>"method="post"> -->
                 <div class="form-group">
                     <label for="">ID alternatif</label>
-                    <input type="hidden" name="id" value="<?= $data->id;?>"> 
-                    <input type="text" name="id_alternatif" class="form-control" value="<?= $data->id_alternatif;?>"> 
+                    <input type="hidden" name="id_alternatif" value="<?= $data->id_alternatif;?>"> 
+                    <input type="text" name="id_alternatif2" class="form-control" value="<?= $data->id_alternatif2;?>"> 
                 </div>
                 <div class="form-group">
                     <label for="">Nama alternatif</label>
-                    <input type="hidden" name="id" value="<?= $data->id;?>"> 
+                    <input type="hidden" name="id_alternatif" value="<?= $data->id_alternatif;?>"> 
                     <input type="text" name="nama_alternatif" class="form-control" value="<?= $data->nama_alternatif;?>"> 
                 </div>
                 <div class="modal-footer">
