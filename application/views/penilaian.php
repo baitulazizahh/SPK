@@ -63,7 +63,16 @@
                                                 <td class="text-center"><?php echo $no++; ?></td>
                                                 <td><?php echo $data->nama_alternatif; ?></td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" data-id="<?php echo $data->id_alternatif; ?>"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal" 
+                                                        data-id="<?php echo $data->id_alternatif; ?>"
+                                                        data-subkriteria_1="<?php echo $data->nilai; ?>"
+                                                        data-subkriteria_2="<?php echo $data->nilai; ?>"
+                                                        data-subkriteria_3="<?php echo $data->nilai; ?>"
+                                                        data-subkriteria_4="<?php echo $data->nilai; ?>"
+                                                        data-subkriteria_5="<?php echo $data->nilai; ?>"
+                                                        data-subkriteria_6="<?php echo $data->nilai; ?>">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
                                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->nama_alternatif;  ?>"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -127,10 +136,13 @@
 
 
    <!-- Modal Edit -->
+    <!-- Modal untuk Edit Data -->
+
+
    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-warning">
+            <div class="modal-header bg-success">
                 <h5 class="modal-title text-white" id="editModalLabel">Edit Data Penilaian</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -154,7 +166,7 @@
                 <?php endforeach; ?>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary">Simpan </button>
                 </div>
                 <?php echo form_close(); ?>
             </div>
@@ -217,24 +229,22 @@
         // });
   -->
 <script>
-  $(document).on('click', '.btn-edit', function() {
+ $(document).on('click', '.btn-edit', function() {
     var id = $(this).data('id');
+    $('#edit-id_alternatif').val(id);
 
-    $.ajax({
-        url: '<?php echo site_url("penilaian/getDataById"); ?>',
-        type: 'GET',
-        data: {id_alternatif: id},
-        dataType: 'json',
-        success: function(response) {
-            $('#edit-id_alternatif').val(response.id_alternatif);
+    // Isi nilai subkriteria berdasarkan data dari tombol
+    $('#edit-subkriteria-1').val($(this).data('subkriteria_1'));
+    $('#edit-subkriteria-2').val($(this).data('subkriteria_2'));
+    $('#edit-subkriteria-3').val($(this).data('subkriteria_3'));
+    $('#edit-subkriteria-4').val($(this).data('subkriteria_4'));
+    $('#edit-subkriteria-5').val($(this).data('subkriteria_5'));
+    $('#edit-subkriteria-6').val($(this).data('subkriteria_6'));
 
-            // Untuk setiap kriteria, masukkan nilai subkriteria yang sesuai ke dalam form modal
-            <?php foreach ($kriteria as $k): ?>
-                $('#edit-subkriteria-<?php echo $k->id_kriteria; ?>').val(response.subkriteria_<?php echo $k->id_kriteria; ?>);
-            <?php endforeach; ?>
-        }
-    });
+    // Tampilkan modal edit
+    $('#editModal').modal('show');
 });
+
 </script>
 
     

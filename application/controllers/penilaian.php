@@ -50,7 +50,8 @@ class Penilaian extends CI_Controller {
                 $data_to_insert[] = [
                     'id_alternatif' => $id_alternatif,
                     'id_kriteria' => $k->id,
-                    'nilai' => $nilai_subkriteria
+                    'nilai' => $nilai_subkriteria,
+					
                 ];
             }
         }	
@@ -77,28 +78,35 @@ class Penilaian extends CI_Controller {
 	}
 
 	public function updateData() {
+
+		
+		//$id_penilaian= $this->input->post('id_penilaian');
 		$id_alternatif = $this->input->post('id_alternatif');
+		//$id_kriteria = $this->input->post('id_kriteria');
+		$nilai_subkriteria = $this->input->post('nilai');
+		
 		$data = array(
 			// Ambil semua data dari form
-			'c1' => $this->input->post('subkriteria_1'),
-			'c2' => $this->input->post('subkriteria_2'),
-			'c3' => $this->input->post('subkriteria_3'),
-			'c4' => $this->input->post('subkriteria_4'),
-			'c5' => $this->input->post('subkriteria_5'),
-			'c6' => $this->input->post('subkriteria_6')
+			'nilai' => $nilai_subkriteria
 		);
-	
-		$this->load->model('m_penilaian');
-		$this->m_penilaian->update_alternatif($id_alternatif, $data);
-	
-		redirect('penilaian'); // Redirect ke halaman penilaian atau halaman lain sesuai kebutuhan
+		
+		// Kondisi untuk menentukan data yang akan diupdate
+		$where = array(
+			'id_alternatif'=>$id_alternatif
+		);
+		
+		
+		// Panggil metode update_data di model
+		$this->m_data->update_data($where, $data, 'tb_penilaian');
+
+
 	}
 	
 	
-	public function update_alternatif($id_alternatif, $data) {
-		$this->db->where('id_alternatif', $id_alternatif);
-		$this->db->update('tb_penilaian', $data);
-	}
+	// public function update_alternatif($id_alternatif, $data) {
+	// 	$this->db->where('id_alternatif', $id_alternatif);
+	// 	$this->db->update('tb_penilaian', $data);
+	// }
 	
 
 }
