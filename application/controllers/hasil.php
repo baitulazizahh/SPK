@@ -18,6 +18,13 @@ class Hasil extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+
+	 
+	public function __construct() {
+        parent::__construct();
+        $this->load->model('m_hasil');
+		// $this->load->library('form_validation');
+    }
 	public function index()
 	{
 		// $this->load->model('m_perhitungan');
@@ -26,11 +33,19 @@ class Hasil extends CI_Controller {
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
+		$data['hasil'] = $this->m_hasil->tampil_data();
+	
+		
+		
+
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);
-		$this->load->view('hasil');
+		// Tampilkan view hasil akhir
+		$this->load->view('hasil', $data);
 		// $this->load->view('templates/footer');
+
+		
 		
 	}
 }

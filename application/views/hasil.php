@@ -1,15 +1,5 @@
 <div class="container-fluid"> 
 
-                    <!-- Page Heading -->
-                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"> Data Perhitungan</h1>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
-
-                        <!-- <a href="list-kriteria.php" class="btn btn-primary ">
-                            <span class="icon text-white-70"><i class="fas fa-plus"></i></span>
-                            <span class="text"> Tambah data</span>
-                        </a> -->
-                    <!-- </div> -->
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -28,10 +18,21 @@
                                         </tr>   
                                     </thead>
                                     <tbody>
-                                    
-                                        <td>Baitul Azizah</td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">1</td>
+                                    <tr>
+                                    <?php $no = 1; ?>
+                                    <?php foreach ($hasil as $data): ?>  
+                                        <tr>
+
+                                            <td class="text-center"><?php echo $data->nama_alternatif ?></td>
+                                            <td class="text-center"><?php echo $data->nilai ?></td>
+                                            <td class="text-center"><?php echo $no++; ?></td> 
+
+                                            
+
+                                        </tr>
+                                        <?php endforeach; ?>
+                                                   
+                                        
                                        
                                     </tbody>
                                 </table>
