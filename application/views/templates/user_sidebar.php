@@ -18,8 +18,13 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-list-alt text-white"></i>
-                    <span>Kriteria</span></a>
+                    <i class="fas fa-fw fa-file-alt text-white"></i>
+                    <span>Permohonan</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-user text-white"></i>
+                    <span>Profil</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('auth/logout')?>">

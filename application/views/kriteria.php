@@ -53,18 +53,18 @@
                                 <table class="table table-bordered " id="dataTable" width="100%" cellspacing="10" >
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>Id Kriteria</th>
+                                            <th>No</th>
                                             <th>Nama Kriteria</th>
                                             <th>Jenis Kriteria</th>
                                             <th>Bobot </th>
                                             <th>Aksi</th>
                                         </tr>
-                                       
                                     </thead>
                                     <tbody>
+                                    <?php $no = 1; ?>  
                                     <?php foreach ($kriteria as $data): ?>  
                                         <tr>
-                                            <td class="text-center"><?php echo $data->id_kriteria ?></td>
+                                            <td class="text-center"><?php echo $no++?></td>
                                             <td><?php echo $data->nama_kriteria ?></td>
                                             <td class="text-center"><?php echo $data->jenis_kriteria ?></td>
                                             <td class="text-center"><?php echo $data->bobot ?></td>

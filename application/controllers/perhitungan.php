@@ -42,41 +42,6 @@ class Perhitungan extends CI_Controller {
                     redirect('perhitungan');
                 }
             
-            
-
-            // // Pastikan Anda sudah melakukan perhitungan Yi sebelumnya dan datanya tersedia
-            // if (isset($nilai) && !empty($nilai)) {
-            //     foreach ($nilai as $n) {
-            //         // Hitung nilai maximum (benefit)
-            //         $benefit = (($n->c1 / $sumSquares['c1']) * $bobot['c1']) + 
-            //                    (($n->c3 / $sumSquares['c3']) * $bobot['c3']) + 
-            //                    (($n->c5 / $sumSquares['c5']) * $bobot['c5']) + 
-            //                    (($n->c6 / $sumSquares['c6']) * $bobot['c6']);
-    
-            //         // Hitung nilai minimum (cost)
-            //         $cost = (($n->c2 / $sumSquares['c2']) * $bobot['c2']) + 
-            //                 (($n->c4 / $sumSquares['c4']) * $bobot['c4']);
-    
-            //         // Hitung nilai Yi
-            //         $yi = $benefit - $cost;
-    
-            //         // Simpan ke database
-            //         $data = [
-            //             'nama_alternatif' => $n->nama_alternatif,
-            //             'nilai' => $yi
-            //         ];
-                    
-            //         // Insert ke tabel tb_hasil
-            //         $this->db->insert('tb_hasil', $data);
-            //     }
-    
-            //     // Redirect ke halaman hasil akhir atau halaman berikutnya
-            //     redirect('hasil');
-            // } else {
-            //     // Jika data nilai tidak tersedia, Anda bisa mengarahkan kembali atau menampilkan pesan kesalahan
-            //     $this->session->set_flashdata('error', 'Data tidak ditemukan untuk disimpan.');
-            //     redirect('perhitungan');
-            // }
         }
     
     

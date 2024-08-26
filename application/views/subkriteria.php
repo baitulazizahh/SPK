@@ -100,10 +100,12 @@
                                                                     <div class="form-group">
                                                                         <label for="nama_subkriteria">Nama Subkriteria</label>
                                                                         <input type="text" class="form-control" name="nama_subkriteria" value="<?= $sk->nama_subkriteria; ?>" required>
+                                                                        <?= form_error('nama_subkriteria','<small class="text-danger pl-1">','</small>'); ?>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="nilai">Nilai</label>
                                                                         <input type="text" class="form-control" name="nilai" value="<?= $sk->nilai; ?>" required>
+                                                                        <?= form_error('nilai','<small class="text-danger pl-1">','</small>'); ?>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>

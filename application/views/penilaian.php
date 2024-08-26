@@ -63,11 +63,8 @@
                                                 <td class="text-center"><?php echo $no++; ?></td>
                                                 <td ><?php echo $data->nama_alternatif; ?></td>
                                                 <td class="text-center">
-                                                <a data-toggle="modal" data-target="#update<?= $data->id_alternatif;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                    <!-- <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#update<?= $data->id_alternatif;?>" 
-                                                        data-id="<?php echo $data->id_alternatif; ?>">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button> -->
+                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->id_alternatif;  ?>"><i class="fa fa-plus"></i></button>
+                                                <a href="?id=<?php echo $data->id_alternatif; ?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a> 
                                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->nama_alternatif;  ?>"><i class="fa fa-plus"></i></button>
                                                 </td>
                                             </tr>
@@ -101,7 +98,6 @@
          <!-- View: data_penilaian.php -->
 
          <div class="modal-body">
-       
             <?php echo form_open_multipart('penilaian/tambah_aksi'); ?>
             <input type="hidden" name="id_alternatif" id="id_alternatif" value="">
             <input type="hidden" name="nama_alternatif" id="nama_alternatif" value="">
@@ -128,51 +124,46 @@
    </div>
  </div>
   <!-- End Modal Tambah -->
-<!-- Modal Edit-->
-<?php foreach ($penilaian2 as $data): ?> 
 
-<div class="modal fade" id="update<?= $data->id_alternatif;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h4 class="modal-title text-white text-center " id="exampleModalLabel"> 
-                    <i class="fas fa-fw fa-edit text-successy"></i> Edit Data Kriteria
-                </h4>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <?php echo form_open_multipart('penilaian/update_data'); ?>
-                
-                <!-- Loop untuk setiap kriteria -->
+  
+<!-- Modal Edit-->
+<?php foreach ($penilaian as $data): ?> 
+ <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header bg-success">
+           <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Edit Data Penilaian</h4>
+           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+            <form method="post" action="<?php echo base_url('penilaian/update_data'); ?>">
+                <input type="hidden" name="id_alternatif" id="id_alternatif" value="<?= $data->id_alternatif?>">
                 <?php foreach ($kriteria as $k): ?>
-                    <div class="form-group">
+                <div class="form-group">
                     <label for=""><?php echo $k->nama_kriteria; ?></label>
-                        <select class="form-control" name="subkriteria_<?= $k->id_kriteria; ?>">
-                            <!-- Tampilkan pilihan subkriteria -->
-                            <?php foreach ($subkriteria[$k->id_kriteria] as $sub): ?>
-                                <!-- <option value="<?= $sub->nilai; ?>" 
-                                <?php var_dump($sub); ?>
-                                    <?= ($sub->nilai == $data->nilai && $data->id_kriteria == $k->id_kriteria) ? 'selected' : ''; ?>>
-                                    <?= $sub->nama_subkriteria; ?>
-                                </option> -->
+                    <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
+                        <?php if (isset($subkriteria[$k->id])): ?>
+                            <?php foreach ($subkriteria[$k->id] as $sub): ?>
+                                <option value="<?php echo $sub->nilai; ?>"
+                                <?php echo (isset($penilaian_by_kriteria[$k->id_kriteria]) && $penilaian_by_kriteria[$k->id_kriteria]->nilai == $sub->nilai) ? 'selected' : ''; ?>>
+                                <?php echo $sub->nama_subkriteria; ?>
+                                </option>
                             <?php endforeach; ?>
-                        </select>
-                    </div>
-                <?php endforeach; ?>
-                
+                        <?php endif; ?>
+                    </select>
+                </div>
+            <?php endforeach; ?>                                    
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
-                
-                <?php echo form_close(); ?>
-            </div>
+            </form>
         </div>
-    </div>
-</div>
-<?php endforeach; ?>
+     </div>
+   </div>
+   <?php endforeach; ?>
 <!-- End Modal Edit-->
 
 
@@ -229,25 +220,15 @@ $(document).ready(function() {
 });
 </script>
      
+<?php if(isset($penilaian)): ?>
+    <script>
+        $(document).ready(function(){
+            $('#editModal').modal('show');
+        });
+    </script>
+<?php endif; ?>
 
-<script>
- $(document).on('click', '.btn-edit', function() {
-    var id = $(this).data('id');
-    $('#edit-id_alternatif').val(id);
 
-    // Isi nilai subkriteria berdasarkan data dari tombol
-    $('#edit-subkriteria-1').val($(this).data('subkriteria_1'));
-    $('#edit-subkriteria-2').val($(this).data('subkriteria_2'));
-    $('#edit-subkriteria-3').val($(this).data('subkriteria_3'));
-    $('#edit-subkriteria-4').val($(this).data('subkriteria_4'));
-    $('#edit-subkriteria-5').val($(this).data('subkriteria_5'));
-    $('#edit-subkriteria-6').val($(this).data('subkriteria_6'));
-
-    // Tampilkan modal edit
-    $('#editModal').modal('show');
-});
-
-</script>
 
     
 

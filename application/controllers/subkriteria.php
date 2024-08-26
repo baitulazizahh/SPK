@@ -60,20 +60,57 @@ class Subkriteria extends CI_Controller {
 	
 		// Method tambahan untuk menyimpan subkriteria
 		public function tambah_aksi() {
-			$id_kriteria = htmlspecialchars($this->input->post('id_kriteria', true));
-			$nama_subkriteria = htmlspecialchars($this->input->post('nama_subkriteria', true));
-			$nilai = htmlspecialchars($this->input->post('nilai', true));
-	
-			$data = array(
-				'id_kriteria' => $id_kriteria,
-				'nama_subkriteria' => $nama_subkriteria,
-				'nilai' => $nilai,
-			);
-	
-			$this->m_subkriteria->input_data($data, 'tb_subkriteria');
-		
 			
-			redirect('subkriteria/index');
+			$data2['user'] = $this->db->get_where('tb_user',['email'=>
+			$this->session->userdata('email')])->row_array();
+			
+			// Ambil data kriteria
+			$data['kriteria'] = $this->m_subkriteria->get_all_kriteria();
+	
+			
+			// Ambil data subkriteria berdasarkan kriteria
+			$subkriteria = $this->m_subkriteria->get_all_subkriteria();
+			
+			// Mengelompokkan subkriteria berdasarkan id kriteria
+			$subkriteria_by_kriteria= array();
+			foreach ($subkriteria as $sk){
+				$subkriteria_by_kriteria[$sk->id_kriteria][]= $sk;
+			}
+
+			$data['subkriteria_by_kriteria'] = $subkriteria_by_kriteria;
+
+			// Validasi form
+			$this->form_validation->set_rules('id_kriteria', 'Id kiteria', 'required|trim');
+			$this->form_validation->set_rules('nama_subkriteria', 'Nama kriteria', 'required|trim');
+			$this->form_validation->set_rules('nilai', 'Nilai', 'required|trim');
+		
+			if ($this->form_validation->run() == false) {
+				// Jika validasi gagal, muat ulang tampilan dengan pesan kesalahan
+				$title['title'] = 'Subkriteria';
+				$this->load->view('templates/header', $title);
+				$this->load->view('templates/sidebar');
+				$this->load->view('templates/topbar', $data2);
+				$this->load->view('subkriteria', $data);
+				$this->session->set_flashdata('modal_open', true);
+			} else{
+				// Jika validasi berhasil, proses data untuk dimasukkan ke database
+				$id_kriteria = htmlspecialchars($this->input->post('id_kriteria', true));
+				$nama_subkriteria = htmlspecialchars($this->input->post('nama_subkriteria', true));
+				$nilai = htmlspecialchars($this->input->post('nilai', true));
+		
+				// Siapkan data untuk dimasukkan ke database
+				$data = array(
+					'id_kriteria' => $id_kriteria,
+					'nama_subkriteria' => $nama_subkriteria,
+					'nilai' => $nilai,
+				);
+		
+				$this->m_subkriteria->input_data($data, 'tb_subkriteria');
+				
+				redirect('subkriteria/index');
+			}
+
+			
 		}
 
 		public function input() {

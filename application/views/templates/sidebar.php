@@ -16,20 +16,20 @@
                     <i class="fas fa-fw fa-home text-white"></i>
                     <span>Home</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="<?= base_url('kriteria')?>">
                     <i class="fas fa-fw fa-list-alt text-white"></i>
-                    <span>Kriteria</span></a>
+                    <span>Data Kriteria</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="<?= base_url('subkriteria')?>">
                     <i class="fas fa-fw fa-list-alt text-white"></i>
-                    <span>Subkriteria</span></a>
+                    <span>Data Subkriteria</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('alternatif')?>">
                     <i class="fas fa-fw fa-database text-white"></i>
-                    <span>Alternatif</span></a>
+                    <span>Data Permohonan</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('penilaian')?>">
@@ -45,6 +45,11 @@
                 <a class="nav-link" href="<?= base_url('hasil')?>">
                     <i class="fas fa-fw fa-chart-bar text-white"></i>
                     <span>Hasil Akhir</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('pengguna')?>">
+                    <i class="fas fa-fw fa-users text-white"></i>
+                    <span>Data User</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('auth/logout')?>">

@@ -1,84 +1,74 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kriteria extends CI_Controller {
+class Pengguna extends CI_Controller {
 
 	 public function __construct() {
         parent::__construct();
-        $this->load->model('m_data');
+        $this->load->model('m_pengguna');
 		$this->load->library('form_validation');
     }
 	public function index()
 	{
-		$title['title']= 'Kriteria';
+		$title['title']= 'Data Pengguna';
 		$data2['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
-	
-		$data['kriteria'] = $this->m_data->tampil_data();
+		$data['datarole']=$this->m_pengguna->getRoles();
+		$data['user'] = $this->m_pengguna->tampil_data();
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar',$data2);
-		$this->load->view('kriteria', $data);
-		// $this->load->view('templates/footer');
-		
-	}
-	public function get_all_kriteria() {
-		$query = $this->db->get('tb_kriteria');
-		return $query->result();
+		$this->load->view('user', $data);
+		// $this->load->view('templates/footer');	
 	}
 
+	
+
 	public function tambah_aksi(){
-		// Mengambil data pengguna berdasarkan email yang ada di session
-		$data2['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
-			
-		// Mengambil data alternatif
-		$data['kriteria'] = $this->m_data->tampil_data();
-	
+		
 		// Validasi form
-		$this->form_validation->set_rules('id_kriteria', 'Id kiteria', 'required|trim');
-		$this->form_validation->set_rules('nama_kriteria', 'Nama kriteria', 'required|trim');
-		$this->form_validation->set_rules('jenis_kriteria', 'Jenis kiteria', 'required|trim');
-		$this->form_validation->set_rules('bobot', 'Bobot', 'required|trim');
+		$this->form_validation->set_rules('nama', 'nama', 'required|trim');
+		$this->form_validation->set_rules('email', 'email', 'required|trim');
+		$this->form_validation->set_rules('password', 'password', 'required|trim');
+		$this->form_validation->set_rules('id_role', 'role', 'required|trim');
 		$this->form_validation->set_message('required', '{field} harus diisi!');
-	
+		// $this->load->view('user', $role);
+
 		if ($this->form_validation->run() == false) {
 			// Jika validasi gagal, muat ulang tampilan dengan pesan kesalahan
-			$title['title'] = 'Kriteria';
-			$this->load->view('templates/header', $title);
-			$this->load->view('templates/sidebar');
-			$this->load->view('templates/topbar', $data2);
-			$this->load->view('kriteria', $data);
+			$this->index();
 			$this->session->set_flashdata('modal_open', true);
 		} else {
 			// Jika validasi berhasil, proses data untuk dimasukkan ke database
-			$id_kriteria = htmlspecialchars($this->input->post('id_kriteria', true));
-			$nama_kriteria = htmlspecialchars($this->input->post('nama_kriteria', true));
-			$jenis_kriteria = htmlspecialchars($this->input->post('jenis_kriteria', true));
-			$bobot = htmlspecialchars($this->input->post('bobot', true));
-	
+			$nama = htmlspecialchars($this->input->post('nama', true));
+			$email = htmlspecialchars($this->input->post('email', true));
+			$id_role = htmlspecialchars($this->input->post('id_role', true));
+			$password = password_hash($this->input->post('password', true), PASSWORD_DEFAULT);
 			// Siapkan data untuk dimasukkan ke database
 			$data = array(
-				'id_kriteria' => $id_kriteria,
-				'nama_kriteria' => $nama_kriteria,
-				'jenis_kriteria' => $jenis_kriteria,
-				'bobot' => $bobot,
+				'nama' => $nama,
+				'email' => $email,
+				'password' => $password,
+				'id_role' => $id_role,
+				'is_active' =>1,  
+                'date_created' => time()
 			);
 	
 			// Masukkan data ke tabel tb_alternatif
-			$this->m_data->input_data($data, 'tb_kriteria');
+			$this->m_pengguna->input_data($data, 'tb_user');
 			
 			// Redirect ke halaman index alternatif
-			redirect('kriteria/index');
+			redirect('pengguna/index');
 		}
 		
 	}
     
 	public function hapus($id){
-        $where =  array ('id'=> $id);
-        $this->m_data->hapus_data($where,'tb_kriteria');
-        redirect('kriteria/index');
+        $where =  array ('id_role'=> $id);
+        $this->m_data->hapus_data($where,'tb_user');
+        redirect('pengguna/index');
 
     }
 

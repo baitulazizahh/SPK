@@ -2,19 +2,19 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"> Home User</h1>
+                        <h1 class="h3 mb-0 text-gray-800"> Data Permohonan</h1>
                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
 
-                        <!-- <a href="list-kriteria.php" class="btn btn-primary ">
-                            <span class="icon text-white-70"><i class="fas fa-plus"></i></span>
-                            <span class="text"> Tambah data</span>
-                        </a> -->
+                        <a href="list-kriteria.php" class="btn btn-primary ">
+                            <span class="icon text-white-70"></span>
+                            <span class="text"> Ajukan permohonan</span>
+                        </a>
                     </div>
                     
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-successy"></i> Data Perhitungan</h6>
+                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-file-alt text-successy"></i> Data Permohonan</h6>
                         </div>
                         
                         <div class="card-body">
@@ -50,23 +50,13 @@
                                                 <button type="submit" class="btn btn-info btn-sm">Berkas</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class= "text-center">1</td>
-                                            <td>Usaha</td>
-                                            <td class= ><div class="status-containe text-center">
-                                                <div class="status ditolak">Ditolak</div></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <!DOCTYPE html>
-<html lang="en">
+                    <!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
 
     <style>
          .status {
@@ -98,7 +88,7 @@
         <div class="status diproses">Diproses</div>
     </div>
 </body>
-</html>
-
-                </div>
+</html> -->
+<!-- 
+                </div> -->
                 <!-- /.container-fluid -->
