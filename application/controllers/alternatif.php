@@ -105,9 +105,7 @@ class Alternatif extends CI_Controller {
 		);
 		
 		// Kondisi untuk menentukan data yang akan diupdate
-		$where = array(
-			'id_alternatif' => $id_alternatif
-		);
+		$where = array('id_alternatif' => $id_alternatif);
 		
 		// Panggil metode update_data di model
 		$this->m_alternatif->update_data($where, $data, 'tb_alternatif');

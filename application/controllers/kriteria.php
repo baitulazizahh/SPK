@@ -100,9 +100,7 @@ class Kriteria extends CI_Controller {
         );
 
 		// Kondisi untuk menentukan data yang akan diupdate
-        $where = array(
-            'id'=>$id
-        );
+        $where = array('id'=>$id);
 
 		// Panggil metode update_data di model
 		$this->m_data->update_data($where, $data, 'tb_kriteria');

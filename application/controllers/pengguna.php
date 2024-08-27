@@ -66,39 +66,43 @@ class Pengguna extends CI_Controller {
 	}
     
 	public function hapus($id){
-        $where =  array ('id_role'=> $id);
+        $where =  array ('id_user'=> $id);
         $this->m_data->hapus_data($where,'tb_user');
         redirect('pengguna/index');
 
     }
 
 	public function update(){
-		// Ambil data dari input POST
-        $id         	= $this->input->post('id');
-        $id_kriteria    = $this->input->post('id_kriteria');
-        $nama_kriteria  = $this->input->post('nama_kriteria');
-        $jenis_kriteria = $this->input->post('jenis_kriteria');
-        $bobot    		= $this->input->post('bobot');
-        
-		// Persiapkan data untuk diupdate
-        $data = array(
-			'id'				=>$id,
-			'id_kriteria'		=>$id_kriteria,
-            'nama_kriteria'     =>$nama_kriteria,
-            'jenis_kriteria'    =>$jenis_kriteria,
-            'bobot' 			=>$bobot
-        );
 
-		// Kondisi untuk menentukan data yang akan diupdate
-        $where = array(
-            'id'=>$id
-        );
+		// Ambil data dari input POST
+		$nama = $this->input->post('nama');
+		$email = $this->input->post('email');
+	  	$password = $this->input->post('password');
+		$id_role = $this->input->post('id_role');
+	  
+		// Jika password diisi, gunakan password baru, jika tidak, gunakan password lama
+		if (!empty($password)) {
+			$password = password_hash($password, PASSWORD_BCRYPT); // Enkripsi password baru
+		} else {
+			$password = $user->password; // Gunakan password lama
+		}
+	  
+		// Persiapkan data untuk diupdate
+		$data = array(
+			'nama'     => $nama,
+			'email'    => $email,
+			'password' => $password,
+			'id_role'  => $id_role
+		  );
+
+		// Tentukan kondisi berdasarkan id_user
+		$where = array('id_user' => $id_user);
 
 		// Panggil metode update_data di model
-		$this->m_data->update_data($where, $data, 'tb_kriteria');
+		$this->m_pengguna->update_data($where, $data, 'tb_user');
 
 		// Redirect ke halaman alternatif/index
-        redirect('kriteria/index');
+        redirect('pengguna/index');
 
     }
 

@@ -71,8 +71,8 @@
                                             <td class="text-center"><?php echo $data->role ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="#update<?= $data->id_role;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a data-toggle="modal" data-target="#delete<?= $data->id_role;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>pengguna/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a data-toggle="modal" data-target="#update<?= $data->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>pengguna/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a data-toggle="modal" data-target="#delete<?= $data->id_user;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>pengguna/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                                 <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('admin/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>
 
@@ -142,7 +142,7 @@
 
    <!-- Modal Hapus-->
    <?php foreach ($user as $data): ?>  
-        <div class="modal fade" id="delete<?= $data->id_role;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="delete<?= $data->id_user;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -154,13 +154,65 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
-                        <a class="btn btn-primary" href="<?= base_url('pengguna/hapus/').$data->id_role;?>">Ya</a>
+                        <a class="btn btn-primary" href="<?= base_url('pengguna/hapus/').$data->id_user;?>">Ya</a>
                     </div>
                 </div>
             </div>
         </div>
         <?php endforeach; ?>
   <!-- End Modal Hapus-->
+
+ <!-- Modal Edit-->
+ <?php foreach ($user as $data): ?> 
+    <div class="modal fade" id="update<?= $data->id_user;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header bg-success">
+            <h4 class="modal-title text-white text-center " id="exampleModalLabel" > <i class="fas fa-fw fa-edit text-successy"></i> Edit Data User</h4>
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <?php echo form_open_multipart('pengguna/update'); ?>
+            <input type="hidden" name="id_user" value="<? $data->id_user; ?>">
+                <div class="form-group">
+                    <label for="">Nama Lengkap</label>
+                    <input type="text" name="nama" class="form-control" value="<?= $data->nama;?>"> 
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" name="email" class="form-control" value="<?= $data->email;?>"> 
+                </div>
+                <div class="form-group">
+                    <label for="">Role</label>
+                    <select name="id_role" class="form-control">
+                        <?php foreach ($datarole as $role): ?>
+                            <option value=" <?php echo $role->id_role?>"
+                            <?php echo ($role->id_role == $data->id_role) ? 'selected' : ''; ?>>
+                                <?php echo $role->role?></option>
+                            <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah">
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>  
+            <?php echo form_close(); ?>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <?php endforeach; ?>
+   <!-- End Modal Edit-->
+
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
