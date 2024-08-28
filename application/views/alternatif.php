@@ -39,7 +39,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Alternatif</h1>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
 
                         <!-- <a href="list-kriteria.php" class="btn btn-primary ">
                             <span class="icon text-white-70"><i class="fas fa-plus"></i></span>
@@ -71,8 +71,8 @@
                                             <td><?php echo $data->nama_alternatif ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="#update<?= $data->id_alternatif;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>alternatif/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a data-toggle="modal" data-target="#delete<?= $data->id_alternatif;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>alternatif/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a data-toggle="modal" data-target="#update<?= $data->id_alternatif;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>alternatif/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                <a data-toggle="modal" data-target="#delete<?= $data->id_alternatif;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>alternatif/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
                                                 <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('alternatif/hapus/'.$data->id_alternatif,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>
 

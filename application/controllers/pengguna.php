@@ -10,12 +10,13 @@ class Pengguna extends CI_Controller {
     }
 	public function index()
 	{
-		$title['title']= 'Data Pengguna';
+		$title['title']= 'Data User';
 		$data2['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
 		$data['datarole']=$this->m_pengguna->getRoles();
 		$data['user'] = $this->m_pengguna->tampil_data();
+
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
@@ -81,11 +82,13 @@ class Pengguna extends CI_Controller {
 	  	$password = $this->input->post('password');
 		$id_role = $this->input->post('id_role');
 	  
+		$user = $this->m_pengguna->tampil_data(); 
+
 		// Jika password diisi, gunakan password baru, jika tidak, gunakan password lama
 		if (!empty($password)) {
 			$password = password_hash($password, PASSWORD_BCRYPT); // Enkripsi password baru
 		} else {
-			$password = $user->password; // Gunakan password lama
+			$password = $user->password;// Gunakan password lama
 		}
 	  
 		// Persiapkan data untuk diupdate

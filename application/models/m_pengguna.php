@@ -2,7 +2,7 @@
 
 class M_pengguna extends CI_Model{
     public function tampil_data(){
-        $this->db->select('tb_role.role, tb_user.id_role,tb_user.id_user, tb_user.nama, tb_user.email');
+        $this->db->select('tb_role.role, tb_user.*');
         $this->db->from('tb_user');
         $this->db->join('tb_role', 'tb_role.id_role = tb_user.id_role');
         return $this->db->get()->result();

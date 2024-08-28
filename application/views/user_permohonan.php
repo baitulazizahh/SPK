@@ -2,7 +2,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"> Home</h1>
+                        <h1 class="h3 mb-0 text-gray-800"> Data Permohonan</h1>
                         
                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
                     </div>

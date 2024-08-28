@@ -63,9 +63,9 @@
                                                 <td class="text-center"><?php echo $no++; ?></td>
                                                 <td ><?php echo $data->nama_alternatif; ?></td>
                                                 <td class="text-center">
-                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->id_alternatif;  ?>"><i class="fa fa-plus"></i></button>
-                                                <a href="?id=<?php echo $data->id_alternatif; ?>" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a> 
-                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->nama_alternatif;  ?>"><i class="fa fa-plus"></i></button>
+                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->id_alternatif;  ?>"><i class="fa fa-plus fa-sm"></i></button>
+                                                <a href="?id=<?php echo $data->id_alternatif; ?>" class="btn btn-info btn-sm"><i class="fa fa-edit fa-sm"></i></a> 
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_alternatif; ?>"  data-nama="<?php echo $data->nama_alternatif;  ?>"><i class="fa fa-plus fa-sm"></i></button>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

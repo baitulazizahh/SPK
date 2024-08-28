@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Permohonan extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,8 +20,6 @@ class User extends CI_Controller {
 	 */
 	public function index()
 	{
-		// $this->load->model('m_home');
-		// $data['nilai'] = $this->m_penilaian->tampil_data()->result();
 		$data['title']= 'User';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
@@ -29,7 +27,7 @@ class User extends CI_Controller {
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/user_sidebar');
 		$this->load->view('templates/topbar',$user);
-		$this->load->view('user_home');
+		$this->load->view('user_permohonan');
 		// $this->load->view('templates/footer');
 		
 	}

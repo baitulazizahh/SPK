@@ -36,7 +36,7 @@
                                     <i class="fas fa-fw fa-calculator text-success"></i>
                                     <span class="ml-2"><?= $k->nama_kriteria; ?></span>
                                 </h6>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id_kriteria="<?= $k->id; ?>">
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id_kriteria="<?= $k->id; ?>">
                                     <i class="fa fa-plus "></i> Tambah data
                                 </button>
                             </div>
@@ -60,8 +60,8 @@
                                                     <td class="text-center"><?= $sk->nama_subkriteria; ?></td>
                                                     <td class="text-center"><?= $sk->nilai; ?></td>
                                                     <td class="text-center">
-                                                        <a data-toggle="modal" data-target="#update<?= $sk->id_subkriteria; ?>" data-placement="bottom" title="Update Data" href="<?php echo base_url() ?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                        <a data-toggle="modal" data-target="#delete<?= $sk->id_subkriteria; ?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url() ?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                        <a data-toggle="modal" data-target="#update<?= $sk->id_subkriteria; ?>" data-placement="bottom" title="Update Data" href="<?php echo base_url() ?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                        <a data-toggle="modal" data-target="#delete<?= $sk->id_subkriteria; ?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url() ?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
                                                     </td>
                                                 </tr>
 

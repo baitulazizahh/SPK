@@ -18,9 +18,10 @@ class Penilaian extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
 		$data['penilaian2'] = $this->m_penilaian->tampil_data();
-		$data['kriteria'] = $this->m_data->tampil_data(); // Mengambil data dari model
+		$data['kriteria'] 	= $this->m_data->tampil_data(); // Mengambil data dari model
 		$data['subkriteria']= $this->m_subkriteria->get_all_subkriteria_grouped();
-		$data['penilaian'] = $this->m_alternatif->tampil_data();
+		$data['penilaian'] 	= $this->m_alternatif->tampil_data();
+		
 
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');

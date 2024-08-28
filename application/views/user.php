@@ -40,7 +40,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data User</h1>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
                     </div>
                     
                     <!-- DataTales Example -->
@@ -71,8 +71,8 @@
                                             <td class="text-center"><?php echo $data->role ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="#update<?= $data->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>pengguna/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <a data-toggle="modal" data-target="#delete<?= $data->id_user;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>pengguna/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a data-toggle="modal" data-target="#update<?= $data->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>pengguna/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                <a data-toggle="modal" data-target="#delete<?= $data->id_user;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>pengguna/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
                                                 <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('admin/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>
 
@@ -194,10 +194,10 @@
                             <?php endforeach ?>
                     </select>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ingin mengubah">
-                </div>
+                        <input type="text" name="email" class="form-control" value="<?= $data->email;?>"> 
+                </div> -->
 
                 </div>
                 <div class="modal-footer">

@@ -12,17 +12,17 @@
             </a>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="<?= base_url('user/user')?>">
                     <i class="fas fa-fw fa-home text-white"></i>
                     <span>Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="<?= base_url('user/permohonan')?>">
                     <i class="fas fa-fw fa-file-alt text-white"></i>
                     <span>Permohonan</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="<?= base_url('user/profil')?>">
                     <i class="fas fa-fw fa-user text-white"></i>
                     <span>Profil</span></a>
             </li>

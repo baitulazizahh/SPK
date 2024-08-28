@@ -68,7 +68,7 @@ class Auth extends CI_Controller {
                     if($user['id_role'] == 1){
                         redirect('admin');
                     } else {
-                        redirect('user');
+                        redirect('user/user');
                     }
                 } else {
                     echo "Password salah!";
