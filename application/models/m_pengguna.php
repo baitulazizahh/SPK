@@ -26,6 +26,12 @@ class M_pengguna extends CI_Model{
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+
+    public function get_user_by_id($id_user) {
+        $this->db->where('id_user', $id_user);
+        $query = $this->db->get('tb_user');
+        return $query->row(); // Mengembalikan satu baris data
+    }
  
 }
 ?>

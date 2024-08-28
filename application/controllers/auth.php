@@ -42,23 +42,7 @@ class Auth extends CI_Controller {
         
       
         if($user){
-            if($user['is_active'] == 1){
-                // // Debugging: Menampilkan hasil password verification
-                // echo "<h3>Debugging Password Verification</h3>";
-                // $is_password_correct = password_verify($password, $user['password']);
-                // var_dump($is_password_correct);
-                // if($is_password_correct) {
-                //     $data = [
-                //         'email' => $user['email'],
-                //         'id_role' => $user['id_role'],
-                //     ];
-                //     $this->session->set_userdata($data);
-                //     echo "Redirecting...";
-                //     if($user['id_role'] == 1) {
-                //         redirect('admin');
-                //     } else {
-                //         redirect('user');
-                //     }
+           
                 if(password_verify($password, $user['password'])){
                     $data = [
                         'email' => $user['email'],
@@ -75,11 +59,7 @@ class Auth extends CI_Controller {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
                     redirect('auth');
                 }
-            } else {
-                echo "Email belum diaktivasi!";
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum diaktivasi!</div>');
-                redirect('auth');
-            }
+            
         } else {
             echo "Email belum terdaftar!";
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar!</div>');
@@ -97,6 +77,15 @@ class Auth extends CI_Controller {
             'required' => 'Nama lengkap harus diisi!',
             'is_unique' => 'Email sudah terdaftar!',
             'valid_email' => 'Email tidak valid!',
+        ]);
+        $this->form_validation->set_rules('no_hp', 'No_hp', 'required|trim|min_length[10]|max_length[13]',[
+            'required' => 'No HP harus diisi!',
+            'min_length' => 'No HP minimal 10 digit',
+            'max_length' => 'No HP maksimal 13 digit',
+        ]);
+        $this->form_validation->set_rules('alamat', 'alamat', 'required|trim',[
+            'required' => 'Alamat harus diisi!',
+          
         ]);
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]',[
             'required' => 'Password harus diisi!',
@@ -117,8 +106,9 @@ class Auth extends CI_Controller {
                 'id_role' => 2,
                 'nama' => htmlspecialchars($this->input->post('nama',true)), 
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),  
-                'email' =>  htmlspecialchars($this->input->post('email', true)),    
-                'is_active' =>1,  
+                'email' =>  htmlspecialchars($this->input->post('email', true)), 
+                'no_hp' =>  htmlspecialchars($this->input->post('no_hp', true)), 
+                'alamat' =>  htmlspecialchars($this->input->post('alamat', true)),      
                 'date_created' => time()
             ];
 

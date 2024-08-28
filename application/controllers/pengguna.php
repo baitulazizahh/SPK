@@ -96,7 +96,6 @@ class Pengguna extends CI_Controller {
 			'id_user'  => $id_user,
 			'nama'     => $nama,
 			'email'    => $email,
-			'password' => $password,
 			'id_role'  => $id_role
 		  );
 

@@ -2,7 +2,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800"> Data Profil</h1>
+                        <h1 class="h3 mb-0 text-gray-800"> Biodata Pengguna</h1>
                         
                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
                     </div>
@@ -10,33 +10,35 @@
                     <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold text-success">
-                        <i class="fas fa-fw fa-user text-success"></i> Data Profil
+                        <i class="fas fa-fw fa-user text-success"></i> Biodata Pengguna
                     </h6>
    
                 </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                            <?php foreach ($user as $data): ?>   
                             <form>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama" class="form-control" value="<?= $data->nama; ?>"> 
                                 </div>
                                 <div class="mb-3">  
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label>Email</label>
+                                    <input type="email" name="emil" class="form-control" value="<?= $data->email;?>"> 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label>No.HP</label>
+                                    <input type="text" name="no_hp" class="form-control" value="<?= $data->no_hp;?>"> 
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label>Alamat</label>
+                                    <input type="text" name="alamat" class="form-control" value="<?= $alamat;?>"> 
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary btn-sm">Ubah</button>
                                 </div>
                             </form>
+                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

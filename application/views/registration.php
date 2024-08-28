@@ -20,6 +20,16 @@
                                         placeholder="Email" value="<?= set_value('email');?>">
                                         <?= form_error('email','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="no_hp" name="no_hp"
+                                        placeholder="No.HP" value="<?= set_value('no_hp');?>">
+                                        <?= form_error('no_hp','<small class="text-danger pl-3">','</small>'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
+                                        placeholder="Alamat" value="<?= set_value('alamat');?>">
+                                        <?= form_error('alamat','<small class="text-danger pl-3">','</small>'); ?>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
