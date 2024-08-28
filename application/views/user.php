@@ -175,9 +175,9 @@
         </div>
         <div class="modal-body">
             <?php echo form_open_multipart('pengguna/update'); ?>
-            <input type="hidden" name="id_user" value="<? $data->id_user; ?>">
                 <div class="form-group">
                     <label for="">Nama Lengkap</label>
+                    <input type="hidden" name="id_user" value="<?= $data->id_user;?>"> 
                     <input type="text" name="nama" class="form-control" value="<?= $data->nama;?>"> 
                 </div>
                 <div class="form-group">

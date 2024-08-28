@@ -75,6 +75,7 @@ class Pengguna extends CI_Controller {
 	public function update(){
 
 		// Ambil data dari input POST
+		$id_user = $this->input->post('id_user');
 		$nama = $this->input->post('nama');
 		$email = $this->input->post('email');
 	  	$password = $this->input->post('password');
@@ -89,6 +90,7 @@ class Pengguna extends CI_Controller {
 	  
 		// Persiapkan data untuk diupdate
 		$data = array(
+			'id_user'  => $id_user,
 			'nama'     => $nama,
 			'email'    => $email,
 			'password' => $password,
