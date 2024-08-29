@@ -15,14 +15,15 @@ class Profil extends CI_Controller {
 
 	public function index()
 	{
-		$data['title']= 'User';
+		$title['title']= 'User';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
 		$id_user = $this->session->userdata('id_user');
-		$data['user'] = $this->m_pengguna->get_user_by_id($id_user);
-		 
-		$this->load->view('templates/header',$data);
+		
+		$data['user'] = $this->m_pengguna->getUser($id_user);
+	
+		$this->load->view('templates/header',$title);
 		$this->load->view('templates/user_sidebar');
 		$this->load->view('templates/topbar',$user);
 		$this->load->view('user_profil',$data);

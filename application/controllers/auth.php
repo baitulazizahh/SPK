@@ -47,6 +47,7 @@ class Auth extends CI_Controller {
                     $data = [
                         'email' => $user['email'],
                         'id_role' => $user['id_role'],
+                        'id_user' => $user['id_user'],
                     ];
                     $this->session->set_userdata($data);
                     if($user['id_role'] == 1){

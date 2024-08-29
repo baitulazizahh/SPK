@@ -2,8 +2,6 @@
 
 class M_subkriteria extends CI_Model{
   
-
-
         public function get_all_kriteria() {
             return $this->db->get('tb_kriteria')->result();
         }
