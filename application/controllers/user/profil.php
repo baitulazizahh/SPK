@@ -30,6 +30,48 @@ class Profil extends CI_Controller {
 		// $this->load->view('templates/footer');
 		
 	}
+	public function update(){
+		// Ambil data dari input POST
+		$id_user = $this->input->post('id_user');
+		$id_role = $this->input->post('id_role');
+		$nama = $this->input->post('nama');
+		$no_hp = $this->input->post('no_hp');
+		$alamat = $this->input->post('alamat');
+		$password = $this->input->post('password');
+
+		 // Ambil data lama dari database
+		 $datauser = $this->m_pengguna->getUser($id_user);
+    
+		 // Jika password baru diisi, hash password tersebut
+		 if (!empty($password)) {
+			 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+		 } else {
+			 // Jika password kosong, gunakan password lama
+			 $hashed_password = $datauser->password;
+		 }
+		   
+		// Persiapkan data untuk diupdate
+		$data = array(
+			'id_user' => $id_user,
+			'id_role' => $id_role,
+			'nama' => $nama,
+			'no_hp' => $no_hp,
+			'alamat' => $alamat,
+			'password' => $hashed_password,
+		);
+		
+		// Kondisi untuk menentukan data yang akan diupdate
+		$where = array('id_user' => $id_user);
+		
+		// Panggil metode update_data di model
+		$this->m_pengguna->update_profil($where, $data, 'tb_user');
+		
+		// Redirect ke halaman alternatif/index
+		redirect('user/profil');
+		
+    }
+
+
 
 	
 }

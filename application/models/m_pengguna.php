@@ -22,6 +22,7 @@ class M_pengguna extends CI_Model{
         $this->db->where($where);
         $this->db->delete($table);
     }
+
     public function update_data($where, $data,$table){
         $this->db->where($where);
         $this->db->update($table, $data);
@@ -31,6 +32,11 @@ class M_pengguna extends CI_Model{
         $this->db->where('id_user', $id_user);
         $query = $this->db->get('tb_user');
         return $query->row(); // Mengembalikan satu baris data
+    }
+
+    public function update_profil($where, $data,$table){
+        $this->db->where($where);
+        $this->db->update($table, $data);
     }
  
 }

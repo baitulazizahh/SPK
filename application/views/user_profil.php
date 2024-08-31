@@ -33,38 +33,50 @@
                                 <div class="mb-3">
                                     <label>Alamat</label>
                                     <input type="text" name="alamat" class="form-control" value="<?= $user->alamat;?>"> 
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Ubah</button>
-                                </div>
+                                </div> 
                             </form>
+                            <div class="d-flex justify-content-end">
+                                <a data-toggle="modal" data-target="#update<?= $user->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>user/profil/update_profil/" class="btn btn-warning btn-sm">Ubah</a>
+                            </div>
                            
                             </div>
                         </div>
                     </div>
 
-<!-- Modal Tambah-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Edit-->
+<div class="modal fade" id="update<?= $user->id_user;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-success">
-        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Tambah Data Alternatif</h4>
+        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Edit Biodata Pengguna</h4>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       <?= $this->session->flashdata('message'); ?>
-        <?php echo form_open ('alternatif/tambah_aksi'); ?>
+        <?php echo form_open ('user/profil/update'); ?>
             <div class="form-group">
-                <label for="">ID Alternatif</label>
-                <input type="text" name="id_alternatif2" class="form-control"  value="<?= set_value('id_alternatif2');?>"> 
-                <?= form_error('id_alternatif2','<small class="text-danger pl-1">','</small>'); ?>
+                <label for="">Nama Lengkap</label>
+                <input type="hidden" name="id_user" value="<?= $user->id_user;?>"> 
+                <input type="hidden" name="id_role" value="<?= $user->id_role;?>"> 
+                <input type="text" name="nama" class="form-control" value="<?= $user->nama;?>"> 
             </div>
             <div class="form-group">
-                <label for="">Nama Alternatif</label>
-                <input type="text" name="nama_alternatif" class="form-control" value="<?= set_value('nama_alternatif');?>"> 
-                <?= form_error('nama_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+                <label for="">Email</label>
+                <input type="email" name="email" class="form-control"  value="<?= $user->email;?>"> 
+            </div>
+            <div class="form-group">
+                <label for="">No.HP</label>
+                <input type="text" name="no_hp" class="form-control"  value="<?= $user->no_hp;?>"> 
+            </div>
+            <div class="form-group">
+                <label for="">Alamat</label>
+                <input type="text" name="alamat" class="form-control"  value="<?= $user->alamat;?>"> 
+            </div>
+            <div class="form-group">
+                <label for="">Paaword</label>
+                <input type="password" name="password" class="form-control"> 
             </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
