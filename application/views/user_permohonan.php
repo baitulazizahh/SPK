@@ -74,15 +74,15 @@
       </div>
       <div class="modal-body">
         <?= $this->session->flashdata('message'); ?>
-        <?php echo form_open ('alternatif/tambah_aksi'); ?>
+        <?php echo form_open ('user/permohonan/tambah_aksi'); ?>
             <div class="form-group">
                 <label for="">Nama Usaha</label>
-                <input type="text" name="id_alternatif2" class="form-control"  value="<?= set_value('id_alternatif2');?>"> 
-                <?= form_error('id_alternatif2','<small class="text-danger pl-1">','</small>'); ?>
+                <input type="text" name="nama_usaha" class="form-control"  value="<?= set_value('nama_usaha');?>"> 
+                <?= form_error('nama_usaha','<small class="text-danger pl-1">','</small>'); ?>
             </div> 
             <div class="form-group">
                 <label for="">Pendapatan</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= $data->jenis_kriteria;?>">
+                <select class=" form-control" name="pendapatan" value="<?= set_value('pendapatan')?>">
                     <option>Kurang dari Rp 1.000.000</option>
                     <option>Rp 1.000.000 - Kurang dari Rp 1.500.000 </option>
                     <option>Rp 1.500.000 - Kurang dari Rp 2.000.000</option>
@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="">Jumlah Tanggungan</label>
-                <select class=" form-control" name="jenis_kriteria" value="<?= $data->jenis_kriteria;?>">
+                <select class=" form-control" name="tanggungan" value="<?= set_value('tanggungan')?>">
                     <option>Lebih 4 orang</option>
                     <option>4 orang</option>
                     <option>3 orang</option>
@@ -122,6 +122,7 @@
                 <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
                 <small class="text-danger font-italic">*Dokumen dalam format pdf, png, jpeg</small>
             </div>
+             <input type="hidden" name="status" value="Diproses">
             <div class="modal-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>

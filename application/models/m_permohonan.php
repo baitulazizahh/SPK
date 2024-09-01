@@ -8,6 +8,12 @@ class M_permohonan extends CI_Model{
         return $this->db->get()->result();
    
     }
+    // public function getPermohonan($id_permohonan) {
+    //     $this->db->where('id_permohonan', $id_permohonan);
+    //     $query = $this->db->get('tb_permohonan');
+    //     return $query->result();
+    // }
+    
 
     public function getRoles() {
         $query= $this->db->get('tb_role');
@@ -15,29 +21,10 @@ class M_permohonan extends CI_Model{
     }
    
     public function input_data($data){
-        return $this->db->insert('tb_user', $data);
+        return $this->db->insert('tb_permohonan', $data);
      }
 
-    public function hapus_data($where, $table){
-        $this->db->where($where);
-        $this->db->delete($table);
-    }
-
-    public function update_data($where, $data,$table){
-        $this->db->where($where);
-        $this->db->update($table, $data);
-    }
-    
-    public function getUser($id_user) {
-        $this->db->where('id_user', $id_user);
-        $query = $this->db->get('tb_user');
-        return $query->row(); // Mengembalikan satu baris data
-    }
-
-    public function update_profil($where, $data,$table){
-        $this->db->where($where);
-        $this->db->update($table, $data);
-    }
+  
  
 }
 ?>
