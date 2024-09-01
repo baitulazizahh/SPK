@@ -1,3 +1,4 @@
+
 <div class="container-fluid"> 
 
                     <!-- Page Heading -->
@@ -31,26 +32,30 @@
                                        
                                     </thead>
                                     <tbody>
+                                    <?php $no = 1; ?>  
+                                    <?php foreach ($permohonan as $data): ?>  
                                         <tr>
-                                            <td class= "text-center">1</td>
-                                            <td>Usaha</td>
-                                            <td class= ><div class="status-containe text-center">
-                                                <div class="status diterima">Diterima</div></div>
+                                            <td class="text-center"><?php echo $no++?></td>
+                                            <td><?php echo $data->nama_usaha ?></td>
+                                            <td class="text-center">
+                                                <?php if (strtolower($data->status) == 'diproses'): ?>
+                                                    <span class="badge badge-pill badge-warning">Diproses</span>
+                                                <?php elseif (strtolower($data->status) == 'diterima'): ?>
+                                                    <span class="badge badge-pill badge-primary">Diterima</span>
+                                                <?php elseif (strtolower($data->status) == 'ditolak'): ?>
+                                                    <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                <?php endif; ?>
                                             </td>
                                             <td class="text-center">
-                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
+                                                <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
+                                                <a data-toggle="modal" data-target="" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                <a data-toggle="modal" data-target="" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
+                                                <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('admin/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>
+
                                         </tr>
-                                        <tr>
-                                            <td class= "text-center">1</td>
-                                            <td>Usaha</td>
-                                            <td class= ><div class="status-containe text-center">
-                                                <div class="status diproses">Diproses</div></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="submit" class="btn btn-info btn-sm">Berkas</button>
-                                            </td>
-                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
                                     </tbody>
                                 </table>
                             </div>
@@ -62,7 +67,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-success">
-        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Tambah Data Alternatif</h4>
+        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Ajukan Permohonan</h4>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -71,29 +76,51 @@
         <?= $this->session->flashdata('message'); ?>
         <?php echo form_open ('alternatif/tambah_aksi'); ?>
             <div class="form-group">
-                <label for="">ID Alternatif</label>
+                <label for="">Nama Usaha</label>
                 <input type="text" name="id_alternatif2" class="form-control"  value="<?= set_value('id_alternatif2');?>"> 
                 <?= form_error('id_alternatif2','<small class="text-danger pl-1">','</small>'); ?>
             </div> 
             <div class="form-group">
-                <label for="">Nama Alternatif</label>
-                <input type="text" name="nama_alternatif" class="form-control" value="<?= set_value('nama_alternatif');?>"> 
-                <?= form_error('nama_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+                <label for="">Pendapatan</label>
+                <select class=" form-control" name="jenis_kriteria" value="<?= $data->jenis_kriteria;?>">
+                    <option>Kurang dari Rp 1.000.000</option>
+                    <option>Rp 1.000.000 - Kurang dari Rp 1.500.000 </option>
+                    <option>Rp 1.500.000 - Kurang dari Rp 2.000.000</option>
+                    <option>Lebih dari Rp 2.000.000</option>  
+                </select>
             </div>
             <div class="form-group">
-        <label for="file_upload1">Upload File 1</label>
-        <input type="file" name="file_upload1" class="form-control">
-        <?= form_error('file_upload1', '<small class="text-danger pl-1">', '</small>'); ?>
-    </div>
-            <div class="form-group">
-                <label for="">Nama Alternatif</label>
-                <input type="file" name="nama_alternatif" class="form-control" value="<?= set_value('nama_alternatif');?>"> 
-                <?= form_error('nama_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+                <label for="">Jumlah Tanggungan</label>
+                <select class=" form-control" name="jenis_kriteria" value="<?= $data->jenis_kriteria;?>">
+                    <option>Lebih 4 orang</option>
+                    <option>4 orang</option>
+                    <option>3 orang</option>
+                    <option>1-2 orang</option>  
+                </select>
             </div>
             <div class="form-group">
-                <label for="">Nama Alternatif</label>
-                <input type="file" name="nama_alternatif" class="form-control" value="<?= set_value('nama_alternatif');?>"> 
-                <?= form_error('nama_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+                <label>Proposal</label>
+                <input type="file" name="proposal" class="form-control">
+                <?= form_error('proposal', '<small class="text-danger pl-1">', '</small>'); ?>
+                <small class="text-danger font-italic">*Dokumen dalam format pdf</small>
+            </div>
+            <div class="form-group">
+                <label>Surat Keterangan Usaha </label>
+                <input type="file" name="sku" class="form-control">
+                <?= form_error('sku', '<small class="text-danger pl-1">', '</small>'); ?>
+                <small class="text-danger font-italic">*Dokumen dalam format pdf</small>
+            </div>
+            <div class="form-group">
+                <label>Foto Kartu Keluarga</label>
+                <input type="file" name="kk" class="form-control">
+                <?= form_error('kk', '<small class="text-danger pl-1">', '</small>'); ?>
+                <small class="text-danger font-italic">*Dokumen dalam format pdf, png, jpeg</small>
+            </div>
+            <div class="form-group">
+                <label>Foto KTP</label>
+                <input type="file" name="ktp" class="form-control">
+                <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
+                <small class="text-danger font-italic">*Dokumen dalam format pdf, png, jpeg</small>
             </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>

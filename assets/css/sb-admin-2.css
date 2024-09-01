@@ -11279,3 +11279,23 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.status-container {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.status.diproses {
+  background-color: #FFC107; /* Warna kuning untuk status 'Diproses' */
+}
+
+.status.diterima {
+  background-color: #28A745; /* Warna hijau untuk status 'Diterima' */
+}
+
+.status.ditolak {
+  background-color: #DC3545; /* Warna merah untuk status 'Ditolak' */
+}
