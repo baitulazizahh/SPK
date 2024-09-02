@@ -6,14 +6,26 @@ class M_permohonan extends CI_Model{
         $this->db->from('tb_permohonan');
         $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
         return $this->db->get()->result();
-   
     }
-    // public function getPermohonan($id_permohonan) {
-    //     $this->db->where('id_permohonan', $id_permohonan);
-    //     $query = $this->db->get('tb_permohonan');
-    //     return $query->result();
-    // }
+
+    public function getPermohonan($id_user) {
+        $this->db->where('id_user', $id_user);
+        $query = $this->db->get('tb_permohonan');
+        return $query->result(); 
+    }
     
+
+    public function checkUserDuplicate($id_user, $created) {
+        $this->db->where('id_user', $id_user);
+        $this->db->where('DATE(created)', $created);  
+        $query = $this->db->get('tb_permohonan');
+        
+        if ($query->num_rows() > 0) {
+            return true;  // Jika ada data, berarti sudah ada pengajuan pada periode ini
+        } else {
+            return false;  // Jika tidak ada data, berarti belum ada pengajuan
+        }
+    }
 
     public function getRoles() {
         $query= $this->db->get('tb_role');

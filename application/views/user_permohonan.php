@@ -4,21 +4,26 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Permohonan</h1>
-                        
                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
                     </div>
-                    
+                    <!-- // Alert -->
+                    <?php if ($this->session->flashdata('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php echo $this->session->flashdata('error'); ?>
+                        </div>
+                    <?php endif; ?>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold text-success">
-        <i class="fas fa-fw fa-file-alt text-success"></i> Data Permohonan
-    </h6>
-    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-         Ajukan Permohonan
-    </button>
+                        <i class="fas fa-fw fa-file-alt text-success"></i> Data Permohonan
+                    </h6>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                         Ajukan Permohonan
+                    </button>
    
 </div>
+    
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
@@ -32,30 +37,32 @@
                                        
                                     </thead>
                                     <tbody>
-                                    <?php $no = 1; ?>  
-                                    <?php foreach ($permohonan as $data): ?>  
-                                        <tr>
-                                            <td class="text-center"><?php echo $no++?></td>
-                                            <td><?php echo $data->nama_usaha ?></td>
-                                            <td class="text-center">
-                                                <?php if (strtolower($data->status) == 'diproses'): ?>
-                                                    <span class="badge badge-pill badge-warning">Diproses</span>
-                                                <?php elseif (strtolower($data->status) == 'diterima'): ?>
-                                                    <span class="badge badge-pill badge-primary">Diterima</span>
-                                                <?php elseif (strtolower($data->status) == 'ditolak'): ?>
-                                                    <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td class="text-center">
-                                                <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
-                                                <a data-toggle="modal" data-target="" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>admin/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
-                                                <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('admin/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
-                                            </td>
-
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
+                                        <?php if (empty($permohonan)): ?>  <!-- Mengecek apakah $permohonan kosong -->
+                                            <tr>
+                                                <td colspan="4" class="text-center">Tidak ada data permohonan</td> 
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php $no = 1; ?>
+                                            <?php foreach ($permohonan as $data): ?>  
+                                                <tr>
+                                                    <td class="text-center"><?php echo $no++?></td>
+                                                    <td><?php echo $data->nama_usaha ?></td>
+                                                    <td class="text-center">
+                                                        <?php if (strtolower($data->status) == 'diproses'): ?>
+                                                            <span class="badge badge-pill badge-warning">Diproses</span>
+                                                        <?php elseif (strtolower($data->status) == 'diterima'): ?>
+                                                            <span class="badge badge-pill badge-primary">Diterima</span>
+                                                        <?php elseif (strtolower($data->status) == 'ditolak'): ?>
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a data-toggle="modal" data-target="" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>admin/update_data/<?php echo $data->id_permohonan; ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                        <a data-toggle="modal" data-target="" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>admin/hapus_data/<?php echo $data->id_permohonan; ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -74,7 +81,7 @@
       </div>
       <div class="modal-body">
         <?= $this->session->flashdata('message'); ?>
-        <?php echo form_open ('user/permohonan/tambah_aksi'); ?>
+        <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data']); ?>
             <div class="form-group">
                 <label for="">Nama Usaha</label>
                 <input type="text" name="nama_usaha" class="form-control"  value="<?= set_value('nama_usaha');?>"> 
