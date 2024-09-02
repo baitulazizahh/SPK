@@ -81,7 +81,12 @@
       </div>
       <div class="modal-body">
         <?= $this->session->flashdata('message'); ?>
-        <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data']); ?>
+        <?php if ($this->session->flashdata('upload_errors')): ?>
+            <div class="alert alert-danger">
+                <?php echo $this->session->flashdata('upload_errors'); ?>
+            </div>
+        <?php endif; ?>
+        <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data',  'method' => 'post']); ?>
             <div class="form-group">
                 <label for="">Nama Usaha</label>
                 <input type="text" name="nama_usaha" class="form-control"  value="<?= set_value('nama_usaha');?>"> 
@@ -109,25 +114,25 @@
                 <label>Proposal</label>
                 <input type="file" name="proposal" class="form-control">
                 <?= form_error('proposal', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="text-danger font-italic">*Dokumen dalam format pdf</small>
+                <small class="font-italic">*Dokumen dalam format pdf</small>
             </div>
             <div class="form-group">
                 <label>Surat Keterangan Usaha </label>
                 <input type="file" name="sku" class="form-control">
                 <?= form_error('sku', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="text-danger font-italic">*Dokumen dalam format pdf</small>
+                <small class="font-italic">*Dokumen dalam format pdf</small>
             </div>
             <div class="form-group">
                 <label>Foto Kartu Keluarga</label>
                 <input type="file" name="kk" class="form-control">
                 <?= form_error('kk', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="text-danger font-italic">*Dokumen dalam format pdf, png, jpeg</small>
+                <small class="font-italic">*Dokumen dalam format pdf, png, jpeg</small>
             </div>
             <div class="form-group">
                 <label>Foto KTP</label>
                 <input type="file" name="ktp" class="form-control">
                 <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="text-danger font-italic">*Dokumen dalam format pdf, png, jpeg</small>
+                <small class="font-italic">*Dokumen dalam format pdf, png, jpeg</small>
             </div>
              <input type="hidden" name="status" value="Diproses">
             <div class="modal-footer">
@@ -140,10 +145,7 @@
     </div>
   </div>
 </div>      
-<html>
 
-
-</html>
 
     
   <!-- Bootstrap core JavaScript-->
@@ -171,6 +173,15 @@
             <?php endif; ?>
         });
     </script>
+    <script>
+        $(document).ready(function(){
+    <?php if ($this->session->flashdata('upload_errors') || validation_errors() || !empty($this->session->flashdata('message'))) : ?>
+        $('#exampleModal').modal('show');
+    <?php endif; ?>
+});
+    </script>
+
+
  
 
 

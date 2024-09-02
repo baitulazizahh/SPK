@@ -109,18 +109,18 @@ class Permohonan extends CI_Controller {
 		$id_user =$this->session->userdata('id_user');
 		
 		// Validasi input form
-		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required');
+		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required|trim');
         $this->form_validation->set_rules('pendapatan', 'Pendapatan', 'required');
         $this->form_validation->set_rules('tanggungan', 'Tanggungan', 'required');
-		$this->form_validation->set_message('required', '{field} harus diisi!');
+		$this->form_validation->set_message('required', 'Tidak boleh kosong');
      
 		if($this->form_validation->run() == false){
-			$errors = validation_errors();
-			$this->session->set_flashdata('errors', '<div class="alert alert-danger text-center" role="alert">' . $errors . '</div>');
- 			redirect('user/permohonan');
- 			return;
+        	$this->session->set_flashdata('modal_open', 'true');
+			$this->index();
 		}
 
+		 // Inisialisasi pesan error upload
+		 $upload_errors = [];
 
 		//Upload proposal
 		$proposal_config = array(
@@ -131,8 +131,7 @@ class Permohonan extends CI_Controller {
 		$this->upload->initialize($proposal_config);
 
 		if (!$this->upload->do_upload('proposal')) {
-			echo "Proposal Harus Dalam Format PDF: " . $this->upload->display_errors();
-			return;
+			$upload_errors[] = "Proposal harus dalam format PDF: " . $this->upload->display_errors('', '');
 		} 
 		else {
 			$proposal_upload = $this->upload->data();
@@ -149,6 +148,7 @@ class Permohonan extends CI_Controller {
 		$this->upload->initialize($kk_config);
 
 		if (!$this->upload->do_upload('kk')) {
+			$upload_errors[] = "KK harus dalam format PDF/PNG/JPG/JPEG: " . $this->upload->display_errors('', '');
 			$kk = NULL;
 		} 
 		else {
@@ -166,7 +166,8 @@ class Permohonan extends CI_Controller {
 		$this->upload->initialize($ktp_config);
 
 		if (!$this->upload->do_upload('ktp')) {
-			$ktp = NULL;
+			$upload_errors[] = "KTP harus dalam format PDF/PNG/JPG/JPEG: " . $this->upload->display_errors('', '');
+        	$ktp = NULL;
 		} 
 		else {
 			$ktp_upload = $this->upload->data();
@@ -183,11 +184,19 @@ class Permohonan extends CI_Controller {
 		$this->upload->initialize($sku_config);
 
 		if (!$this->upload->do_upload('sku')) {
+			$upload_errors[] = "SKU harus dalam format PDF: " . $this->upload->display_errors('', '');
 			$sku = NULL;
 		} 
 		else {
 			$sku_upload = $this->upload->data();
 			$sku = $sku_upload['file_name'];
+		}
+
+		// Jika ada error dalam upload, tampilkan pesan error di bawah form
+		if (!empty($upload_errors)) {
+			$this->session->set_flashdata('upload_errors', implode('<br>', $upload_errors));
+			redirect('user/permohonan');
+			return;
 		}
 
 		$nama_usaha = $this->input->post('nama_usaha', TRUE);

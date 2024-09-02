@@ -17,7 +17,7 @@ class M_permohonan extends CI_Model{
 
     public function checkUserDuplicate($id_user, $created) {
         $this->db->where('id_user', $id_user);
-        $this->db->where('DATE(created)', $created);  
+        $this->db->where('created', $created);  
         $query = $this->db->get('tb_permohonan');
         
         if ($query->num_rows() > 0) {
