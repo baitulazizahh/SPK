@@ -36,10 +36,9 @@
                                     <h6 class="m-0 font-weight-bold text-success">Template Berkas Permohonan</h6>
                                 </div>
                                 <div class="card-body">
-                                <p>Di bawah ini adalah template proposal yang dapat Anda gunakan untuk pengajuan permohonan:</p>
-                                    <!-- Tautan untuk mengunduh template -->
+                                <p>Template proposal yang digunakan untuk pengajuan permohonan</p>
                                     <a href="<?= base_url('assets/templates/template_proposal.docx'); ?>" class="btn btn-info btn-sm">
-                                        Unduh Template Proposal
+                                        Unduh Template 
                                     </a>
                                 </div>
                             </div>
