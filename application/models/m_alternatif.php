@@ -12,7 +12,6 @@ class M_alternatif extends CI_Model{
      }
 
     public function hapus_data($where, $table){
-       
         $this->db->delete($table,$where,);
     }
     public function update_data($where, $data,$table){

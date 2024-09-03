@@ -36,6 +36,11 @@ class M_permohonan extends CI_Model{
         return $this->db->insert('tb_permohonan', $data);
      }
 
+     public function hapus_data($where, $table){
+        $this->db->delete($table,$where,);
+        
+    }
+
   
  
 }

@@ -22,88 +22,12 @@ class Permohonan extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 		$data['permohonan'] = $this->m_permohonan->getPermohonan($id_user);
 
-		// $id_permohonan = $this->session->userdata('id_');
-		// $data['user'] = $this->m_pengguna->getUser($id_user);
-		//$id_permohonan = $this->session->userdata('id_permohonan');
-		//$data['permohonan'] = $this->m_permohonan->getPermohonan($id_permohonan);
-
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/user_sidebar');
 		$this->load->view('templates/topbar',$user);
 		$this->load->view('user_permohonan', $data);
 		// $this->load->view('templates/footer');
-		
 	}
-
-	public function tambah_aksi(){
-
-		// Validasi input form
-		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required');
-        $this->form_validation->set_rules('pendapatan', 'Pendapatan', 'required');
-        $this->form_validation->set_rules('tanggungan', 'Tanggungan', 'required');
-     
-
-		if($this->form_validation->run()==false){
-			//Jika validasi gagal kembali ke halaman awal
-			$this->session->set_flashdata('modal_open', 'true');
-			$this->index();
-		} else{
-			// Ambil id user dari session
-			$id_user =$this->session->userdata('id_user');
-
-			//Proses upload file
-			$proposal =$this->_uploadFile('proposal');
-			$sku =$this->_uploadFile('sku');
-			$kk =$this->_uploadFile('kk');
-			$ktp =$this->_uploadFile('ktp');
-
-			//Membuat array data yang akan disimpan
-			$data=[
-				'id_user' => $id_user, // Menambahkan ID user ke data
-                'nama_usaha' => $this->input->post('nama_usaha'),
-                'pendapatan' => $this->input->post('pendapatan'),
-                'tanggungan' => $this->input->post('tanggungan'),
-                'proposal' => $proposal,
-                'sku' => $sku,
-                'kk' => $kk,
-                'ktp' => $ktp,
-				'status' => 'Diproses',
-				'created'=> date('Y')
-			];
-			
-			
-			// Masukkan data ke tabel tb_alternatif
-		$this->m_permohonan->input_data($data, 'tb_permohonan');
-		$this->session->set_flashdata('message', '<div class="alert alert-success">Data berhasil ditambahkan</div>');
-        redirect('user/permohonan'); // Redirect ke halaman permohonan
-		}
-	
-		
-			
-	}
-
-	private function _uploadFile($fieldName) {
-        $config['upload_path'] = './uploads/' . $fieldName . '/';
-    	$config['allowed_types'] = 'pdf|png|jpeg|jpg';
-    	$config['max_size'] = 2048; // 2MB
-		$config['file_name'] = $_FILES[$fieldName]['name'];
-		$config['overwrite'] = TRUE; // Allow overwrite if the file already exists
-
-		
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload($fieldName)) {
-			$error = $this->upload->display_errors();
-            $this->session->set_flashdata('message', $error);
-            return '';
-
-        } else {
-           // Jika upload berhasil, kembalikan nama file yang diupload
-        $uploadedData = $this->upload->data();
-        return $uploadedData['file_name'];
-        }
-    }
-
 
 	public function upload(){
 		$id_user =$this->session->userdata('id_user');
@@ -226,6 +150,15 @@ class Permohonan extends CI_Controller {
 		redirect('user/permohonan');
 
 	}
+
+	public function hapus($id_permohonan){
+        $where =  array ('id_permohonan'=> $id_permohonan);
+        $this->m_data->hapus_data($where,'tb_permohonan');
+        redirect('user/permohonan/index');
+
+    }
+
+
 		
 }
 
