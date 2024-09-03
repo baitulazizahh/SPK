@@ -29,6 +29,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('alternatif')?>">
                     <i class="fas fa-fw fa-database text-white"></i>
+                    <span>Data Alternatif</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('permohonan')?>">
+                    <i class="fas fa-fw fa-database text-white"></i>
                     <span>Data Permohonan</span></a>
             </li>
             <li class="nav-item">

@@ -21,8 +21,8 @@
                                             </ul>
                                         </li>
                                         <li>Ajukan permohonan pada menu "Permohonan" dan silakan isi form sesuai dengan data yang diminta</li>
-                                        <li>Pastikan semua data yang diisi dalam formulir adalah benar dan sesuai dengan dokumen resmi.</li>
                                         <li>Unggah berkas pendukung seperti Proposal, Surat Keterangan Usaha (SKU), Foto Kartu Keluarga (KK), dan Foto KTP.</li>
+                                        <li>Pastikan semua data yang diisi dalam formulir adalah benar dan sesuai dengan dokumen resmi.</li>
                                         <li>Jika semua data sudah benar, klik tombol "Simpan" untuk mengirim permohonan.</li>
                                         <li>Anda dapat memantau status permohonan secara berkala.</li>
                                     </ol>

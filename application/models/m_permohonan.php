@@ -2,7 +2,7 @@
 
 class M_permohonan extends CI_Model{
     public function tampil_data(){
-        $this->db->select('tb_user.id_user, tb_permohonan.*');
+        $this->db->select('tb_user.id_user, tb_user.nama,tb_permohonan.*');
         $this->db->from('tb_permohonan');
         $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
         return $this->db->get()->result();

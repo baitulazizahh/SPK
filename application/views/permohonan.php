@@ -18,9 +18,7 @@
                     <h6 class="m-0 font-weight-bold text-success">
                         <i class="fas fa-fw fa-file-alt text-success"></i> Data Permohonan
                     </h6>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
-                         Ajukan Permohonan
-                    </button>
+                   
    
 </div>
     
@@ -30,7 +28,7 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Usaha</th>
+                                            <th>Nama Pemohon</th>
                                             <th>Status Permohonan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -46,7 +44,7 @@
                                             <?php foreach ($permohonan as $data): ?>  
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++?></td>
-                                                    <td><?php echo $data->nama_usaha ?></td>
+                                                    <td><?php echo $data->nama ?></td>
                                                     <td class="text-center">
                                                         <?php if (strtolower($data->status) == 'diproses'): ?>
                                                             <span class="badge badge-pill badge-warning">Diproses</span>
@@ -57,9 +55,9 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center">
-                                                    <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" href="" class="btn btn-primary btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                    <a data-toggle="modal" data-target="#delete<?= $data->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>user/permohonan/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
-                                                    </td>
+                                                    <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
+                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"  data-nama="<?php echo $data->id_permohonan;  ?>"><i class="fa fa-plus fa-sm"></i></button>
+                                                </td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -68,106 +66,6 @@
                             </div>
                         </div>
                     </div>
-
-         <!-- Modal Tambah-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-success">
-        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Ajukan Permohonan</h4>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <?= $this->session->flashdata('message'); ?>
-        <?php if ($this->session->flashdata('upload_errors')): ?>
-            <div class="alert alert-danger">
-                <?php echo $this->session->flashdata('upload_errors'); ?>
-            </div>
-        <?php endif; ?>
-        <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data',  'method' => 'post']); ?>
-            <div class="form-group">
-                <label for="">Nama Usaha</label>
-                <input type="text" name="nama_usaha" class="form-control"  value="<?= set_value('nama_usaha');?>"> 
-                <?= form_error('nama_usaha','<small class="text-danger pl-1">','</small>'); ?>
-            </div> 
-            <div class="form-group">
-                <label for="">Pendapatan</label>
-                <select class=" form-control" name="pendapatan" value="<?= set_value('pendapatan')?>">
-                    <option>Kurang dari Rp 1.000.000</option>
-                    <option>Rp 1.000.000 - Kurang dari Rp 1.500.000 </option>
-                    <option>Rp 1.500.000 - Kurang dari Rp 2.000.000</option>
-                    <option>Lebih dari Rp 2.000.000</option>  
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Jumlah Tanggungan</label>
-                <select class=" form-control" name="tanggungan" value="<?= set_value('tanggungan')?>">
-                    <option>Lebih 4 orang</option>
-                    <option>4 orang</option>
-                    <option>3 orang</option>
-                    <option>1-2 orang</option>  
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Proposal</label>
-                <input type="file" name="proposal" class="form-control">
-                <?= form_error('proposal', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="font-italic">*Dokumen dalam format pdf</small>
-            </div>
-            <div class="form-group">
-                <label>Surat Keterangan Usaha </label>
-                <input type="file" name="sku" class="form-control">
-                <?= form_error('sku', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="font-italic">*Dokumen dalam format pdf</small>
-            </div>
-            <div class="form-group">
-                <label>Foto Kartu Keluarga</label>
-                <input type="file" name="kk" class="form-control">
-                <?= form_error('kk', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="font-italic">*Dokumen dalam format pdf, png, jpeg</small>
-            </div>
-            <div class="form-group">
-                <label>Foto KTP</label>
-                <input type="file" name="ktp" class="form-control">
-                <?= form_error('ktp', '<small class="text-danger pl-1">', '</small>'); ?>
-                <small class="font-italic">*Dokumen dalam format pdf, png, jpeg</small>
-            </div>
-             <input type="hidden" name="status" value="Diproses">
-            <div class="modal-footer">
-                <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>  
-         <?php echo form_close(); ?>  
-        </form>
-      </div>
-    </div>
-  </div>
-</div>     
-<!-- End Modal Tambah  -->
-
-  <!-- Modal Hapus-->
-  <?php foreach ($permohonan as $data): ?>  
-        <div class="modal fade" id="delete<?= $data->id_permohonan;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Anda yakin ingin menghapus data?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
-                        <a class="btn btn-primary" href="<?= base_url('user/permohonan/hapus/').$data->id_permohonan;?>">Ya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; ?>
-  <!-- End Modal Hapus-->
 
 <!-- Modal Detail -->
 <?php foreach($permohonan as $data): ?>
@@ -227,6 +125,47 @@
 </div>
 <?php endforeach; ?>
 <!-- End Modal Detail  -->
+
+ <!-- Modal Tambah-->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header bg-success">
+           <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Input Penilaian</h4>
+           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+        
+         <!-- View: data_penilaian.php -->
+
+         <div class="modal-body">
+            <?php echo form_open_multipart('penilaian/tambah_aksi'); ?>
+            <input type="hidden" name="id_alternatif" id="id_alternatif" value="">
+            <input type="hidden" name="nama_alternatif" id="nama_alternatif" value="">
+            <?php foreach ($kriteria as $k): ?>
+                <div class="form-group">
+                    <label for=""><?php echo $k->nama_kriteria; ?></label>
+                    <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
+                        <option value="">--Pilih--</option>
+                        <?php if (isset($subkriteria[$k->id])): ?>
+                            <?php foreach ($subkriteria[$k->id] as $sub): ?>
+                                <option value="<?php echo $sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+            <?php endforeach; ?>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            <?php echo form_close(); ?>
+        </div>
+     </div>
+   </div>
+ </div>
+  <!-- End Modal Tambah --
 
 <!-- Modal Proposal View -->
 <?php foreach($permohonan as $data): ?>
