@@ -55,9 +55,10 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center">
-                                                    <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"  data-nama="<?php echo $data->id_permohonan;  ?>"><i class="fa fa-plus fa-sm"></i></button>
-                                                </td>
+                                                      <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
+                                                      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"><i class="fa fa-plus fa-sm"></i></button>
+
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -94,29 +95,29 @@
             <div class="row">
                 <div class="col-6"><strong>Proposal</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewProposalModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/proposal/'.$data->proposal); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewProposalModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/proposal/'.$data->proposal); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Surat Keterangan Usaha</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewSkuModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/sku/'.$data->sku); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewSkuModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/sku/'.$data->sku); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KK</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewKkModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/kk/'.$data->kk); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKkModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/kk/'.$data->kk); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KTP</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewKtpModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/ktp/'.$data->ktp); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKtpModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/ktp/'.$data->ktp); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
         </div>
@@ -136,13 +137,9 @@
              <span aria-hidden="true">&times;</span>
            </button>
          </div>
-        
-         <!-- View: data_penilaian.php -->
-
          <div class="modal-body">
-            <?php echo form_open_multipart('penilaian/tambah_aksi'); ?>
-            <input type="hidden" name="id_alternatif" id="id_alternatif" value="">
-            <input type="hidden" name="nama_alternatif" id="nama_alternatif" value="">
+            <?php echo form_open_multipart('permohonan/tambah_penilaian'); ?>
+            <input type="hidden" name="id_permohonan" id="id_permohonan" value="">
             <?php foreach ($kriteria as $k): ?>
                 <div class="form-group">
                     <label for=""><?php echo $k->nama_kriteria; ?></label>
@@ -150,7 +147,7 @@
                         <option value="">--Pilih--</option>
                         <?php if (isset($subkriteria[$k->id])): ?>
                             <?php foreach ($subkriteria[$k->id] as $sub): ?>
-                                <option value="<?php echo $sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
+                                <option value="<?php echo $sub->id_subkriteria. ',' .$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
@@ -247,14 +244,9 @@
 <?php endforeach; ?>
  <!-- End Modal KTP -->
 
-
-
-
-
-
-    
+   
   <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -270,21 +262,47 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
 
-    <!-- Script open modal  -->
-    <script>
-        $(document).ready(function(){
-            <?php if ($this->session->flashdata('modal_open')): ?>
-                $('#exampleModal').modal('show');
-            <?php endif; ?>
+
+<script>
+    $(document).ready(function() {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Tombol yang diklik
+            var idPermohonan = button.data('id'); // Ambil data-id dari tombol
+
+            // Update nilai input hidden di dalam modal
+            var modal = $(this);
+            modal.find('#id_permohonan').val(idPermohonan);
+
+            // Optional: Menampilkan nilai id_permohonan di dalam modal untuk debugging
+            console.log("ID Permohonan yang diterima:", idPermohonan);
         });
-    </script>
-    <script>
+    });
+</script>
+
+
+    <!-- Script open modal  -->
+   
+    <!-- <script>
         $(document).ready(function(){
     <?php if ($this->session->flashdata('upload_errors') || validation_errors() || !empty($this->session->flashdata('message'))) : ?>
         $('#exampleModal').modal('show');
     <?php endif; ?>
 });
-    </script>
+    </script> -->
+
+
+
+<!-- <script>
+  
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Tombol yang membuka modal
+    var idPermohonan = button.data('id'); // Ambil ID permohonan dari data-id tombol
+
+    var modal = $(this);
+    modal.find('input[name="id_permohonan"]').val(idPermohonan); // Set nilai id_permohonan dalam modal
+});
+
+</script> -->
 
 <style>
     .modal-body .row {

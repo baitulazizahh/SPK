@@ -18,22 +18,22 @@
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="<?= base_url('kriteria')?>">
-                    <i class="fas fa-fw fa-list-alt text-white"></i>
+                    <i class="fas fa-fw fa-cube text-white"></i>
                     <span>Data Kriteria</span></a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="<?= base_url('subkriteria')?>">
-                    <i class="fas fa-fw fa-list-alt text-white"></i>
+                    <i class="fas fa-fw fa-cubes text-white"></i>
                     <span>Data Subkriteria</span></a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('alternatif')?>">
                     <i class="fas fa-fw fa-database text-white"></i>
                     <span>Data Alternatif</span></a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('permohonan')?>">
-                    <i class="fas fa-fw fa-database text-white"></i>
+                    <i class="fas fa-fw fa-file-alt text-white"></i>
                     <span>Data Permohonan</span></a>
             </li>
             <li class="nav-item">

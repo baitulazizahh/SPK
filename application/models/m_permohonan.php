@@ -6,10 +6,17 @@ class M_permohonan extends CI_Model{
         $this->db->from('tb_permohonan');
         $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
         return $this->db->get()->result();
-    }
+    } 
+ 
 
     public function getPermohonan($id_user) {
         $this->db->where('id_user', $id_user);
+        $query = $this->db->get('tb_permohonan');
+        return $query->result(); 
+    }
+
+    public function getPermohonanbyID($id_permohonan) {
+        $this->db->where('id_permohonan', $id_permohonan);
         $query = $this->db->get('tb_permohonan');
         return $query->result(); 
     }
@@ -33,13 +40,22 @@ class M_permohonan extends CI_Model{
     }
    
     public function input_data($data){
-        return $this->db->insert('tb_permohonan', $data);
+        return $this->db->insert('tb_permohonan', $data); // insert permohonan
      }
 
      public function hapus_data($where, $table){
         $this->db->delete($table,$where,);
         
     }
+
+    // Bagian admin
+    public function insert($data) {
+        $this->db->insert('tb_penilaian', $data); // insert penilaian
+    }
+
+
+    
+    
 
   
  

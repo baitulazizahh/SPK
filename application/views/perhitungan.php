@@ -3,12 +3,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Perhitungan</h1>
-                        <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
-
-                        <!-- <a href="list-kriteria.php" class="btn btn-primary ">
-                            <span class="icon text-white-70"><i class="fas fa-plus"></i></span>
-                            <span class="text"> Tambah data</span>
-                        </a> -->
                     </div>
                     
                     <!-- Tabel Perhitungan -->
@@ -23,7 +17,7 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Alternatif</th>
+                                            <th>Nama Pemohon</th>
                                             <th>C1</th>
                                             <th>C2</th>
                                             <th>C3</th>
@@ -35,17 +29,17 @@
                                     </thead>
                                     <tbody  >
                                     <?php $no = 1; ?>
-                                    <?php if (isset($nilai) && !empty($nilai)): ?>
-                                    <?php foreach ($nilai as $n): ?>  
+                                    <?php if (isset($penilaian) && !empty($penilaian)): ?>
+                                    <?php foreach ($penilaian as $p): ?>  
                                         <tr>
                                             <td class="text-center"><?php echo $no++; ?></td>
-                                            <td class="text-center"><?php echo $n->nama_alternatif ?></td>
-                                            <td class="text-center"><?php echo $n->c1; ?></td>
-                                            <td class="text-center"><?php echo $n->c2; ?></td>
-                                            <td class="text-center"><?php echo $n->c3; ?></td>
-                                            <td class="text-center"><?php echo $n->c4; ?></td>
-                                            <td class="text-center"><?php echo $n->c5; ?></td>
-                                            <td class="text-center"><?php echo $n->c6; ?></td>
+                                            <td class><?php echo $p->nama ?></td>
+                                            <td class="text-center"><?php echo $p->c1; ?></td>
+                                            <td class="text-center"><?php echo $p->c2; ?></td>
+                                            <td class="text-center"><?php echo $p->c3; ?></td>
+                                            <td class="text-center"><?php echo $p->c4; ?></td>
+                                            <td class="text-center"><?php echo $p->c5; ?></td>
+                                            <td class="text-center"><?php echo $p->c6; ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>
@@ -69,13 +63,13 @@
                         $sumSquares = array('c1' => 0, 'c2' => 0, 'c3' => 0, 'c4' => 0, 'c5' => 0, 'c6' => 0);
 
                         // Hitung total kuadrat dari setiap kolom
-                        foreach ($nilai as $n) {
-                            $sumSquares['c1'] += pow($n->c1, 2);
-                            $sumSquares['c2'] += pow($n->c2, 2);
-                            $sumSquares['c3'] += pow($n->c3, 2);
-                            $sumSquares['c4'] += pow($n->c4, 2);
-                            $sumSquares['c5'] += pow($n->c5, 2);
-                            $sumSquares['c6'] += pow($n->c6, 2);
+                        foreach ($penilaian as $p) {
+                            $sumSquares['c1'] += pow($p->c1, 2);
+                            $sumSquares['c2'] += pow($p->c2, 2);
+                            $sumSquares['c3'] += pow($p->c3, 2);
+                            $sumSquares['c4'] += pow($p->c4, 2);
+                            $sumSquares['c5'] += pow($p->c5, 2);
+                            $sumSquares['c6'] += pow($p->c6, 2);
                         }
 
                         // Ambil akar kuadrat dari setiap sumSquares
@@ -148,7 +142,7 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Alternatif</th>
+                                            <th>Nama Pemohon</th>
                                             <th>C1</th>
                                             <th>C2</th>
                                             <th>C3</th>
@@ -163,7 +157,7 @@
                                         <?php foreach ($nilai as $n): ?>  
                                             <tr>
                                                 <td class="text-center"><?php echo $no++; ?></td>
-                                                <td class="text-center"><?php echo $n->nama_alternatif ?></td>
+                                                <td class="text-center"><?php echo $n->nama ?></td>
                                                 <td class="text-center"><?php echo number_format(($n->c1 / $sumSquares['c1']) * $bobot['c1'], 8); ?></td>
                                                 <td class="text-center"><?php echo number_format(($n->c2 / $sumSquares['c2']) * $bobot['c2'], 8); ?></td>
                                                 <td class="text-center"><?php echo number_format(($n->c3 / $sumSquares['c3']) * $bobot['c3'], 8); ?></td>
@@ -196,7 +190,7 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Alternatif</th>
+                                            <th>Nama Pemohon</th>
                                             <th>Nilai Maximum</th>
                                             <th>Nilai Minimum</th>
                                             <th>Y<small class="font-weight-bold">i</small></th>

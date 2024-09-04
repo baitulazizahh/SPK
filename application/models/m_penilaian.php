@@ -7,7 +7,6 @@ class M_penilaian extends CI_Model{
         $this->db->select('tb_alternatif.id_alternatif, tb_alternatif.nama_alternatif, tb_penilaian.*');
         $this->db->from('tb_alternatif');
         $this->db->join('tb_penilaian', 'tb_penilaian.id_alternatif = tb_alternatif.id_alternatif', 'left');
-        //$this->db->group_by('tb_penilaian.id_alternatif', 'ASC');
         return $this->db->get()->result();
       
     }

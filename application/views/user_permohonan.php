@@ -196,29 +196,29 @@
             <div class="row">
                 <div class="col-6"><strong>Proposal</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewProposalModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/proposal/'.$data->proposal); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewProposalModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/proposal/'.$data->proposal); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Surat Keterangan Usaha</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewSkuModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/sku/'.$data->sku); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewSkuModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/sku/'.$data->sku); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KK</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewKkModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/kk/'.$data->kk); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKkModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/kk/'.$data->kk); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KTP</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#viewKtpModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/ktp/'.$data->ktp); ?>" target="_blank" class="btn btn-info btn-sm">Lihat</a>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKtpModal<?= $data->id_permohonan; ?>">Lihat</button>
+                    <a href="<?= base_url('uploads/ktp/'.$data->ktp); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
                 </div>
             </div>
         </div>
