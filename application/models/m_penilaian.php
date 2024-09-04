@@ -2,22 +2,29 @@
 
 class M_penilaian extends CI_Model{
 
-    
-    public function tampil_data() {
-        $this->db->select('tb_alternatif.id_alternatif, tb_alternatif.nama_alternatif, tb_penilaian.*');
-        $this->db->from('tb_alternatif');
-        $this->db->join('tb_penilaian', 'tb_penilaian.id_alternatif = tb_alternatif.id_alternatif', 'left');
-        return $this->db->get()->result();
-      
-    }
-    public function insert($data) {
-        $this->db->insert('tb_penilaian', $data); // ganti 'tabel_perhitungan' dengan nama tabel Anda
-    }
+    public function get_penilaian_with_nama()
+    {
+        
+        $this->db->select('tb_user.nama, tb_penilaian.id_kriteria, tb_penilaian.nilai, tb_subkriteria.nama_subkriteria, tb_penilaian.id_permohonan,
+        
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 48 THEN tb_subkriteria.nama_subkriteria END) AS c1,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 49 THEN tb_subkriteria.nama_subkriteria END) AS c2,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 50 THEN tb_subkriteria.nama_subkriteria END) AS c3,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 51 THEN tb_subkriteria.nama_subkriteria END) AS c4,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 52 THEN tb_subkriteria.nama_subkriteria END) AS c5,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 56 THEN tb_subkriteria.nama_subkriteria END) AS c6');
 
-     // Function untuk mengambil penilaian berdasarkan id_alternatif
-     public function getPenilaianByAlternatif($id_alternatif) {
-        $this->db->where('id_alternatif', $id_alternatif);
-        return $this->db->get('tb_penilaian')->result();
+        $this->db->from('tb_penilaian');
+        // Join ke tb_permohonan untuk mendapatkan id_user
+        $this->db->join('tb_permohonan', 'tb_permohonan.id_permohonan = tb_penilaian.id_permohonan');
+        // Join ke tb_user untuk mendapatkan nama berdasarkan id_user
+        $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
+        $this->db->join('tb_subkriteria', 'tb_subkriteria.id_subkriteria = tb_penilaian.id_subkriteria');
+
+        $this->db->order_by('tb_penilaian.created_at', 'DESC');
+        $this->db->group_by('tb_user.nama');
+        $query = $this->db->get();
+        return $query->result();
     }
 
 

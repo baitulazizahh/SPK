@@ -18,7 +18,7 @@ class M_perhitungan extends CI_Model{
         $this->db->join('tb_permohonan', 'tb_permohonan.id_permohonan = tb_penilaian.id_permohonan');
         // Join ke tb_user untuk mendapatkan nama berdasarkan id_user
         $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
-        $this->db->order_by('tb_user.nama', 'ASC');
+        $this->db->order_by('tb_penilaian.created_at', 'DESC');
         $this->db->group_by('tb_user.nama');
         $query = $this->db->get();
         return $query->result();

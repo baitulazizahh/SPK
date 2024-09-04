@@ -85,7 +85,7 @@ class Permohonan extends CI_Controller {
         }
 
         // Redirect kembali ke halaman sebelumnya atau halaman lain
-        redirect('perhitungan/index');
+        redirect('penilaian/index');
 	}
 
 		
