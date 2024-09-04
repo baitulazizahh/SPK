@@ -5,6 +5,7 @@ class M_permohonan extends CI_Model{
         $this->db->select('tb_user.id_user, tb_user.nama,tb_permohonan.*');
         $this->db->from('tb_permohonan');
         $this->db->join('tb_user', 'tb_user.id_user = tb_permohonan.id_user');
+        $this->db->order_by('tb_permohonan.date_created', 'DESC');
         return $this->db->get()->result();
     } 
  
@@ -52,6 +53,16 @@ class M_permohonan extends CI_Model{
     public function insert($data) {
         $this->db->insert('tb_penilaian', $data); // insert penilaian
     }
+
+    public function is_penilaian_exist($id_permohonan)
+    {
+        $this->db->where('id_permohonan', $id_permohonan);
+        $query = $this->db->get('tb_penilaian');
+    
+        return $query->num_rows() > 0;
+    }
+    
+    
 
 
     

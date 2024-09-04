@@ -128,6 +128,7 @@ class Permohonan extends CI_Controller {
 		$tanggungan = $this->input->post('tanggungan', TRUE);
 		$status = 'Diproses';
 		$created = date('Y');
+		$date_created = date('Y-m-d H:i:s');
 		
 		if ($this->m_permohonan->checkUserDuplicate($id_user, $created)) {
  			$this->session->set_flashdata('error', '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> Mohon maaf Anda sudah mengajukan permohonan pada periode ini');
@@ -144,7 +145,8 @@ class Permohonan extends CI_Controller {
             'kk' => $kk,
             'ktp' => $ktp,
 			'status' => $status,
-			'created'=> $created
+			'created'=> $created,
+			'date_created' =>$date_created
 		];
 		$this->m_permohonan->input_data($data);
 		redirect('user/permohonan');

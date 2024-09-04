@@ -1,4 +1,5 @@
 
+
 <div class="container-fluid"> 
 
                     <!-- Page Heading -->
@@ -55,9 +56,15 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center">
-                                                      <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"><i class="fa fa-plus fa-sm"></i></button>
-
+                                                          <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
+                                                          <!-- Cek apakah data penilaian sudah ada untuk id_permohonan ini -->
+                                                          <?php if ($this->m_permohonan->is_penilaian_exist($data->id_permohonan)): ?>
+                                                              <!-- Tombol Edit karena data sudah ada -->
+                                                              <button class="btn btn-secondary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button>
+                                                          <?php else: ?>
+                                                              <!-- Tombol Tambah jika data belum ada -->
+                                                              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"><i class="fa fa-plus fa-sm"></i></button>
+                                                          <?php endif; ?>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -147,7 +154,7 @@
                         <option value="">--Pilih--</option>
                         <?php if (isset($subkriteria[$k->id])): ?>
                             <?php foreach ($subkriteria[$k->id] as $sub): ?>
-                                <option value="<?php echo $sub->id_subkriteria. ',' .$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
+                                <option value="<?php echo $sub->id_subkriteria.',' .$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
