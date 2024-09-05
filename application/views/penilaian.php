@@ -43,8 +43,9 @@
                                             <td class="text-center"><?php echo $p->c6; ?></td>
                                             <td class="text-center">
                                             <a data-toggle="modal" data-target="#exampleModal" data-placement="bottom" title="Detail Data" class="btn btn-danger btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id=""><i class="fa fa-plus fa-sm"></i></button>
-                                            </td>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus fa-sm"></i></button>
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>    
+                                        </td>
                                         </tr>
                                         <?php endforeach; ?>
                                         <?php else: ?>
@@ -58,43 +59,41 @@
                         </div>
             </div>      
 <!-- /.container-fluid -->
- <!-- Modal Tambah-->
- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-       <div class="modal-content">
-         <div class="modal-header bg-success">
-           <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Input Penilaian</h4>
-           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-         <div class="modal-body">
-            <?php echo form_open_multipart('permohonan/tambah_penilaian'); ?>
-            <input type="hidden" name="id_permohonan" id="id_permohonan" value="">
-            <?php foreach ($kriteria as $k): ?>
-                <div class="form-group">
-                    <label for=""><?php echo $k->nama_kriteria; ?></label>
-                    <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
-                        <option value="">--Pilih--</option>
-                        <?php if (isset($subkriteria[$k->id])): ?>
-                            <?php foreach ($subkriteria[$k->id] as $sub): ?>
-                                <option value="<?php echo $sub->id_subkriteria.',' .$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </select>
-                </div>
-            <?php endforeach; ?>
+
+<!-- Modal Tambah-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Tambah Data Alternatif</h4>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <?= $this->session->flashdata('message'); ?>
+        <?php echo form_open ('alternatif/tambah_aksi'); ?>
+            <div class="form-group">
+                <label for="">ID Alternatif</label>
+                <input type="text" name="id_alternatif2" class="form-control"  value="<?= set_value('id_alternatif2');?>"> 
+                <?= form_error('id_alternatif2','<small class="text-danger pl-1">','</small>'); ?>
+            </div>
+            <div class="form-group">
+                <label for="">Nama Alternatif</label>
+                <input type="text" name="nama_alternatif" class="form-control" value="<?= set_value('nama_alternatif');?>"> 
+                <?= form_error('nama_alternatif','<small class="text-danger pl-1">','</small>'); ?>
+            </div>
             <div class="modal-footer">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-            <?php echo form_close(); ?>
-        </div>
-     </div>
-   </div>
- </div>
-   <!-- End Modal Tambah  -->
-
+            </div>  
+         <?php echo form_close(); ?> 
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
  <!-- Script open modal  -->
     <script>
         $(document).ready(function(){

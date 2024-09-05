@@ -23,7 +23,7 @@ class Penilaian extends CI_Controller {
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);
-		$this->load->view('penilaian', $data);
+		$this->load->view('penilaiann', $data);
 		
 	}
 

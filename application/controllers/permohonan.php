@@ -38,7 +38,7 @@ class Permohonan extends CI_Controller {
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar',$user);
-		$this->load->view('permohonan', $data);
+		$this->load->view('permohonann', $data);
 		// $this->load->view('templates/footer');
 	}
 

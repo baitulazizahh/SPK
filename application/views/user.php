@@ -23,6 +23,17 @@
 
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    /* Mengatur strip hanya untuk baris genap */
+    table.table-striped tbody tr:nth-child(even) {
+        background-color: #f2f2f2; /* Warna strip untuk baris genap */
+    }
+
+    /* Mengatur baris ganjil agar berwarna putih */
+    table.table-striped tbody tr:nth-child(odd) {
+        background-color: white; /* Warna putih untuk baris ganjil */
+    }
+</style>
 
 </head>
 
@@ -51,7 +62,7 @@
                         
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="10" >
+                                <table class="table table-bordered table-striped " id="dataTable" width="100%" cellspacing="10" >
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>

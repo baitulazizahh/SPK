@@ -169,9 +169,9 @@
      </div>
    </div>
  </div>
-  <!-- End Modal Tambah --
+  <!-- End Modal Tambah -->
 
-<!-- Modal Proposal View -->
+<!-- Modal Proposal View  -->
 <?php foreach($permohonan as $data): ?>
 <div class="modal fade" id="viewProposalModal<?= $data->id_permohonan; ?>" tabindex="-1" role="dialog" aria-labelledby="viewProposalModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
