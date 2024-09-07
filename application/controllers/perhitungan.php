@@ -7,7 +7,7 @@ class Perhitungan extends CI_Controller {
         parent::__construct();
        $this->load->model('m_perhitungan');
        $this->load->model('m_permohonan');
-		
+	   $this->load->model('m_data');	
     }
 	public function index()
 	{
@@ -17,6 +17,8 @@ class Perhitungan extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
         $data['penilaian'] = $this->m_perhitungan->get_penilaian_with_nama();
+        $data['bobot_kriteria'] = $this->m_data->getBobotKriteria();
+       
        
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
@@ -24,11 +26,6 @@ class Perhitungan extends CI_Controller {
 		$this->load->view('perhitungan', $data);
 		
 	}
-    
-    
-    
-    
-    
     
     
     public function simpanHasil() {
@@ -51,6 +48,8 @@ class Perhitungan extends CI_Controller {
                 }
             
     }
+    
+    
     
     
 

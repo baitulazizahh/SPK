@@ -78,22 +78,8 @@
                                                 <td colspan="8" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         <?php endif; ?>
-
-                                        <!-- Baris Total -->
-                                        <!-- <tr class="bg-light">
-                                            <td class="text-center font-weight-bold" colspan="2">Total</td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC1; ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC2; ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC3; ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC4; ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC5; ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo $totalC6; ?></td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-secondary btn-sm">Next</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,27 +153,22 @@
                                         <?php endif; ?>
                                     </tbody>
                                 </table>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-secondary btn-sm">Next</button>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- End Matriks Normalisasi -->
 
-                    
-                    <!-- Mormalisasi Matriks -->
+
+                    <!-- Bobot Kriteria -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Normalisasi Matriks Keputusan</h6>
+                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Bobot Kriteria</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Alternatif</th>
                                             <th>C1</th>
                                             <th>C2</th>
                                             <th>C3</th>
@@ -198,64 +179,46 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        // Inisialisasi total kolom untuk normalisasi
-                                        $totalC1 = $totalC2 = $totalC3 = $totalC4 = $totalC5 = $totalC6 = 0;
+                                        // Initialize variables to store bobot values
+                                        $bobot = [
+                                            'C1' => 'N/A',
+                                            'C2' => 'N/A',
+                                            'C3' => 'N/A',
+                                            'C4' => 'N/A',
+                                            'C5' => 'N/A',
+                                            'C6' => 'N/A'
+                                        ];
 
-                                        // Menghitung total setiap kolom
-                                        if (isset($penilaian) && !empty($penilaian)) {
-                                            foreach ($penilaian as $p) {
-                                                $totalC1 += $p->c1;
-                                                $totalC2 += $p->c2;
-                                                $totalC3 += $p->c3;
-                                                $totalC4 += $p->c4;
-                                                $totalC5 += $p->c5;
-                                                $totalC6 += $p->c6;
-                                            }
+                                        // Populate the bobot values from the data array
+                                        foreach ($bobot_kriteria as $item) {
+                                            $bobot[$item['id_kriteria']] = number_format($item['bobot'], 2);
                                         }
-
-                                        // Tampilkan data normalisasi
-                                        if (isset($penilaian) && !empty($penilaian)): 
-                                            $no = 1;
-                                            foreach ($penilaian as $p): 
                                         ?>
-                                            <tr>
-                                                <td class="text-center"><?php echo $no++; ?></td>
-                                                <td><?php echo $p->nama; ?></td>
-                                                <td class="text-center"><?php echo round($p->c1 / $totalC1, 4); ?></td> <!-- Normalisasi C1 -->
-                                                <td class="text-center"><?php echo round($p->c2 / $totalC2, 4); ?></td> <!-- Normalisasi C2 -->
-                                                <td class="text-center"><?php echo round($p->c3 / $totalC3, 4); ?></td> <!-- Normalisasi C3 -->
-                                                <td class="text-center"><?php echo round($p->c4 / $totalC4, 4); ?></td> <!-- Normalisasi C4 -->
-                                                <td class="text-center"><?php echo round($p->c5 / $totalC5, 4); ?></td> <!-- Normalisasi C5 -->
-                                                <td class="text-center"><?php echo round($p->c6 / $totalC6, 4); ?></td> <!-- Normalisasi C6 -->
-                                            </tr>
-                                        <?php 
-                                            endforeach; 
-                                        else: ?>
-                                            <tr>
-                                                <td colspan="8" class="text-center">Data tidak ditemukan</td>
-                                            </tr>
-                                        <?php endif; ?>
+                                        <tr class="text-center">
+                                            <td><?php echo $bobot['C1']; ?></td>
+                                            <td><?php echo $bobot['C2']; ?></td>
+                                            <td><?php echo $bobot['C3']; ?></td>
+                                            <td><?php echo $bobot['C4']; ?></td>
+                                            <td><?php echo $bobot['C5']; ?></td>
+                                            <td><?php echo $bobot['C6']; ?></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    <!-- End Bobot Kriteria -->
 
-
-                <!-- Tabel Optimalisasi nilai atribut -->
-                        <?php 
-                            // Inisialisasi bobot
-                            $bobot = array('c1' => 0.1, 'c2' => 0.1, 'c3' => 0.2, 'c4' => 0.3, 'c5' => 0.15, 'c6' => 0.15);
-                            $no = 1;
-                        ?>
-                <div class="card shadow mb-4">
+                    
+                     <!-- Matriks Normalisasi -->
+                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-successy"></i> Optimalisasi Nilai Atribut</h6>
+                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Bobot Matriks Normalisasi</h6>
                         </div>
-                        
+
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
@@ -267,108 +230,46 @@
                                             <th>C5</th>
                                             <th>C6</th>
                                         </tr>
-                                       
                                     </thead>
                                     <tbody>
-                                    <?php if (isset($nilai) && !empty($nilai)): ?>
-                                        <?php foreach ($nilai as $n): ?>  
-                                            <tr>
-                                                <td class="text-center"><?php echo $no++; ?></td>
-                                                <td class="text-center"><?php echo $n->nama ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c1 / $sumSquares['c1']) * $bobot['c1'], 8); ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c2 / $sumSquares['c2']) * $bobot['c2'], 8); ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c3 / $sumSquares['c3']) * $bobot['c3'], 8); ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c4 / $sumSquares['c4']) * $bobot['c4'], 8); ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c5 / $sumSquares['c5']) * $bobot['c5'], 8); ?></td>
-                                                <td class="text-center"><?php echo number_format(($n->c6 / $sumSquares['c6']) * $bobot['c6'], 8); ?></td>          
-                                            </tr>
-                                        <?php endforeach; ?>
+                                        
+                                        <tr class="bg-light">
+                                            <td class="text-center font-weight-bold">0</td>
+                                            <td class="font-weight-bold">Alternatif Optimal</td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C1']* (4 / $totalC1)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C2'] * (1 / $totalC2)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C3'] * (4 / $totalC3)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C4']* (1 / $totalC4)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C5'] * (4 / $totalC5)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C6'] * (4 / $totalC6)), 5); ?></td>
+                                        </tr>
+                                         <!-- Baris Penilaian Normalisasi -->
+                                      <?php 
+                                      $no=1;
+                                      ?>
+                                        <?php if (isset($penilaian) && !empty($penilaian)): ?>
+                                            <?php foreach ($penilaian as $p): ?>  
+                                                <tr>
+                                                    <td class="text-center"><?php echo $no++; ?></td>
+                                                    <td><?php echo $p->nama; ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C2'] * ($p->c2 / $totalC2)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C4'] * ($p->c4 / $totalC4)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5); ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         <?php else: ?>
                                             <tr>
                                                 <td colspan="8" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Menghitung Nilai Yi -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-successy"></i>Menghitung Nilai Y<small class="font-weight-bold">i</small></h6>
-                        </div>
-                        
-                        <div class="card-body">
-                            <div class="table-responsive">
-                            <form action="<?php echo site_url('perhitungan/simpanHasil'); ?>" method="post">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
-                                    <thead class="text-center bg-success text-white">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Pemohon</th>
-                                            <th>Nilai Maximum</th>
-                                            <th>Nilai Minimum</th>
-                                            <th>Y<small class="font-weight-bold">i</small></th>
-                                        
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if (isset($nilai) && !empty($nilai)): ?>
-                                            <?php 
-                                            $no=1;
-                                            $yiData=[];
-                                            foreach ($nilai as $n):  
-                                                // Hitung nilai maximum (benefit)
-                                                $benefit = (($n->c1 / $sumSquares['c1']) * $bobot['c1'])+ 
-                                                (($n->c3 / $sumSquares['c3']) * $bobot['c3'])+ 
-                                                (($n->c5 / $sumSquares['c5']) * $bobot['c5'])+ 
-                                                (($n->c6 / $sumSquares['c6']) * $bobot['c6']);
-                                          
-      
-                                                // Hitung nilai minimum (cost)
-                                                $cost = (($n->c2 / $sumSquares['c2']) * $bobot['c2']) + (($n->c4 / $sumSquares['c4']) * $bobot['c4']);
-                                                
-                                                // Hitung nilai Yi
-                                                $yi = $benefit - $cost;
-
-                                                //Menyimpan data Yi ke dalam array
-                                                $yiData[]=[
-                                                    'id_alternatif' =>$n->id_alternatif,
-                                                    'yi' => $yi
-                                                ];
-
-                                                //Simpan data ke session
-                                                $this->session->set_userdata('yi_data', $yiData);
-                                                
-                                            ?>
-                                                <tr>
-                                                    <td class="text-center"><?php echo $no++; ?></td>
-                                                    <td class="text-center"><?php echo $n->nama_alternatif; ?></td>
-                                                    <td class="text-center"><?php echo number_format($benefit, 8); ?></td>
-                                                    <td class="text-center"><?php echo number_format($cost, 8); ?></td>
-                                                    <td class="text-center"><?php echo number_format($yi, 8); ?></td>
-                                                </tr>
-
-                                                  <!-- Input hidden untuk mengirim data Yi ke controller -->
-                                                <input type="hidden" name="yi_data[<?php echo $n->id_alternatif; ?>][id_alternatif]" value="<?php echo $n->id_alternatif; ?>">
-                                                <input type="hidden" name="yi_data[<?php echo $n->id_alternatif; ?>][nilai]" value="<?php echo $yi; ?>">
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <tr>
-                                                <td colspan="5" class="text-center">Data tidak ditemukan</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                                <!-- Tombol Next untuk melanjutkan -->
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-secondary btn-sm">Next</button>
-                                </div>                                  
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Matriks Normalisasi -->
+                                               
                 <!-- /.container-fluid -->
