@@ -39,8 +39,8 @@
 
                                          <!-- Baris Total -->
                                         <tr class="bg-light">
-                                            <td class="text-center font-weight-bold">0</td>
-                                            <td class=" font-weight-bold">Alternatif Optimal</td>
+                                            <td class="text-center font-weight-bold">-</td>
+                                            <td class=" font-weight-bold">Alternatif Optimal</sub></td>
                                             <td class="text-center font-weight-bold">4</td>
                                             <td class="text-center font-weight-bold">1</td>
                                             <td class="text-center font-weight-bold">4</td>
@@ -110,7 +110,7 @@
                                         <?php 
                                         $no = 1; 
 
-                                        
+                                            
                                         // Total dari setiap kolom berdasarkan hasil matriks keputusan
                                         $totalC1 = 38; // Ini berasal dari total C1 pada matriks sebelumnya
                                         $totalC2 = 4.25;
@@ -122,7 +122,7 @@
 
                                         <!-- Baris Alternatif Optimal (A0) -->
                                         <tr class="bg-light">
-                                            <td class="text-center font-weight-bold">0</td>
+                                            <td class="text-center font-weight-bold">-</td>
                                             <td class="font-weight-bold">Alternatif Optimal</td>
                                             <td class="text-center font-weight-bold"><?php echo number_format(4 / $totalC1, 5); ?></td>
                                             <td class="text-center font-weight-bold"><?php echo number_format(1 / $totalC2, 5); ?></td>
@@ -131,17 +131,24 @@
                                             <td class="text-center font-weight-bold"><?php echo number_format(4 / $totalC5, 5); ?></td>
                                             <td class="text-center font-weight-bold"><?php echo number_format(4 / $totalC6, 5); ?></td>
                                         </tr>
-
+                                        
                                         <!-- Baris Penilaian Normalisasi -->
                                         <?php if (isset($penilaian) && !empty($penilaian)): ?>
-                                            <?php foreach ($penilaian as $p): ?>  
+                                            <?php foreach ($penilaian as $p): ?> 
+                                                <?php
+                                                // Menambahkan nilai ke total masing-masing kolom
+                                               
+                                                $nilai_C2 = 1/$p->c2 ;
+                                                $nilai_C4 = 1/$p->c4 ;
+                                               
+                                                ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++; ?></td>
                                                     <td><?php echo $p->nama; ?></td>
                                                     <td class="text-center"><?php echo number_format($p->c1 / $totalC1, 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format($p->c2 / $totalC2, 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format($nilai_C2/ $totalC2, 5); ?></td>
                                                     <td class="text-center"><?php echo number_format($p->c3 / $totalC3, 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format($p->c4 / $totalC4, 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format($nilai_C4 / $totalC4, 5); ?></td>
                                                     <td class="text-center"><?php echo number_format($p->c5 / $totalC5, 5); ?></td>
                                                     <td class="text-center"><?php echo number_format($p->c6 / $totalC6, 5); ?></td>
                                                 </tr>
@@ -234,7 +241,7 @@
                                     <tbody>
                                         
                                         <tr class="bg-light">
-                                            <td class="text-center font-weight-bold">0</td>
+                                            <td class="text-center font-weight-bold">-</td>
                                             <td class="font-weight-bold">Alternatif Optimal</td>
                                             <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C1']* (4 / $totalC1)), 5); ?></td>
                                             <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C2'] * (1 / $totalC2)), 5); ?></td>
@@ -248,14 +255,19 @@
                                       $no=1;
                                       ?>
                                         <?php if (isset($penilaian) && !empty($penilaian)): ?>
-                                            <?php foreach ($penilaian as $p): ?>  
+                                            <?php foreach ($penilaian as $p): ?> 
+                                                <?php
+                                                // Normalisasi Matriks Cost
+                                                $nilai_C2 = 1/$p->c2 ;
+                                                $nilai_C4 = 1/$p->c4 ;
+                                                ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++; ?></td>
                                                     <td><?php echo $p->nama; ?></td>
                                                     <td class="text-center"><?php echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C2'] * ($p->c2 / $totalC2)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5); ?></td>
                                                     <td class="text-center"><?php echo number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C4'] * ($p->c4 / $totalC4)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5); ?></td>
                                                     <td class="text-center"><?php echo number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5); ?></td>
                                                     <td class="text-center"><?php echo number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5); ?></td>
                                                 </tr>
@@ -271,5 +283,207 @@
                                             </div>
                                         </div>
                                         <!-- End Matriks Normalisasi -->
-                                               
-                <!-- /.container-fluid -->
+                    
+                                        
+                   <!-- Nilai utilitas -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Nilai Utilitas (Si)</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                    <thead class="text-center bg-success text-white">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Pemohon</th>
+                                            <th>Penjumlahan</th>
+                                            <th>Total Nilai (Si)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php 
+                                        $no = 1; 
+                                        ?>
+
+                                        <!-- Baris Alternatif Optimal (A0) -->
+                                        <tr class="bg-light">
+                                            <td class="text-center font-weight-bold">-</td>
+                                            <td class="font-weight-bold">Alternatif Optimal</td>
+                                            <td class="text-center font-weight-bold">
+                                                SUM(
+                                                <?php 
+                                                echo number_format(($bobot['C1'] * (4 / $totalC1)), 5) . " + " .
+                                                    number_format(($bobot['C2'] * (1 / $totalC2)), 5) . " + " .
+                                                    number_format(($bobot['C3'] * (4 / $totalC3)), 5) . " + " .
+                                                    number_format(($bobot['C4'] * (1 / $totalC4)), 5) . " + " .
+                                                    number_format(($bobot['C5'] * (4 / $totalC5)), 5) . " + " .
+                                                    number_format(($bobot['C6'] * (4 / $totalC6)), 5);
+                                                ?>)
+                                            </td>
+                                            <td class="text-center font-weight-bold">
+                                                <?php 
+                                                $total_optimal = 
+                                                    ($bobot['C1'] * (4 / $totalC1)) +
+                                                    ($bobot['C2'] * (1 / $totalC2)) +
+                                                    ($bobot['C3'] * (4 / $totalC3)) +
+                                                    ($bobot['C4'] * (1 / $totalC4)) +
+                                                    ($bobot['C5'] * (4 / $totalC5)) +
+                                                    ($bobot['C6'] * (4 / $totalC6));
+
+                                                echo number_format($total_optimal, 5); 
+                                                ?>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Baris Penilaian Normalisasi -->
+                                        <?php if (isset($penilaian) && !empty($penilaian)): ?>
+                                            <?php foreach ($penilaian as $p): ?>  
+                                                <?php
+                                                // Normalisasi Matriks Cost
+                                                $nilai_C2 = 1/$p->c2 ;
+                                                $nilai_C4 = 1/$p->c4 ;
+                                                ?>
+                                                <tr>
+                                                    <td class="text-center"><?php echo $no++; ?></td>
+                                                    <td><?php echo $p->nama; ?></td>
+                                                    <td class="text-center">
+                                                        SUM(
+                                                        <?php 
+                                                        echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5) . " + " .
+                                                            number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5) . " + " .
+                                                            number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5) . " + " .
+                                                            number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5) . " + " .
+                                                            number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5) . " + " .
+                                                            number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5);
+                                                        ?>)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php 
+                                                        $total_nilai = 
+                                                            ($bobot['C1'] * ($p->c1 / $totalC1)) +
+                                                            ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
+                                                            ($bobot['C3'] * ($p->c3 / $totalC3)) +
+                                                            ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
+                                                            ($bobot['C5'] * ($p->c5 / $totalC5)) +
+                                                            ($bobot['C6'] * ($p->c6 / $totalC6));
+
+                                                        echo number_format($total_nilai, 5);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="3" class="text-center">Data tidak ditemukan</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nilai Akhir -->
+                    
+                                      
+                    <!-- Nilai Akhir dan Perangkingan -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Hasil Akhir dan Perangkingan</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                <thead class="text-center bg-success text-white">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Pemohon</th>
+                        <th>Nilai Si</th>
+                        <th>Nilai Ki</th>
+                        <th>Ranking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 1; 
+
+                    // Menghitung nilai optimal S_0
+                    $S0 = 
+                        ($bobot['C1'] * (4 / $totalC1)) +
+                        ($bobot['C2'] * (1 / $totalC2)) +
+                        ($bobot['C3'] * (4 / $totalC3)) +
+                        ($bobot['C4'] * (1 / $totalC4)) +
+                        ($bobot['C5'] * (4 / $totalC5)) +
+                        ($bobot['C6'] * (4 / $totalC6));
+
+                    // Inisialisasi array untuk menyimpan nilai Ki dan ranking
+                    $data_ranking = [];
+
+                    // Looping data penilaian
+                    if (isset($penilaian) && !empty($penilaian)) {
+                        foreach ($penilaian as $p) {
+                            // Normalisasi Matriks Cost
+                            $nilai_C2 = 1/$p->c2 ;
+                            $nilai_C4 = 1/$p->c4 ;
+
+                            // Menghitung Si
+                            $Si = 
+                                ($bobot['C1'] * ($p->c1 / $totalC1)) +
+                                ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
+                                ($bobot['C3'] * ($p->c3 / $totalC3)) +
+                                ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
+                                ($bobot['C5'] * ($p->c5 / $totalC5)) +
+                                ($bobot['C6'] * ($p->c6 / $totalC6));
+
+                            // Menghitung Ki
+                            $Ki = $Si / $S0;
+
+                            // Simpan data ke array ranking
+                            $data_ranking[] = [
+                                'nama' => $p->nama,
+                                'Si' => $Si,
+                                'Ki' => $Ki
+                            ];
+                        }
+
+                        // Mengurutkan data ranking berdasarkan nilai Ki tertinggi
+                        usort($data_ranking, function ($a, $b) {
+                            return $b['Ki'] <=> $a['Ki'];
+                        });
+
+                         // Menampilkan baris S0 dengan background 'bg-light'
+                         echo "<tr class='bg-light font-weight-bold'>";
+                         echo "<td class='text-center font-weight-bold'>-</td>";
+                         echo "<td class='font-weight-bold'>Optimal S<sub>0</sub></td>";
+                         echo "<td class='text-center font-weight-bold'>" . number_format($S0, 5) . "</td>";
+                         echo "<td class='text-center font-weight-bold'>" . number_format($S0/$S0, 5) . "</td>";
+                         echo "<td class='text-center font-weight-bold'>-</td>";
+                         echo "</tr>";
+
+                        // Menampilkan data yang sudah diurutkan
+                        foreach ($data_ranking as $key => $row) {
+                            echo "<tr>";
+                            echo "<td class='text-center'>" . ($key + 1) . "</td>";
+                            echo "<td>" . $row['nama'] . "</td>";
+                            echo "<td class='text-center'>" . number_format($row['Si'], 5) . "</td>";
+                            echo "<td class='text-center'>" . number_format($row['Ki'], 5) . "</td>";
+                            echo "<td class='text-center'>" . ($key + 1) . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5' class='text-center'>Data tidak ditemukan</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+                       
+
+
+                                    
+                                    <!-- /.container-fluid -->
