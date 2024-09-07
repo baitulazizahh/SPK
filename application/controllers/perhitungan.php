@@ -15,9 +15,9 @@ class Perhitungan extends CI_Controller {
 		$title['title']= 'Perhitungan';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
-      
 
         $data['penilaian'] = $this->m_perhitungan->get_penilaian_with_nama();
+       
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);

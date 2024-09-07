@@ -90,9 +90,7 @@
                                             <td class="text-center"><?php echo $p->c5; ?></td>
                                             <td class="text-center"><?php echo $p->c6; ?></td>
                                             <td class="text-center">
-                                                <a href="<?php echo site_url('permohonan/edit_penilaian/'.$p->id_permohonan); ?>" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-edit fa-sm"></i></a>
-                                                <a data-toggle="modal" data-target="#detailModal<?= $p->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-danger btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                <a data-toggle="modal" data-target="#update<?= $p->id_permohonan;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>penilaian/edit_penilaian/" class="btn btn-success btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                <a data-toggle="modal" data-id_permohonan="<?php echo $p->id_permohonan; ?>"  data-target="#updateModal" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>penilaian/update_penilaian/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -107,99 +105,52 @@
                         </div>
                     </div>
 
- <!-- Modal Detail -->
- <?php foreach($penilaian as $data): ?>
-        <div class="modal fade" id="update<?= $data->id_permohonan;?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Edit Penilaian</h4>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <?php echo form_open_multipart('permohonan/update_penilaian'); ?>
-          
-                        <input type="hidden" name="id_permohonan" value="<?php echo $p->id_permohonan; ?>">
-                        <?php foreach ($kriteria as $k): ?>
-                            <div class="form-group">
-                                <label for=""><?php echo $k->nama_kriteria; ?></label>
-                                <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
-                                    <option value="">--Pilih--</option>
-                                    <?php foreach ($subkriteria as $sub): ?>
-                                        <!-- Filter subkriteria berdasarkan id_kriteria -->
-                                        <?php if ($sub->id_kriteria == $k->id_kriteria): ?>
-                                            <option value="<?php echo $sub->id_subkriteria; ?>"
-                                                <?php echo ($sub->id_subkriteria == $penilaian->{'subkriteria_'.$k->id_kriteria}) ? 'selected' : ''; ?>>
-                                                <?php echo $sub->nama_subkriteria; ?> (Nilai: <?php echo $sub->nilai; ?>)
-                                            </option>
-                                        <?php endif; ?>
+            <!-- Modal Edit -->
+            <?php foreach($penilaian as $data): ?>
+                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-success">
+                                    <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Edit Penilaian</h4>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <?php echo form_open_multipart('penilaian/update_penilaian'); ?>
+                                    <input type="hidden" name="id_permohonan" name="id_permohonan">
+                                    <?php foreach ($kriteria as $k): ?>
+                                        <div class="form-group">
+                                            <label for=""><?php echo $k->nama_kriteria; ?></label>
+                                            <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
+                                                <option value="">--Pilih--</option>
+                                                <?php foreach ($subkriteria as $sub): ?>
+                                                    <!-- Filter subkriteria berdasarkan id_kriteria -->
+                                                    <?php if ($sub->id_kriteria == $k->id_kriteria): ?>
+                                                        <option value="<?php echo $sub->id_subkriteria; ?>"
+                                                            <?php echo ($sub->id_subkriteria == $penilaian->{'subkriteria_'.$k->id_kriteria}) ? 'selected' : ''; ?>>
+                                                            <?php echo $sub->nama_subkriteria; ?> (Nilai: <?php echo $sub->nilai; ?>)
+                                                        </option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                     <?php endforeach; ?>
-                                </select>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                    <?php echo form_close(); ?>
+                                </div>
                             </div>
-                        <?php endforeach; ?>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
-                        <?php echo form_close(); ?>
                     </div>
                 </div>
-            </div>
-        </div>
-        </div>
-        <?php endforeach; ?>
-        <!-- End Modal Detail  -->
-
-        <!-- Modal Edit-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-success">
-                        <h4 class="modal-title text-white text-center " id="exampleModalLabel" >Edit Penilaian</h4>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <?php echo form_open_multipart('permohonan/update_penilaian'); ?>
-                        <input type="hidden" name="id_permohonan" value="<?php echo $p->id_permohonan; ?>">
-                     
-                     <?php foreach ($kriteria as $k): ?>
-                            <div class="form-group">
-                                <label for=""><?php echo $k->nama_kriteria; ?></label>
-                                <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
-                                    <option value="">--Pilih--</option>
-                                    <?php foreach ($subkriteria as $sub): ?>
-                                        <option value="<?php echo $sub->id_subkriteria.','.$sub->nilai; ?>" <?php echo ($sub->id_subkriteria.','.$sub->nilai == $penilaian->{'subkriteria_'.$k->id_kriteria}) ? 'selected' : ''; ?>><?php echo $sub->nama_subkriteria; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        <?php endforeach; ?>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                        <?php echo form_close(); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal Edit -->
-
-
-        
-
-        
-
-       
-
-       
-
+            <?php endforeach; ?>
+            <!-- End Modal Edit  -->
    
-  <!-- Bootstrap core JavaScript-->
+    <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -216,22 +167,27 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            $('#updateModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Tombol yang diklik
+                console.log(button); // Debug: Cek apakah tombol berhasil ditangkap
+                var id_permohonan = button.data('id_permohonan'); // Ambil data-id_permohonan
 
-<script>
-    $(document).ready(function() {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Tombol yang diklik
-            var idPermohonan = button.data('id'); // Ambil data-id dari tombol
+                // Debug: Log ID permohonan ke console
+                console.log("ID Permohonan yang diambil: " + id_permohonan);
 
-            // Update nilai input hidden di dalam modal
-            var modal = $(this);
-            modal.find('#id_permohonan').val(idPermohonan);
-
-            // Optional: Menampilkan nilai id_permohonan di dalam modal untuk debugging
-            console.log("ID Permohonan yang diterima:", idPermohonan);
+                // Set ID permohonan ke input hidden jika ID ditemukan
+                if (id_permohonan) {
+                    var modal = $(this);
+                    modal.find('#id_permohonan').val(id_permohonan);
+                } else {
+                    console.log("ID Permohonan tidak ditemukan!");
+                }
+            });
         });
-    });
-</script>
+    </script>
+        
 
 
                 </div>
