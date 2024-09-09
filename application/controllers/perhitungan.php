@@ -27,27 +27,36 @@ class Perhitungan extends CI_Controller {
 		
 	}
     
-    
     public function simpanHasil() {
-            
-                // Ambil data Yi dari post
-                $yiData = $this->input->post('yi_data');
-                
-                if (!empty($yiData)) {
-                    foreach ($yiData as $data) {
+        // Pastikan Anda memuat model terlebih dahulu
+        $this->load->model('m_hasil');
 
-                        $this->db->insert('tb_hasil', $data);
-                    }
-            
-                    // Redirect ke halaman hasil akhir atau halaman berikutnya
-                    redirect('hasil');
-                } else {
-                    // Jika data tidak ada di post, tampilkan pesan error
-                    $this->session->set_flashdata('error', 'Data tidak ditemukan untuk disimpan.');
-                    redirect('perhitungan');
-                }
-            
-    }
+        // Mendapatkan data dari form
+        $id_permohonan = $this->input->post('id_permohonan');
+        $nilai_ki = $this->input->post('Ki');
+
+        // Proses menyimpan data ke dalam database
+        if (!empty($id_permohonan) && !empty($nilai_ki)) {
+            for ($i = 0; $i < count($id_permohonan); $i++) {
+                $dataToInsert = [
+                    'id_permohonan' => $id_permohonan[$i],
+                    'hasil' => $nilai_ki[$i]
+                ];
+
+                // Insert data ke tabel hasil
+                $this->m_hasil->insertHasil($dataToInsert);
+            }
+
+            // Redirect setelah data berhasil disimpan
+            $this->session->set_flashdata('message', 'Data berhasil disimpan');
+            redirect('hasil'); // Ganti dengan URL halaman hasil
+        } else {
+            // Jika data tidak valid, tampilkan error
+            $this->session->set_flashdata('message', 'Gagal menyimpan data');
+            redirect('hasil'); // Ganti dengan URL halaman hasil
+        }
+    }   
+
     
     
     

@@ -4,7 +4,7 @@ class M_perhitungan extends CI_Model{
 
     public function get_penilaian_with_nama()
     {
-        $this->db->select('tb_user.nama, tb_penilaian.id_kriteria, tb_penilaian.nilai,
+        $this->db->select('tb_user.nama, tb_penilaian.id_kriteria, tb_penilaian.nilai, tb_penilaian.id_permohonan,
         
         MAX(CASE WHEN tb_penilaian.id_kriteria = 48 THEN tb_penilaian.nilai END) AS c1,
         MAX(CASE WHEN tb_penilaian.id_kriteria = 49 THEN tb_penilaian.nilai END) AS c2,

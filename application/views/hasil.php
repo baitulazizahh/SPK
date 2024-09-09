@@ -12,23 +12,28 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>Nama Alternatif</th>
+                                            <th>Nama Pemohon</th>
                                             <th>Nilai</th>
-                                            <th>Peringkat</th>
+                                            <th>Status</th>
                                         </tr>   
                                     </thead>
                                     <tbody>
                                     <tr>
                                     <?php $no = 1; ?>
-                                    <?php foreach ($hasil as $data): ?>  
+                                    <?php foreach ($hasil as $h): ?>  
                                         <tr>
 
-                                            <td class="text-center"><?php echo $data->nama_alternatif ?></td>
-                                            <td class="text-center"><?php echo $data->nilai ?></td>
-                                            <td class="text-center"><?php echo $no++; ?></td> 
-
-                                            
-
+                                            <td class="text-center"><?php echo $h->nama ?></td>
+                                            <td class="text-center"><?php echo $h->hasil ?></td>
+                                            <td class="text-center">
+                                                        <?php if (strtolower($h->status) == 'diproses'): ?>
+                                                            <span class="badge badge-pill badge-warning">Diproses</span>
+                                                        <?php elseif (strtolower($h->status) == 'diterima'): ?>
+                                                            <span class="badge badge-pill badge-primary">Diterima</span>
+                                                        <?php elseif (strtolower($h->status) == 'ditolak'): ?>
+                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
+                                                        <?php endif; ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach; ?>
                                                    

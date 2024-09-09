@@ -389,99 +389,116 @@
                     
                                       
                     <!-- Nilai Akhir dan Perangkingan -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Hasil Akhir dan Perangkingan</h6>
-    </div>
+                    <form action="<?= base_url('perhitungan/simpanHasil') ?>" method="POST">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Hasil Akhir dan Perangkingan</h6>
+                            </div>
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
-                <thead class="text-center bg-success text-white">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pemohon</th>
-                        <th>Nilai Si</th>
-                        <th>Nilai Ki</th>
-                        <th>Ranking</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $no = 1; 
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                        <thead class="text-center bg-success text-white">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Pemohon</th>
+                                                <th>Nilai Si</th>
+                                                <th>Nilai Ki</th>
+                                                <th>Ranking</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $no = 1; 
 
-                    // Menghitung nilai optimal S_0
-                    $S0 = 
-                        ($bobot['C1'] * (4 / $totalC1)) +
-                        ($bobot['C2'] * (1 / $totalC2)) +
-                        ($bobot['C3'] * (4 / $totalC3)) +
-                        ($bobot['C4'] * (1 / $totalC4)) +
-                        ($bobot['C5'] * (4 / $totalC5)) +
-                        ($bobot['C6'] * (4 / $totalC6));
+                                            // Menghitung nilai optimal S_0
+                                            $S0 = 
+                                                ($bobot['C1'] * (4 / $totalC1)) +
+                                                ($bobot['C2'] * (1 / $totalC2)) +
+                                                ($bobot['C3'] * (4 / $totalC3)) +
+                                                ($bobot['C4'] * (1 / $totalC4)) +
+                                                ($bobot['C5'] * (4 / $totalC5)) +
+                                                ($bobot['C6'] * (4 / $totalC6));
 
-                    // Inisialisasi array untuk menyimpan nilai Ki dan ranking
-                    $data_ranking = [];
+                                            // Inisialisasi array untuk menyimpan nilai Ki dan ranking
+                                            $data_ranking = [];
 
-                    // Looping data penilaian
-                    if (isset($penilaian) && !empty($penilaian)) {
-                        foreach ($penilaian as $p) {
-                            // Normalisasi Matriks Cost
-                            $nilai_C2 = 1/$p->c2 ;
-                            $nilai_C4 = 1/$p->c4 ;
+                                            // Looping data penilaian
+                                            if (isset($penilaian) && !empty($penilaian)) {
+                                                foreach ($penilaian as $p) {
+                                                    // Normalisasi Matriks Cost
+                                                    $nilai_C2 = 1/$p->c2 ;
+                                                    $nilai_C4 = 1/$p->c4 ;
 
-                            // Menghitung Si
-                            $Si = 
-                                ($bobot['C1'] * ($p->c1 / $totalC1)) +
-                                ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
-                                ($bobot['C3'] * ($p->c3 / $totalC3)) +
-                                ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
-                                ($bobot['C5'] * ($p->c5 / $totalC5)) +
-                                ($bobot['C6'] * ($p->c6 / $totalC6));
+                                                    // Menghitung Si
+                                                    $Si = 
+                                                        ($bobot['C1'] * ($p->c1 / $totalC1)) +
+                                                        ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
+                                                        ($bobot['C3'] * ($p->c3 / $totalC3)) +
+                                                        ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
+                                                        ($bobot['C5'] * ($p->c5 / $totalC5)) +
+                                                        ($bobot['C6'] * ($p->c6 / $totalC6));
 
-                            // Menghitung Ki
-                            $Ki = $Si / $S0;
+                                                    // Menghitung Ki
+                                                    $Ki = $Si / $S0;
 
-                            // Simpan data ke array ranking
-                            $data_ranking[] = [
-                                'nama' => $p->nama,
-                                'Si' => $Si,
-                                'Ki' => $Ki
-                            ];
-                        }
+                                                    // Simpan data ke array ranking
+                                                    $data_ranking[] = [
+                                                        'id_permohonan' => $p->id_permohonan,
+                                                        'nama' => $p->nama,
+                                                        'Si' => $Si,
+                                                        'Ki' => $Ki
+                                                    ];
+                                                }
 
-                        // Mengurutkan data ranking berdasarkan nilai Ki tertinggi
-                        usort($data_ranking, function ($a, $b) {
-                            return $b['Ki'] <=> $a['Ki'];
-                        });
+                                                // Mengurutkan data ranking berdasarkan nilai Ki tertinggi
+                                                usort($data_ranking, function ($a, $b) {
+                                                    return $b['Ki'] <=> $a['Ki'];
+                                                });
 
-                         // Menampilkan baris S0 dengan background 'bg-light'
-                         echo "<tr class='bg-light font-weight-bold'>";
-                         echo "<td class='text-center font-weight-bold'>-</td>";
-                         echo "<td class='font-weight-bold'>Optimal S<sub>0</sub></td>";
-                         echo "<td class='text-center font-weight-bold'>" . number_format($S0, 5) . "</td>";
-                         echo "<td class='text-center font-weight-bold'>" . number_format($S0/$S0, 5) . "</td>";
-                         echo "<td class='text-center font-weight-bold'>-</td>";
-                         echo "</tr>";
+                                                // Menampilkan baris S0 dengan background 'bg-light'
+                                                echo "<tr class='bg-light font-weight-bold'>";
+                                                echo "<td class='text-center font-weight-bold'>-</td>";
+                                                echo "<td class='font-weight-bold'>Optimal S<sub>0</sub></td>";
+                                                echo "<td class='text-center font-weight-bold'>" . number_format($S0, 5) . "</td>";
+                                                echo "<td class='text-center font-weight-bold'>" . number_format($S0/$S0, 5) . "</td>";
+                                                echo "<td class='text-center font-weight-bold'>-</td>";
+                                                echo "</tr>";
 
-                        // Menampilkan data yang sudah diurutkan
-                        foreach ($data_ranking as $key => $row) {
-                            echo "<tr>";
-                            echo "<td class='text-center'>" . ($key + 1) . "</td>";
-                            echo "<td>" . $row['nama'] . "</td>";
-                            echo "<td class='text-center'>" . number_format($row['Si'], 5) . "</td>";
-                            echo "<td class='text-center'>" . number_format($row['Ki'], 5) . "</td>";
-                            echo "<td class='text-center'>" . ($key + 1) . "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='5' class='text-center'>Data tidak ditemukan</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                                                // Menampilkan data yang sudah diurutkan
+                                                foreach ($data_ranking as $key => $row) {
+                                                    echo "<tr>";
+                                                    echo "<td class='text-center'>" . ($key + 1) . "</td>";
+                                                    echo "<td>" . $row['nama'] . "</td>";
+                                                    echo "<td class='text-center'>" . number_format($row['Si'], 5) . "</td>";
+                                                    echo "<td class='text-center'>" . number_format($row['Ki'], 5) . "</td>";
+                                                    echo "<td class='text-center'>" . ($key + 1) . "</td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='5' class='text-center'>Data tidak ditemukan</td></tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Tombol di bawah tabel -->
+                                <div class="text-center mt-3">
+                                    <button type="submit" class="btn btn-success">Simpan Data</button>
+                                </div>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <!-- Input hidden untuk mengirim data ranking -->
+                        <?php
+                            foreach ($data_ranking as $row) {
+                                echo "<input type='hidden' name='id_permohonan[]' value='" . $row['id_permohonan'] . "'>";
+                                echo "<input type='hidden' name='Ki[]' value='" . $row['Ki'] . "'>";
+                            }
+                        ?>
+                    </form>
                        
 
 

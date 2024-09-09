@@ -52,6 +52,12 @@
                     <span>Hasil Akhir</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('hasil')?>">
+                  
+                    <i class="fas fa-fw fa-calendar-minus text-white"></i>
+                    <span>Laporan</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('pengguna')?>">
                     <i class="fas fa-fw fa-users text-white"></i>
                     <span>Data User</span></a>

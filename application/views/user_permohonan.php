@@ -196,29 +196,41 @@
             <div class="row">
                 <div class="col-6"><strong>Proposal</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewProposalModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/proposal/'.$data->proposal); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
+                    <?php if (file_exists('./uploads/proposal/' . $data->proposal) && !empty($data->proposal)) : ?>
+                          <a href=" <?php echo base_url() . 'uploads/proposal/' . $data->proposal; ?>" class="btn btn-info btn-sm">Lihat</a>
+                    <?php else : ?>
+                        <span class="badge badge-danger">Proposal tidak ditemukan</span>
+                    <?php endif; ?>                
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Surat Keterangan Usaha</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewSkuModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/sku/'.$data->sku); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
+                    <?php if (file_exists('./uploads/sku/' . $data->sku) && !empty($data->sku)) : ?>
+                          <a href=" <?php echo base_url() . 'uploads/sku/' . $data->sku; ?>" class="btn btn-info btn-sm">Lihat</a>
+                    <?php else : ?>
+                        <span class="badge badge-danger">SKU tidak ditemukan</span>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KK</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKkModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/kk/'.$data->kk); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
+                    <?php if (file_exists('./uploads/kk/' . $data->kk) && !empty($data->kk)) : ?>
+                          <a href=" <?php echo base_url() . 'uploads/kk/' . $data->kk ?>" class="btn btn-info btn-sm">Lihat</a>
+                    <?php else : ?>
+                        <span class="badge badge-danger">Foto KK tidak ditemukan</span>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Foto KTP</strong></div>
                 <div class="col-6">
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#viewKtpModal<?= $data->id_permohonan; ?>">Lihat</button>
-                    <a href="<?= base_url('uploads/ktp/'.$data->ktp); ?>" target="_blank" class="btn btn-danger btn-sm">Lihat</a>
+                    <?php if (file_exists('./uploads/ktp/' . $data->ktp) && !empty($data->ktp)) : ?>
+                          <a href=" <?php echo base_url() . 'uploads/ktp/' . $data->ktp; ?>" class="btn btn-info btn-sm">Lihat</a>
+                    <?php else : ?>
+                        <span class="badge badge-danger">Foto KTP tidak ditemukan</span>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -227,92 +239,6 @@
 </div>
 <?php endforeach; ?>
 <!-- End Modal Detail  -->
-
-<!-- Modal Proposal View -->
-<?php foreach($permohonan as $data): ?>
-<div class="modal fade" id="viewProposalModal<?= $data->id_permohonan; ?>" tabindex="-1" role="dialog" aria-labelledby="viewProposalModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="viewProposalModalLabel">Proposal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <embed src="<?= base_url('uploads/proposal/'.$data->proposal); ?>" type="application/pdf" width="100%" height="500px" />
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
-<!-- End Modal Proposal -->
-
-<!-- Modal SKU -->
-<?php foreach($permohonan as $data): ?>
-<div class="modal fade" id="viewSkuModal<?= $data->id_permohonan; ?>" tabindex="-1" role="dialog" aria-labelledby="viewSkuModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="viewSkuModalLabel">Surat Keterangan Usaha</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <embed src="<?= base_url('uploads/sku/'.$data->sku); ?>" type="application/pdf" width="100%" height="500px" />
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
-<!-- End Modal SKU  -->
-
-<!-- Modal KK View -->
-<?php foreach($permohonan as $data): ?>
-<div class="modal fade" id="viewKkModal<?= $data->id_permohonan; ?>" tabindex="-1" role="dialog" aria-labelledby="viewKkModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="viewKkModalLabel">Foto KK</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="<?= base_url('uploads/kk/'.$data->kk); ?>" class="img-fluid" />
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
-<!-- End Modal KK -->
-
-<!-- Modal KTP -->
-<?php foreach($permohonan as $data): ?>
-<div class="modal fade" id="viewKtpModal<?= $data->id_permohonan; ?>" tabindex="-1" role="dialog" aria-labelledby="viewKtpModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="viewKtpModalLabel">Foto KTP</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="<?= base_url('uploads/ktp/'.$data->ktp); ?>" class="img-fluid" />
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
- <!-- End Modal KTP -->
-
-
-
-
-
-
     
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
