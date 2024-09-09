@@ -34,6 +34,7 @@ class Hasil extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
 		$data['hasil'] = $this->m_hasil->tampil_data();
+		$data['years'] = $this->m_hasil->get_periode();
 	
 		
 		
