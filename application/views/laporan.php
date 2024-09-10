@@ -27,27 +27,83 @@
             text-align: center;
         }
         .signature {
-            text-align: right;
-            margin-top: 50px;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: flex; /* Align items to the end of the container */
+            text-align: left; /* Align text to the right */
+            margin-top: 40px; /* Remove default margin if needed */
+            padding-left: 540px; 
+        }
+        .signature p {
+            margin: 0; /* Remove default margin for p elements */
+            line-height: 1.5; /* Adjust line height for better readability */
         }
         @media print {
             .no-print {
                 display: none;
             }
         }
+        .header {
+        display: flex;
+        align-items: center; /* Vertically center items */
+        padding: 10px; /* Optional: Adds padding around the content */
+        position: relative; /* Allow positioning of the line absolutely */
+    }
+    .header .image-container {
+      
+    }
+    .header .text-container {
+        flex: 1; /* Allow the text container to take up remaining space */
+        display: flex;
+        flex-direction: column; /* Stack text vertically */
+        align-items: center; /* Center text horizontally */
+        justify-content: center; /* Center text vertically */
+        position: relative; /* Allow positioning of the line inside this container */
+    }
+    .header h2 {
+        margin: 0; /* Remove default margin */
+        font-size: 18px; /* Adjust font size as needed */
+        text-align: center; /* Center text horizontally */
+    }
+    .header p {
+        margin: 0; /* Remove default margin */
+        font-size: 14px; /* Adjust font size as needed */
+        text-align: center; /* Center text horizontally */
+    }
+    .header .line {
+        position: absolute; /* Position the line absolutely within the text container */
+        bottom: 0; /* Position the line below the text container */
+        left: 0; /* Align the line with the left edge of the text container */
+        width: 100%; /* Make the line span the full width of the text container */
+        border-bottom: 2px solid #000; /* Add the line with a solid border */
+    }
+    p{
+        font-size : 12px;
+        text-align: justify;
+    }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="path/to/logo.png" alt="Logo" style="width: 100px;">
-        <h2>DINAS KOPERASI USAHA KECIL DAN MENENGAH KOTA PADANG</h2>
-        <p>Jl. Ujung Gurun, Kec. Padang Barat, Kota Padang, Sumatera Barat 25114</p>
-        <hr>
+        <div class="image-container">
+            <img src="<?php echo base_url() ?>/assets/img/Baznas.png" class="brand-image" width="60" height="50">
+        </div>
+        <div class="text-container">
+            <h2>BADAN AMIL ZAKAT NASIONAL KABUPATEN PADANG PARIAMAN</h2>
+            <p>Simpang Balai Basuo Nagari Kapalo Koto Kec. Nan Sabaris 25571</p>
+        </div>
+        <div class="line"></div> <!-- The horizontal line -->
+        <div>
+            
+        </div>
     </div>
-
-    <h3 style="text-align: center;">Laporan Bantuan Alat Produksi Untuk Usaha Mikro Tahun 2024</h3>
-    <p style="text-align: center;">Pada periode 2024, berikut adalah daftar nama pemohon:</p>
+    <h3 style="text-align: center;"> Laporan Hasil Akhir Penerima Bantuan Modal Usaha Tahun 2024</h3>
+    <p>Berdasarkan hasil perhitungan menggunakan sistem pendukung keputusan untuk menentukan penerima bantuan modal 
+        bagi pelaku usaha mikro pada Badan Amil Zakat Nasional Kabupaten Padang Pariaman
+        Menggunakan Metode Additive Ratio Assessment (ARAS), berikut adalah nama-nama penerima yang direkomendasikan untuk menerima bantuan:
+    </p>
+   
 
     <table>
         <thead>
@@ -74,13 +130,15 @@
 
     <div class="signature">
         <p>Padang, <?= date('d M Y'); ?></p>
-        <p>Mengetahui,<br>Kepala Dinas Koperasi UKM Kota Padang</p>
+        <p>Mengetahui,<br>Kepala BAZNAS Padang Pariaman</p>
         <br><br>
-        <p><b>Ferri Erviyan Rinaldy</b></p>
+        <p><b>Dr. H. Rahmat Tk Sulaiman, MM</b></p>
     </div>
-
+<script type="text/javascript">
+window.print();
+</script>
     <!-- Button cetak -->
     <button onclick="window.print();" class="no-print">Cetak Laporan</button>
-
+            
 </body>
 </html>

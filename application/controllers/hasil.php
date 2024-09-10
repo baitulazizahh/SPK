@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+
 class Hasil extends CI_Controller {
 	 
 	public function __construct() {
@@ -67,8 +69,11 @@ class Hasil extends CI_Controller {
 		// Load view dengan data
 		$this->load->view('hasil', $data);
 	}
+	public function print() {
+		$tahun = $this->input->get('tahun');
 	
-
-
-
+		$data['hasil'] = $this->m_hasil->get_data_by_year($tahun);
+		$this->load->view('laporan', $data);
+		
+	}
 }

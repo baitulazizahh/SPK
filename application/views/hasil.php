@@ -30,7 +30,8 @@
             <?php if (isset($selected_year)): ?>
                 <h6 id="judul-laporan" class="font-weight-bold text-center mb-3 mt-4">DATA LAPORAN TAHUN <?= $selected_year ?></h6>
                 <div class="d-flex justify-content-end mb-3">
-                    <button type="button" class="btn btn-secondary btn-sm" id="btn-cetak">Cetak Laporan</button>
+                <a href="<?= site_url('hasil/print?year=' . $selected_year); ?>" class="btn btn-secondary btn-sm" target="_blank">Cetak Laporan</a>
+                </div>
                 </div>
 
                 <!-- Tabel Data Hasil -->
@@ -74,21 +75,7 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-<script>
-        document.getElementById('btn-cetak').addEventListener('click', function() {
-            // Buat URL untuk file HTML yang akan dicetak
-            var printUrl = './cetak_laporan';
 
-            // Buka jendela baru dan muat konten HTML
-            var printWindow = window.open(printUrl, '_blank');
-
-            // Tunggu sampai konten dimuat
-            printWindow.onload = function() {
-                // Panggil perintah cetak
-                printWindow.print();
-            };
-        });
-    </script>
 <script>
     document.getElementById('btn-cetak').addEventListener('click', function() {
         // Buat variabel yang berisi elemen tabel yang akan dicetak
@@ -98,15 +85,25 @@
         var printWindow = window.open('', '', 'height=600,width=800');
         
         // Tambahkan style dan isi tabel ke dalam jendela baru
-        printWindow.document.write('<html><head><title>Cetak Laporan</title>');
+        // printWindow.document.write('<html><head><title>Cetak Laporan</title>');
         printWindow.document.write('<style>');
         printWindow.document.write('table {width: 100%;border-collapse: collapse;}');
         printWindow.document.write('table, th, td {border: 1px solid black;padding: 8px;text-align: center;}');
         printWindow.document.write('th {background-color: #4CAF50;color: white;}');
         printWindow.document.write('</style>');
         printWindow.document.write('</head><body>');
-        printWindow.document.write('<h2 style="text-align: center;">Laporan Data Hasil Akhir</h2>');
+
+        // Menulis kop surat dengan logo di samping kiri
+        printWindow.document.write('<div class="header">');
+        printWindow.document.write('<img src="http://localhost/spk/assets/img/logo.png" alt="Logo" class="logo" style="width: 100px;">'); // Ganti dengan path ke logo Anda
+        printWindow.document.write('<div>');
+        printWindow.document.write('<h4 style="margin-bottom: 5px; font-weight: bold;">BADAN AMIL ZAKAT NASIONAL KABUPATEN PADANG PARIAMAN</h4>');
+        printWindow.document.write('<p style="margin-top: 0;">Jl. Contoh Alamat No. 123, Padang Pariaman</p>');
+        printWindow.document.write('</div>');
+        printWindow.document.write('</div>');
+
         printWindow.document.write(printContents);
+        
         printWindow.document.write('</body></html>');
         
         // Tutup dan cetak isi dari jendela baru
