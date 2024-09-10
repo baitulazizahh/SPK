@@ -48,6 +48,7 @@ class Hasil extends CI_Controller {
 		$this->load->view('templates/topbar', $user);
 		// Tampilkan view hasil akhir
 		$this->load->view('hasil', $data);
+		
 		// $this->load->view('templates/footer');
 
 		
@@ -112,10 +113,17 @@ class Hasil extends CI_Controller {
 		$this->load->view('hasil', $data);
 	}
 	public function print() {
-		$tahun = $this->input->get('tahun');
+		$years = $this->m_hasil->get_periode();
+		$data['hasil'] = $this->m_hasil->tampil_data();
 	
-		$data['hasil'] = $this->m_hasil->get_data_by_year($tahun);
 		$this->load->view('laporan', $data);
+		
+	}
+	public function print2() {
+		$years = $this->m_hasil->get_periode();
+		$data['hasil'] = $this->m_hasil->tampil_data();
+	
+		$this->load->view('penerima', $data);
 		
 	}
 }

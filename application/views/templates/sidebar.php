@@ -49,13 +49,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('hasil')?>">
                     <i class="fas fa-fw fa-chart-bar text-white"></i>
-                    <span>Hasil Akhir</span></a>
+                    <span> Laporan Hasil Akhir</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('hasill')?>">
+                <a class="nav-link" href="<?= base_url('hasil/index2')?>">
                   
                     <i class="fas fa-fw fa-calendar-minus text-white"></i>
-                    <span>Laporan</span></a>
+                    <span>Laporan Penerima</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('pengguna')?>">

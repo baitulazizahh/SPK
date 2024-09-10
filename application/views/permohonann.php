@@ -67,7 +67,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>Status Permohonan</th>
+                                            <th>Jenis Usaha</th>
+                                            <th>Pendapatan</th>
+                                            <th>Tanggungan</th>
                                             <th>Aksi</th>
                                         </tr>
                                        
@@ -83,15 +85,10 @@
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++?></td>
                                                     <td><?php echo $data->nama ?></td>
-                                                    <td class="text-center">
-                                                        <?php if (strtolower($data->status) == 'diproses'): ?>
-                                                            <span class="badge badge-pill badge-warning">Diproses</span>
-                                                        <?php elseif (strtolower($data->status) == 'diterima'): ?>
-                                                            <span class="badge badge-pill badge-primary">Diterima</span>
-                                                        <?php elseif (strtolower($data->status) == 'ditolak'): ?>
-                                                            <span class="badge badge-pill badge-danger">Ditolak</span>
-                                                        <?php endif; ?>
-                                                    </td>
+                                                    <td><?php echo $data->nama_usaha ?></td>
+                                                    <td><?php echo $data->pendapatan ?></td>
+                                                    <td><?php echo $data->tanggungan ?></td>
+                                                    
                                                     <td class="text-center">
                                                           <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
                                                           <!-- Cek apakah data penilaian sudah ada untuk id_permohonan ini -->

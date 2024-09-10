@@ -88,9 +88,13 @@
         <?php endif; ?>
         <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data',  'method' => 'post']); ?>
             <div class="form-group">
-                <label for="">Nama Usaha</label>
-                <input type="text" name="nama_usaha" class="form-control"  value="<?= set_value('nama_usaha');?>"> 
-                <?= form_error('nama_usaha','<small class="text-danger pl-1">','</small>'); ?>
+                <label for="">Jenis Usaha</label>
+                <select class=" form-control" name="nama_usaha" value="<?= set_value('nama_usaha')?>">
+                    <option>Usaha Kuliner</option>
+                    <option>Usaha Jasa </option>
+                    <option>Usaha Pertanian/Peternakan</option>
+                    <option>Usaha Lainnya</option>  
+                </select>
             </div> 
             <div class="form-group">
                 <label for="">Pendapatan</label>

@@ -110,21 +110,23 @@
             <tr>
                 <th style="width: 5%;">No.</th> <!-- Lebar 5% -->
                 <th style="width: 40%; ">Nama</th> <!-- Lebar 40% -->
-                <th style="width: 30%;">Nilai</th> <!-- Lebar 30% -->
-                <th style="width: 25%;">Status Permohonan</th> <!-- Lebar 25% -->
+                <th style="width: 35%;">Nilai</th> <!-- Lebar 30% -->
             </tr>
         </thead>
         <tbody>
             <?php 
-            $no = 1;
-            foreach($hasil as $row): ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td style ="text-align: left;"><?= $row->nama; ?></td>
-                    <td><?= $row->hasil; ?></td>
-                    <td><?= $row->status; ?></td>
-                </tr>
-            <?php endforeach; ?>
+                $no = 1;
+                foreach($hasil as $row):
+                    if($row->status == 'Diterima'): // Filter hanya yang berstatus 'Diterima'
+                ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td style="text-align: left;"><?= $row->nama; ?></td>
+                        <td><?= $row->hasil; ?></td>
+                    </tr>
+                    <?php endif;
+            endforeach;
+            ?>
         </tbody>
     </table>
 
