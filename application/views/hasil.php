@@ -1,7 +1,6 @@
 <div class="container-fluid"> 
-
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-6">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-success">
                 <i class="fas fa-fw fa-chart-bar text-success"></i> Data Hasil Akhir
@@ -25,7 +24,7 @@
                     </form>
                 </div>
             </div>
-
+            <div>
             <!-- Tampilkan data hanya jika tahun dipilih -->
             <?php if (isset($selected_year)): ?>
                 <h6 id="judul-laporan" class="font-weight-bold text-center mb-3 mt-4">DATA LAPORAN TAHUN <?= $selected_year ?></h6>
@@ -71,6 +70,7 @@
                     </table>
                 </div>
             <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>

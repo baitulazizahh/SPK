@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-class Hasil extends CI_Controller {
+class Hasill extends CI_Controller {
 	 
 	public function __construct() {
         parent::__construct();
@@ -47,7 +47,7 @@ class Hasil extends CI_Controller {
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);
 		// Tampilkan view hasil akhir
-		$this->load->view('hasil', $data);
+		$this->load->view('hasill', $data);
 		// $this->load->view('templates/footer');
 
 		

@@ -52,7 +52,7 @@
                     <span>Hasil Akhir</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('hasil')?>">
+                <a class="nav-link" href="<?= base_url('hasill')?>">
                   
                     <i class="fas fa-fw fa-calendar-minus text-white"></i>
                     <span>Laporan</span></a>
