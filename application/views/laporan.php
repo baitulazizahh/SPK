@@ -111,7 +111,7 @@
                 <th>No.</th>
                 <th>Nama</th>
                 <th>Nilai</th>
-                <th>Status</th>
+                <th>Statuss</th>
             </tr>
         </thead>
         <tbody>
