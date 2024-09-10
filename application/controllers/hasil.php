@@ -2,23 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Hasil extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html
-	 */
-
 	 
 	public function __construct() {
         parent::__construct();
@@ -32,11 +15,30 @@ class Hasil extends CI_Controller {
 		$title['title']= 'Hasil akhir';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
-
-		$data['hasil'] = $this->m_hasil->tampil_data();
-		$data['years'] = $this->m_hasil->get_periode();
-	
 		
+		$years = $this->m_hasil->get_periode();
+
+		// Mengecek apakah tahun dipilih dari dropdown
+		if ($this->input->post('tahun_periode')) {
+			$selected_year = $this->input->post('tahun_periode');
+			
+			// Ambil data hasil berdasarkan tahun yang dipilih
+			$hasil = $this->m_hasil->get_data_by_year($selected_year);
+	
+			// Kirim data ke view
+			$data = [
+				'years' => $years,
+				'selected_year' => $selected_year,
+				'hasil' => $hasil,
+			];
+		} else {
+			// Jika belum memilih tahun, hanya kirim data tahun
+			$data = [
+				'years' => $years,
+				'selected_year' => null,
+				'hasil' => []
+			];
+		}
 		
 
 		$this->load->view('templates/header', $title);
@@ -48,6 +50,25 @@ class Hasil extends CI_Controller {
 
 		
 	}
+	public function filtered_data() {
+		$tahun = $this->input->get('tahun');
+	
+		// Ambil data tahun untuk dropdown
+		$data['years'] = $this->m_hasil->get_periode();
+	
+		// Jika tahun dipilih, ambil data hasil berdasarkan tahun
+		if ($tahun) {
+			$data['hasil'] = $this->m_hasil->get_data_by_year($tahun);
+		} else {
+			// Jika belum ada tahun yang dipilih, tampilkan halaman kosong
+			$data['hasil'] = [];
+		}
+	
+		// Load view dengan data
+		$this->load->view('hasil', $data);
+	}
+	
+
 
 
 }
