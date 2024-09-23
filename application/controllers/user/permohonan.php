@@ -33,7 +33,8 @@ class Permohonan extends CI_Controller {
 		$id_user =$this->session->userdata('id_user');
 		
 		// Validasi input form
-		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required|trim');
+		$this->form_validation->set_rules('nik', 'NIK', 'required');
+		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required');
         $this->form_validation->set_rules('pendapatan', 'Pendapatan', 'required');
         $this->form_validation->set_rules('tanggungan', 'Tanggungan', 'required');
 		$this->form_validation->set_message('required', 'Tidak boleh kosong');
@@ -123,6 +124,21 @@ class Permohonan extends CI_Controller {
 			return;
 		}
 
+
+		 // Cek apakah NIK sudah ada di tabel penerima
+		 $nik = $this->input->post('nik', TRUE);
+		 $riwayat_bantuan = "Belum Pernah"; // Default value
+		 
+		 $this->db->where('nik', $nik);
+		 $penerima = $this->db->get('tb_penerima')->row();
+		 
+		 if ($penerima) {
+			 // Jika NIK ditemukan, berarti sudah pernah menerima bantuan
+			 $riwayat_bantuan = "Sudah Pernah";
+		 }
+
+
+		//$nik = $this->input->post('nik', TRUE);
 		$nama_usaha = $this->input->post('nama_usaha', TRUE);
 		$pendapatan = $this->input->post('pendapatan', TRUE);
 		$tanggungan = $this->input->post('tanggungan', TRUE);
@@ -137,6 +153,7 @@ class Permohonan extends CI_Controller {
 	
 		$data=[
 			'id_user' => $id_user, 
+			'nik'=> $nik,
             'nama_usaha' => $nama_usaha,
             'pendapatan' => $pendapatan,
             'tanggungan' => $tanggungan,
@@ -146,7 +163,8 @@ class Permohonan extends CI_Controller {
             'ktp' => $ktp,
 			'status' => $status,
 			'created'=> $created,
-			'date_created' =>$date_created
+			'date_created' =>$date_created,
+			'riwayat_bantuan' =>$riwayat_bantuan
 		];
 		$this->m_permohonan->input_data($data);
 		redirect('user/permohonan');

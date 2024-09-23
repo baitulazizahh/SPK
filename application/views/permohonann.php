@@ -65,12 +65,14 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Pemohon</th>
-                                            <th>Jenis Usaha</th>
-                                            <th>Pendapatan</th>
-                                            <th>Tanggungan</th>
-                                            <th>Aksi</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Nama Pemohon</th>
+                                            <th class="text-center">Jenis Usaha</th>
+                                            <!-- <th>Pendapatan</th>
+                                            <th>Tanggungan</th> -->
+                                            <th class="text-center">Riwayat Bantuan</th>
+                                            <th class="text-center">Waktu Pengajuan</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                        
                                     </thead>
@@ -86,20 +88,29 @@
                                                     <td class="text-center"><?php echo $no++?></td>
                                                     <td><?php echo $data->nama ?></td>
                                                     <td><?php echo $data->nama_usaha ?></td>
-                                                    <td><?php echo $data->pendapatan ?></td>
-                                                    <td><?php echo $data->tanggungan ?></td>
-                                                    
+                                                    <!-- <td><?php echo $data->pendapatan ?></td>
+                                                    <td><?php echo $data->tanggungan ?></td> -->
+                                                    <td><?php echo $data->riwayat_bantuan ?></td>
+                                                    <td class="text-center"> <?php echo date('d F Y', strtotime($data->date_created)); ?></td>
                                                     <td class="text-center">
-                                                          <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                          <!-- Cek apakah data penilaian sudah ada untuk id_permohonan ini -->
-                                                          <?php if ($this->m_permohonan->is_penilaian_exist($data->id_permohonan)): ?>
-                                                              <!-- Tombol Edit karena data sudah ada -->
-                                                              <button class="btn btn-secondary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button>
-                                                          <?php else: ?>
-                                                              <!-- Tombol Tambah jika data belum ada -->
-                                                              <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $data->id_permohonan; ?>"><i class="fa fa-plus fa-sm"></i></button>
-                                                          <?php endif; ?>
+                                                        <!-- Tombol Detail untuk melihat modal -->
+                                                        <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" class="btn btn-warning btn-sm">
+                                                            <i class="fa fa-info-circle fa-sm"></i>
+                                                        </a>
+
+                                                        <!-- Cek apakah data penilaian sudah ada untuk id_permohonan ini -->
+                                                        <?php if ($this->m_permohonan->is_penilaian_exist($data->id_permohonan)): ?>
+                                                            <!-- Tombol Edit karena data sudah ada, jadi button tambah dinonaktifkan -->
+                                                            <button class="btn btn-secondary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button>
+                                                        <?php else: ?>
+                                                            <!-- Tombol Tambah jika data belum ada, tapi hanya aktif jika semua checkbox di modal sudah dicentang -->
+                                                            <!-- <button id="tambahButton_<?= $data->id_permohonan ?>" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button> -->
+                                                            <!-- <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" data-toggle="modal" data-target="#detailModal" data-id="<?php $data->id_permohonan; ?>" disabled><i class="fa fa-plus fa-sm"></i></button> -->
+                                                            <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" disabled>Tambah</button>
+
+                                                            <?php endif; ?>
                                                     </td>
+
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
@@ -133,10 +144,15 @@
                         <div class="col-6"><?= $data->tanggungan; ?></div>
                     </div>
                     <div class="row">
+                        <div class="col-6"><strong>Riwayat Bantuan</strong></div>
+                        <div class="col-6"><?= $data->riwayat_bantuan; ?></div>
+                    </div>
+                    <div class="row">
                         <div class="col-6"><strong>Proposal</strong></div>
                         <div class="col-6">
                             <?php if (file_exists('./uploads/proposal/' . $data->proposal) && !empty($data->proposal)) : ?>
                                 <a href=" <?php echo base_url() . 'uploads/proposal/' . $data->proposal; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                <input type="checkbox" id="verify_proposal_<?= $data->id_permohonan ?>" name="verify_proposal_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
                                 <span class="badge badge-danger">Proposal tidak ditemukan</span>
                             <?php endif; ?>                
@@ -147,6 +163,7 @@
                         <div class="col-6">
                             <?php if (file_exists('./uploads/sku/' . $data->sku) && !empty($data->sku)) : ?>
                                 <a href=" <?php echo base_url() . 'uploads/sku/' . $data->sku; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                <input type="checkbox" id="verify_sku_<?= $data->id_permohonan ?>" name="verify_sku_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
                                 <span class="badge badge-danger">Foto SKU tidak ditemukan</span>
                             <?php endif; ?>                
@@ -157,6 +174,7 @@
                         <div class="col-6">
                             <?php if (file_exists('./uploads/kk/' . $data->kk) && !empty($data->kk)) : ?>
                                 <a href=" <?php echo base_url() . 'uploads/kk/' . $data->kk; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                <input type="checkbox" id="verify_kk_<?= $data->id_permohonan ?>" name="verify_kk_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
                                 <span class="badge badge-danger"> Foto KK tidak ditemukan</span>
                             <?php endif; ?>                
@@ -167,7 +185,8 @@
                         <div class="col-6">
                             <?php if (file_exists('./uploads/ktp/' . $data->ktp) && !empty($data->ktp)) : ?>
                                 <a href=" <?php echo base_url() . 'uploads/ktp/' . $data->ktp; ?>" class="btn btn-info btn-sm">Lihat</a>
-                            <?php else : ?>
+                                <input type="checkbox" id="verify_ktp_<?= $data->id_permohonan ?>" name="verify_ktp_<?= $data->id_permohonan ?>"> Verifikasi
+                                <?php else : ?>
                                 <span class="badge badge-danger">Foto KTP tidak ditemukan</span>
                             <?php endif; ?>                
                         </div>
@@ -234,22 +253,68 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Tombol yang diklik
+                var idPermohonan = button.data('id'); // Ambil data-id dari tombol
 
-<script>
-    $(document).ready(function() {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Tombol yang diklik
-            var idPermohonan = button.data('id'); // Ambil data-id dari tombol
+                // Update nilai input hidden di dalam modal
+                var modal = $(this);
+                modal.find('#id_permohonan').val(idPermohonan);
 
-            // Update nilai input hidden di dalam modal
-            var modal = $(this);
-            modal.find('#id_permohonan').val(idPermohonan);
-
-            // Optional: Menampilkan nilai id_permohonan di dalam modal untuk debugging
-            console.log("ID Permohonan yang diterima:", idPermohonan);
+                // Optional: Menampilkan nilai id_permohonan di dalam modal untuk debugging
+                console.log("ID Permohonan yang diterima:", idPermohonan);
+            });
         });
+    </script>
+    
+    <script>
+    // Fungsi untuk memantau perubahan pada checkbox
+    $(document).ready(function() {
+        <?php foreach($permohonan as $data): ?>
+            // Tangkap checkbox untuk setiap dokumen
+            let checkboxes = [
+                '#verify_proposal_<?= $data->id_permohonan ?>',
+                '#verify_sku_<?= $data->id_permohonan ?>',
+                '#verify_kk_<?= $data->id_permohonan ?>',
+                '#verify_ktp_<?= $data->id_permohonan ?>'
+            ];
+
+            // Fungsi untuk mengecek apakah semua checkbox sudah dicentang
+            function checkAllChecked() {
+                let allChecked = true;
+                checkboxes.forEach(function(selector) {
+                    if (!$(selector).is(':checked')) {
+                        allChecked = false;
+                    }
+                });
+                // Aktifkan atau non-aktifkan tombol berdasarkan status checkbox
+                if (allChecked) {
+                    console.log('All checked, enabling button');
+                    $('#btnTambah_<?= $data->id_permohonan ?>').prop('disabled', false);
+                } else {
+                    console.log('Not all checked, disabling button');
+                    $('#btnTambah_<?= $data->id_permohonan ?>').prop('disabled', true);
+                }
+            }
+
+            // Pantau setiap perubahan pada checkbox
+            checkboxes.forEach(function(selector) {
+                $(selector).on('change', function() {
+                    checkAllChecked();
+                });
+            });
+
+            // Cek status saat pertama kali modal terbuka
+            $('#detailModal<?= $data->id_permohonan ?>').on('shown.bs.modal', function () {
+                checkAllChecked();
+            });
+        <?php endforeach; ?>
     });
 </script>
+
+
 
 
                 </div>

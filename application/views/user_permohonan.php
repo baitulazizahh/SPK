@@ -30,8 +30,9 @@
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Usaha</th>
+                                            <th>Jenis Usaha</th>
                                             <th>Status Permohonan</th>
+                                            <th>Tahun</th>
                                             <th>Aksi</th>
                                         </tr>
                                        
@@ -56,6 +57,7 @@
                                                             <span class="badge badge-pill badge-danger">Ditolak</span>
                                                         <?php endif; ?>
                                                     </td>
+                                                    <td class="text-center"><?php echo $data->created ?></td>
                                                     <td class="text-center">
                                                     <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" href="" class="btn btn-primary btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
                                                     <a data-toggle="modal" data-target="#delete<?= $data->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>user/permohonan/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
@@ -87,6 +89,11 @@
             </div>
         <?php endif; ?>
         <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data',  'method' => 'post']); ?>
+            <div class="form-group">
+                <label for="">NIK / No.KTP</label>
+                <input type="text" name="nik" class="form-control"  value="<?= set_value('nik');?>"> 
+                <?= form_error('nik','<small class="text-danger pl-1">','</small>'); ?>
+            </div>
             <div class="form-group">
                 <label for="">Jenis Usaha</label>
                 <select class=" form-control" name="nama_usaha" value="<?= set_value('nama_usaha')?>">
@@ -186,6 +193,10 @@
       </div>
         <div class="modal-body">
             <div class="row">
+                <div class="col-6"><strong>NIK</strong></div>
+                <div class="col-6"><?= $data->nik; ?></div>
+            </div>
+            <div class="row">
                 <div class="col-6"><strong>Nama Usaha</strong></div>
                 <div class="col-6"><?= $data->nama_usaha; ?></div>
             </div>
@@ -196,6 +207,10 @@
             <div class="row">
                 <div class="col-6"><strong>Tanggungan</strong></div>
                 <div class="col-6"><?= $data->tanggungan; ?></div>
+            </div>
+            <div class="row">
+                <div class="col-6"><strong>Riwayat Bantuan</strong></div>
+                <div class="col-6"><?= $data->riwayat_bantuan; ?></div>
             </div>
             <div class="row">
                 <div class="col-6"><strong>Proposal</strong></div>

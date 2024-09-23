@@ -36,6 +36,7 @@ class M_hasil extends CI_Model{
 
     public function insertHasil($data) {
         $this->db->insert('tb_hasil', $data);
+    
     }
 
     public function get_periode() {
@@ -46,7 +47,7 @@ class M_hasil extends CI_Model{
     }
 
     public function get_data_by_year($tahun) {
-        $this->db->select('tb_hasil.*, tb_user.nama, tb_permohonan.status, tb_hasil.id_permohonan, ');
+        $this->db->select('tb_hasil.*, tb_user.nama, tb_permohonan.status, tb_permohonan.nik, tb_hasil.id_permohonan, ');
         $this->db->from('tb_hasil');
         $this->db->join('tb_penilaian', 'tb_hasil.id_permohonan = tb_penilaian.id_permohonan');
         $this->db->join('tb_permohonan', 'tb_penilaian.id_permohonan = tb_permohonan.id_permohonan');
