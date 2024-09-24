@@ -23,7 +23,7 @@ class Perhitungan extends CI_Controller {
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);
-		$this->load->view('perhitungan', $data);
+		$this->load->view('perhitungann', $data);
 		
 	}
     

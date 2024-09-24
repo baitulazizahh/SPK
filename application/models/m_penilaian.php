@@ -26,7 +26,10 @@ class M_penilaian extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
-
+    public function hapus_data($where, $table){
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 
  
    

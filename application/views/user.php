@@ -62,7 +62,7 @@
                         
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped " id="dataTable" width="100%" cellspacing="10" >
+                                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="10" >
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
@@ -81,8 +81,8 @@
                                             <td class="text-center"><?php echo $data->email ?></td>
                                             <td class="text-center"><?php echo $data->role ?></td>
                                             <td class="text-center">
-                                                <!-- <a data-toggle="tooltip" data-placement="bottom" title="Edit Data" href="" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> -->
-                                                <a data-toggle="modal" data-target="#update<?= $data->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>pengguna/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                               
+                                                <!-- <a data-toggle="modal" data-target="#update<?= $data->id_user;?>" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>pengguna/update_data/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a> -->
                                                 <a data-toggle="modal" data-target="#delete<?= $data->id_user;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>pengguna/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
                                                 <!-- <td onclick="javascript: return confirm('Yakin menghapus data?')"><?php echo anchor ('admin/hapus/'.$data->id,'<div class="btn btn-danger btn-sm "><i class="fa fa-trash "></i></div>')  ?></td> -->
                                             </td>

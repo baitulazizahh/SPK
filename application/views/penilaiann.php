@@ -90,7 +90,8 @@
                                             <td class="text-center"><?php echo $p->c5; ?></td>
                                             <td class="text-center"><?php echo $p->c6; ?></td>
                                             <td class="text-center">
-                                                <a data-toggle="modal" data-id_permohonan="<?php echo $p->id_permohonan; ?>"  data-target="#updateModal" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>penilaian/update_penilaian/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a>
+                                                <!-- <a data-toggle="modal" data-id_permohonan="<?php echo $p->id_permohonan; ?>"  data-target="#updateModal" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>penilaian/update_penilaian/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a> -->
+                                                <a data-toggle="modal" data-target="#delete<?= $p->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>penilaian/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -105,6 +106,28 @@
                         </div>
                     </div>
 
+
+            <!-- Modal Hapus-->
+            <?php foreach ($penilaian as $p): ?>  
+                <div class="modal fade" id="delete<?= $p->id_permohonan;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Anda yakin ingin menghapus data?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger" type="button" data-dismiss="modal">Tidak</button>
+                                <a class="btn btn-primary" href="<?= base_url('penilaian/hapus/').$p->id_permohonan;?>">Ya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <!-- End Modal Hapus-->
             <!-- Modal Edit -->
             <?php foreach($penilaian as $data): ?>
                     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">

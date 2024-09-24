@@ -76,6 +76,14 @@ $this->load->view('penilaiann', $data);
 		redirect('permohonan/data_penilaian');
 	}
 
+	public function hapus($id_permohonan){
+        $where =  array ('id_permohonan'=> $id_permohonan);
+        $this->m_penilaian->hapus_data($where,'tb_penilaian');
+        redirect('penilaian/index');
+
+    }
+
+
 
 	
 		

@@ -105,8 +105,8 @@
                                                         <?php else: ?>
                                                             <!-- Tombol Tambah jika data belum ada, tapi hanya aktif jika semua checkbox di modal sudah dicentang -->
                                                             <!-- <button id="tambahButton_<?= $data->id_permohonan ?>" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button> -->
-                                                            <!-- <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" data-toggle="modal" data-target="#detailModal" data-id="<?php $data->id_permohonan; ?>" disabled><i class="fa fa-plus fa-sm"></i></button> -->
-                                                            <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" disabled>Tambah</button>
+                                                            <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" data-toggle="modal" data-target="#exampleModal" data-id="<?php $data->id_permohonan; ?>" disabled><i class="fa fa-plus fa-sm"></i></button>
+                                                            <!-- <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" disabled>Tambah</button> -->
 
                                                             <?php endif; ?>
                                                     </td>
@@ -216,11 +216,11 @@
                             <label for=""><?php echo $k->nama_kriteria; ?></label>
                             <select class="form-control" name="subkriteria_<?php echo $k->id_kriteria; ?>" required>
                                 <option value="">--Pilih--</option>
-                                <?php if (isset($subkriteria[$k->id])): ?>
+                                 <?php if (isset($subkriteria[$k->id])): ?>
                                     <?php foreach ($subkriteria[$k->id] as $sub): ?>
                                         <option value="<?php echo $sub->id_subkriteria.',' .$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
                                     <?php endforeach; ?>
-                                <?php endif; ?>
+                                <?php endif; ?> 
                             </select>
                         </div>
                     <?php endforeach; ?>
@@ -234,6 +234,51 @@
         </div>
         </div>
         <!-- End Modal Tambah -->
+          <!-- Modal Tambah 2-->
+       
+        <?php foreach($permohonan as $data): ?>
+        <div class="modal fade" id="exampleModal<?= $data->id_permohonan;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white text-center" id="exampleModalLabel">Input Penilaian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Jenis Usaha</label>
+                        <input type="text" name="nama_usaha" class="form-control" value="<?= $data->nama_usaha;?>"> 
+                    </div>       
+                    <div class="form-group">
+                        <label for="">Pendapatan</label>
+                        <input type="text" name="pendapatan" class="form-control" value="<?= $data->pendapatan;?>"> 
+                    </div>       
+                    <div class="form-group">
+                        <label for="">Tanggungan</label>
+                        <input type="text" name="tanggungan" class="form-control" value="<?= $data->tanggungan;?>"> 
+                    </div>      
+                    <div class="form-group">
+                        <label for="">Riwayat Bantuan</label>
+                        <input type="text" name="riwayat_bantuan" class="form-control" value="<?= $data->riwayat_bantuan;?>"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="">Kelengkapan Berkas</label>
+                        <input type="text" name="riwayat_bantuan" class="form-control" value="<?= $data->riwayat_bantuan;?>"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="">SKU</label>
+                        <input type="text" name="riwayat_bantuan" class="form-control" value="<?= $data->sku;?>"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <?php endforeach; ?>
+
+        <!-- End Modal Tambah 2 -->
+
 
    
   <!-- Bootstrap core JavaScript-->
@@ -270,10 +315,9 @@
     </script>
     
     <script>
-    // Fungsi untuk memantau perubahan pada checkbox
-    $(document).ready(function() {
-        <?php foreach($permohonan as $data): ?>
-            // Tangkap checkbox untuk setiap dokumen
+        $(document).ready(function() {
+    <?php foreach($permohonan as $data): ?>
+        (function() {
             let checkboxes = [
                 '#verify_proposal_<?= $data->id_permohonan ?>',
                 '#verify_sku_<?= $data->id_permohonan ?>',
@@ -281,15 +325,15 @@
                 '#verify_ktp_<?= $data->id_permohonan ?>'
             ];
 
-            // Fungsi untuk mengecek apakah semua checkbox sudah dicentang
             function checkAllChecked() {
                 let allChecked = true;
                 checkboxes.forEach(function(selector) {
+                    console.log(selector + ' is checked: ' + $(selector).is(':checked')); // Debugging
                     if (!$(selector).is(':checked')) {
                         allChecked = false;
                     }
                 });
-                // Aktifkan atau non-aktifkan tombol berdasarkan status checkbox
+
                 if (allChecked) {
                     console.log('All checked, enabling button');
                     $('#btnTambah_<?= $data->id_permohonan ?>').prop('disabled', false);
@@ -299,23 +343,21 @@
                 }
             }
 
-            // Pantau setiap perubahan pada checkbox
             checkboxes.forEach(function(selector) {
                 $(selector).on('change', function() {
                     checkAllChecked();
                 });
             });
 
-            // Cek status saat pertama kali modal terbuka
             $('#detailModal<?= $data->id_permohonan ?>').on('shown.bs.modal', function () {
                 checkAllChecked();
             });
-        <?php endforeach; ?>
-    });
-</script>
+        })();
+    <?php endforeach; ?>
+});
 
-
-
+    </script>
+    
 
                 </div>
                 <!-- /.container-fluid -->
