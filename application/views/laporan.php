@@ -81,6 +81,9 @@
         font-size : 12px;
         text-align: justify;
     }
+    #content {
+        margin-top: 100px; /* Jarak antara topbar dan konten */  
+    }
     </style>
 </head>
 <body>
@@ -98,10 +101,10 @@
             
         </div>
     </div>
-    <h3 style="text-align: center;"> Laporan Hasil Akhir Penerima Bantuan Modal Usaha Tahun 2024</h3>
+    <h3 style="text-align: center;"> Laporan Data Pengajuan Permohonan  Bantuan Modal Usaha Tahun <?= $selected_year ?></h3>
     <p>Berdasarkan hasil perhitungan menggunakan sistem pendukung keputusan untuk menentukan penerima bantuan modal 
         bagi pelaku usaha mikro pada Badan Amil Zakat Nasional Kabupaten Padang Pariaman
-        Menggunakan Metode Additive Ratio Assessment (ARAS), berikut adalah nama-nama penerima yang direkomendasikan untuk menerima bantuan:
+        Menggunakan Metode Additive Ratio Assessment (ARAS), berikut adalah daftar nama yang mengajukan permohonan bantuan:
     </p>
    
 
@@ -115,16 +118,19 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
-            $no = 1;
-            foreach($hasil as $row): ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td style ="text-align: left;"><?= $row->nama; ?></td>
-                    <td><?= $row->hasil; ?></td>
-                    <td><?= $row->status; ?></td>
-                </tr>
-            <?php endforeach; ?>
+        <?php if (!empty($hasil)): ?>
+                <?php $no = 1; ?>
+                <?php foreach ($hasil as $h): ?>
+                    <tr>
+                        <td><?= $no++ ?></td>
+                        <td><?= $h->nama ?></td>
+                        <td><?= number_format($h->hasil, 5) ?></td>
+                        <td><?= ucfirst($h->status) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr></tr>
+            <?php endif; ?>
         </tbody>
     </table>
 
@@ -136,9 +142,6 @@
     </div>
 <script type="text/javascript">
 window.print();
-</script>
-    <!-- Button cetak -->
-    <button onclick="window.print();" class="no-print">Cetak Laporan</button>
-            
+</script>  
 </body>
 </html>

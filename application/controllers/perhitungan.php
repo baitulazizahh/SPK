@@ -18,7 +18,7 @@ class Perhitungan extends CI_Controller {
 
         $data['penilaian'] = $this->m_perhitungan->get_penilaian_with_nama();
         $data['bobot_kriteria'] = $this->m_data->getBobotKriteria();
-       
+        
        
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');

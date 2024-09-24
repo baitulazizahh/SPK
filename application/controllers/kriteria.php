@@ -13,8 +13,18 @@ class Kriteria extends CI_Controller {
 		$title['title']= 'Kriteria';
 		$data2['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
+		
+		// Generate ID Kriteria di sini
+		$last_kriteria = $this->db->select('id')
+		->order_by('id', 'DESC')
+		->limit(1)
+		->get('tb_kriteria')
+		->row_array();
 
-	
+		$new_id_number = $last_kriteria ? $last_kriteria['id'] + 1 : 1;
+		$new_id_kriteria = 'K' . str_pad($new_id_number, 3, '0', STR_PAD_LEFT); // Contoh: K001, K002, dst.
+
+		$data['id_kriteria'] = $new_id_kriteria;
 		$data['kriteria'] = $this->m_data->tampil_data();
 
 		$this->load->view('templates/header', $title);
@@ -35,9 +45,9 @@ class Kriteria extends CI_Controller {
 			
 		// Mengambil data alternatif
 		$data['kriteria'] = $this->m_data->tampil_data();
-	
+		
+		  
 		// Validasi form
-		$this->form_validation->set_rules('id_kriteria', 'Id kiteria', 'required|trim');
 		$this->form_validation->set_rules('nama_kriteria', 'Nama kriteria', 'required|trim');
 		$this->form_validation->set_rules('jenis_kriteria', 'Jenis kiteria', 'required|trim');
 		$this->form_validation->set_rules('bobot', 'Bobot', 'required|trim');
@@ -52,15 +62,29 @@ class Kriteria extends CI_Controller {
 			$this->load->view('kriteria', $data);
 			$this->session->set_flashdata('modal_open', true);
 		} else {
+
+			 // Mengambil id terakhir dari tabel kriteria
+			 $last_id = $this->db->select('id')
+			 ->order_by('id', 'DESC')
+			 ->limit(1)
+			 ->get('tb_kriteria')
+			 ->row('id');
+
+			  // Jika ada data, tambahkan 1 ke id terakhir, jika tidak mulai dari 1
+			  $new_id_number = $last_id ? $last_id + 1 : 1;
+
+			  // Generate id_kriteria dengan format 'K' diikuti dengan angka berurutan
+			  $new_id_kriteria = 'K' . str_pad($new_id_number, 3, '0', STR_PAD_LEFT); // Contoh: K001, K002, dst.
+
 			// Jika validasi berhasil, proses data untuk dimasukkan ke database
-			$id_kriteria = htmlspecialchars($this->input->post('id_kriteria', true));
+			//$id_kriteria = htmlspecialchars($this->input->post('id_kriteria', true));
 			$nama_kriteria = htmlspecialchars($this->input->post('nama_kriteria', true));
 			$jenis_kriteria = htmlspecialchars($this->input->post('jenis_kriteria', true));
 			$bobot = htmlspecialchars($this->input->post('bobot', true));
 	
 			// Siapkan data untuk dimasukkan ke database
 			$data = array(
-				'id_kriteria' => $id_kriteria,
+				'id_kriteria' => $new_id_kriteria,
 				'nama_kriteria' => $nama_kriteria,
 				'jenis_kriteria' => $jenis_kriteria,
 				'bobot' => $bobot,

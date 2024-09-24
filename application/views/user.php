@@ -24,14 +24,8 @@
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-    /* Mengatur strip hanya untuk baris genap */
-    table.table-striped tbody tr:nth-child(even) {
-        background-color: #f2f2f2; /* Warna strip untuk baris genap */
-    }
-
-    /* Mengatur baris ganjil agar berwarna putih */
-    table.table-striped tbody tr:nth-child(odd) {
-        background-color: white; /* Warna putih untuk baris ganjil */
+   #content {
+        margin-top: 100px; /* Jarak antara topbar dan konten */  
     }
 </style>
 

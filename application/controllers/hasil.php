@@ -112,18 +112,39 @@ class Hasil extends CI_Controller {
 		// Load view dengan data
 		$this->load->view('hasil', $data);
 	}
+
+	//fungsi print laporan
 	public function print() {
-		$years = $this->m_hasil->get_periode();
-		$data['hasil'] = $this->m_hasil->tampil_data();
+
+		$selected_year = $this->input->get('year'); // Mengambil tahun dari URL
+		if($selected_year) {
+			// Query untuk mendapatkan data berdasarkan tahun yang dipilih
+			$data['hasil'] = $this->m_hasil->get_data_by_year($selected_year);
+			$data['selected_year'] = $selected_year;
 	
-		$this->load->view('laporan', $data);
-		
+			// Load view halaman cetak
+			$this->load->view('laporan', $data);
+		} else {
+			// Jika tahun tidak ada, redirect ke halaman utama atau tampilkan pesan error
+			redirect('hasil/index');
+		}
 	}
+	
+	//fungsi print penerima
 	public function print2() {
-		$years = $this->m_hasil->get_periode();
-		$data['hasil'] = $this->m_hasil->tampil_data();
+
+		$selected_year = $this->input->get('year'); // Mengambil tahun dari URL
+		if($selected_year) {
+			// Query untuk mendapatkan data berdasarkan tahun yang dipilih
+			$data['hasil'] = $this->m_hasil->get_data_by_year($selected_year);
+			$data['selected_year'] = $selected_year;
 	
-		$this->load->view('penerima', $data);
-		
+			// Load view halaman cetak
+			$this->load->view('penerima', $data);
+		} else {
+			// Jika tahun tidak ada, redirect ke halaman utama atau tampilkan pesan error
+			redirect('hasil/index');
+		}
 	}
+	
 }

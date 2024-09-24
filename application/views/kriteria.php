@@ -23,6 +23,12 @@
 
     <!-- Custom styles for this page -->
     <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">    
+    <style>
+        #content {
+            margin-top: 100px; /* Jarak antara topbar dan konten */
+            
+        }
+    </style>
 
 </head>
 
@@ -105,7 +111,7 @@
         <form action="<?php echo base_url().'kriteria/tambah_aksi'; ?>"method="post">
             <div class="form-group">
                 <label for="">ID Kriteria</label>
-                <input type="text" name="id_kriteria" class="form-control" value="<?= set_value('id_kriteria');?>"> 
+                <input type="text" class="form-control" id="id" name="id" value="<?= $id_kriteria?>" readonly>
                 <?= form_error('id_kriteria','<small class="text-danger pl-1">','</small>'); ?>
             </div>
             <div class="form-group">
@@ -137,6 +143,8 @@
   </div>
 </div>
   </div>
+  <!-- End -->
+
     <!-- Modal Hapus-->
     <?php foreach ($kriteria as $data): ?>  
         <div class="modal fade" id="delete<?= $data->id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -177,7 +185,7 @@
                 <div class="form-group">
                     <label for="">ID Kriteria</label>
                     <input type="hidden" name="id" value="<?= $data->id;?>"> 
-                    <input type="text" name="id_kriteria" class="form-control" value="<?= $data->id_kriteria;?>"> 
+                    <input type="text" name="id_kriteria" class="form-control" value="<?= $data->id_kriteria;?>"readonly> 
                 </div>
                 <div class="form-group">
                     <label for="">Nama Kriteria</label>

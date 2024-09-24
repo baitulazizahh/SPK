@@ -21,6 +21,17 @@ class M_data extends CI_Model{
         $query = $this->db->get('tb_kriteria'); // Adjust the table name if necessary
         return $query->result_array(); // Return as associative array
     }
+    public function get_last_kriteria_id()
+    {
+        // Query untuk mendapatkan id_kriteria terbesar
+        $this->db->select('id');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('tb_kriteria');
+        
+        return $query->row();
+    }
+
   
  
 }

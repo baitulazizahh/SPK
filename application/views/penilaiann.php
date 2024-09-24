@@ -34,6 +34,9 @@
         padding: 3px 10px; /* Ukuran tombol kecil */
         font-size: 12px;   /* Ukuran teks kecil */
     }
+    #content {
+        margin-top: 100px; /* Jarak antara topbar dan konten */  
+    }
 </style>
 
 </head>

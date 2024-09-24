@@ -7,6 +7,18 @@
     <title>Data Subkriteria</title>
     <link href="<?php echo base_url() ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        #content {
+            margin-top: 100px; /* Jarak antara topbar dan konten */
+            
+            
+        } #wrapper {
+            margin-left: 0px;/* Jarak antara topbar dan konten */
+            margin-right: 0px;
+            width : 100%;
+            
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -15,7 +27,7 @@
     <div id="wrapper">
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d-flex flex-column" >
 
             <!-- Main Content -->
             <div id="content">
@@ -136,22 +148,8 @@
                     <?php endforeach; ?>
                 </div>
                 <!-- /.container-fluid -->
-                 
-
             </div>
             <!-- End of Main Content -->
-
-            
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2024</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->

@@ -10150,7 +10150,7 @@ a:focus {
 
 .sidebar .nav-item .nav-link,
 .topbar .nav-item .nav-link {
-  position: relative;
+  position: fixed;
 }
 
 .sidebar .nav-item .nav-link .badge-counter,
@@ -10169,6 +10169,12 @@ a:focus {
 }
 
 .topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+
   height: 4.375rem;
 }
 
@@ -10321,6 +10327,8 @@ a:focus {
 }
 
 .sidebar {
+  position: fixed;
+  
   width: 6.5rem;
   min-height: 100vh;
 }

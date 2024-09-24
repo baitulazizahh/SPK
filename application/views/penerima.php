@@ -81,9 +81,13 @@
         font-size : 12px;
         text-align: justify;
     }
+    
     </style>
 </head>
 <body>
+    <div id="content">
+
+    </div>
 
     <div class="header">
         <div class="image-container">
@@ -98,7 +102,7 @@
             
         </div>
     </div>
-    <h3 style="text-align: center;"> Laporan Hasil Akhir Penerima Bantuan Modal Usaha Tahun 2024</h3>
+    <h3 style="text-align: center;"> Laporan Hasil Akhir Penerima Bantuan Modal Usaha Tahun  <?= $selected_year ?></h3>
     <p>Berdasarkan hasil perhitungan menggunakan sistem pendukung keputusan untuk menentukan penerima bantuan modal 
         bagi pelaku usaha mikro pada Badan Amil Zakat Nasional Kabupaten Padang Pariaman
         Menggunakan Metode Additive Ratio Assessment (ARAS), berikut adalah nama-nama penerima yang direkomendasikan untuk menerima bantuan:
@@ -138,9 +142,6 @@
     </div>
 <script type="text/javascript">
 window.print();
-</script>
-    <!-- Button cetak -->
-    <button onclick="window.print();" class="no-print">Cetak Laporan</button>
-            
+</script>           
 </body>
 </html>

@@ -34,6 +34,9 @@
         padding: 3px 10px; /* Ukuran tombol kecil */
         font-size: 12px;   /* Ukuran teks kecil */
     }
+    #content {
+        margin-top: 100px; /* Jarak antara topbar dan konten */  
+    }
 </style>
 
 </head>
@@ -236,12 +239,12 @@
                                         <?php
                                         // Initialize variables to store bobot values
                                         $bobot = [
-                                            'C1' => 'N/A',
-                                            'C2' => 'N/A',
-                                            'C3' => 'N/A',
-                                            'C4' => 'N/A',
-                                            'C5' => 'N/A',
-                                            'C6' => 'N/A'
+                                            'K048' => 'N/A',
+                                            'K049' => 'N/A',
+                                            'K050' => 'N/A',
+                                            'K051' => 'N/A',
+                                            'K052' => 'N/A',
+                                            'K056' => 'N/A'
                                         ];
 
                                         // Populate the bobot values from the data array
@@ -250,12 +253,12 @@
                                         }
                                         ?>
                                         <tr class="text-center">
-                                            <td><?php echo $bobot['C1']; ?></td>
-                                            <td><?php echo $bobot['C2']; ?></td>
-                                            <td><?php echo $bobot['C3']; ?></td>
-                                            <td><?php echo $bobot['C4']; ?></td>
-                                            <td><?php echo $bobot['C5']; ?></td>
-                                            <td><?php echo $bobot['C6']; ?></td>
+                                            <td><?php echo $bobot['K048']; ?></td>
+                                            <td><?php echo $bobot['K049']; ?></td>
+                                            <td><?php echo $bobot['K050']; ?></td>
+                                            <td><?php echo $bobot['K051']; ?></td>
+                                            <td><?php echo $bobot['K052']; ?></td>
+                                            <td><?php echo $bobot['K056']; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -291,12 +294,12 @@
                                         <tr class="bg-light">
                                             <td class="text-center font-weight-bold">-</td>
                                             <td class="font-weight-bold">Alternatif Optimal</td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C1']* (4 / $totalC1)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C2'] * (1 / $totalC2)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C3'] * (4 / $totalC3)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C4']* (1 / $totalC4)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C5'] * (4 / $totalC5)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C6'] * (4 / $totalC6)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K048']* (4 / $totalC1)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K049'] * (1 / $totalC2)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K050'] * (4 / $totalC3)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K051']* (1 / $totalC4)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K052'] * (4 / $totalC5)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K056'] * (4 / $totalC6)), 5); ?></td>
                                         </tr>
                                          <!-- Baris Penilaian Normalisasi -->
                                       <?php 
@@ -312,12 +315,12 @@
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++; ?></td>
                                                     <td><?php echo $p->nama; ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K048'] * ($p->c1 / $totalC1)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K049'] * ($nilai_C2 / $totalC2)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K050'] * ($p->c3 / $totalC3)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K051'] * ($nilai_C4 / $totalC4)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K052'] * ($p->c5 / $totalC5)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K056'] * ($p->c6 / $totalC6)), 5); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -362,23 +365,23 @@
                                             <td class="text-center font-weight-bold">
                                                 SUM(
                                                 <?php 
-                                                echo number_format(($bobot['C1'] * (4 / $totalC1)), 5) . " + " .
-                                                    number_format(($bobot['C2'] * (1 / $totalC2)), 5) . " + " .
-                                                    number_format(($bobot['C3'] * (4 / $totalC3)), 5) . " + " .
-                                                    number_format(($bobot['C4'] * (1 / $totalC4)), 5) . " + " .
-                                                    number_format(($bobot['C5'] * (4 / $totalC5)), 5) . " + " .
-                                                    number_format(($bobot['C6'] * (4 / $totalC6)), 5);
+                                                echo number_format(($bobot['K048'] * (4 / $totalC1)), 5) . " + " .
+                                                    number_format(($bobot['K049'] * (1 / $totalC2)), 5) . " + " .
+                                                    number_format(($bobot['K050'] * (4 / $totalC3)), 5) . " + " .
+                                                    number_format(($bobot['K051'] * (1 / $totalC4)), 5) . " + " .
+                                                    number_format(($bobot['K052'] * (4 / $totalC5)), 5) . " + " .
+                                                    number_format(($bobot['K056'] * (4 / $totalC6)), 5);
                                                 ?>)
                                             </td>
                                             <td class="text-center font-weight-bold">
                                                 <?php 
                                                 $total_optimal = 
-                                                    ($bobot['C1'] * (4 / $totalC1)) +
-                                                    ($bobot['C2'] * (1 / $totalC2)) +
-                                                    ($bobot['C3'] * (4 / $totalC3)) +
-                                                    ($bobot['C4'] * (1 / $totalC4)) +
-                                                    ($bobot['C5'] * (4 / $totalC5)) +
-                                                    ($bobot['C6'] * (4 / $totalC6));
+                                                    ($bobot['K048'] * (4 / $totalC1)) +
+                                                    ($bobot['K049'] * (1 / $totalC2)) +
+                                                    ($bobot['K050'] * (4 / $totalC3)) +
+                                                    ($bobot['K051'] * (1 / $totalC4)) +
+                                                    ($bobot['K052'] * (4 / $totalC5)) +
+                                                    ($bobot['K056'] * (4 / $totalC6));
 
                                                 echo number_format($total_optimal, 5); 
                                                 ?>
@@ -399,23 +402,23 @@
                                                     <td class="text-center">
                                                         SUM(
                                                         <?php 
-                                                        echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5) . " + " .
-                                                            number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5) . " + " .
-                                                            number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5) . " + " .
-                                                            number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5) . " + " .
-                                                            number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5) . " + " .
-                                                            number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5);
+                                                        echo number_format(($bobot['K048'] * ($p->c1 / $totalC1)), 5) . " + " .
+                                                            number_format(($bobot['K049'] * ($nilai_C2 / $totalC2)), 5) . " + " .
+                                                            number_format(($bobot['K050'] * ($p->c3 / $totalC3)), 5) . " + " .
+                                                            number_format(($bobot['K051'] * ($nilai_C4 / $totalC4)), 5) . " + " .
+                                                            number_format(($bobot['K052'] * ($p->c5 / $totalC5)), 5) . " + " .
+                                                            number_format(($bobot['K056'] * ($p->c6 / $totalC6)), 5);
                                                         ?>)
                                                     </td>
                                                     <td class="text-center">
                                                         <?php 
                                                         $total_nilai = 
-                                                            ($bobot['C1'] * ($p->c1 / $totalC1)) +
-                                                            ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
-                                                            ($bobot['C3'] * ($p->c3 / $totalC3)) +
-                                                            ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
-                                                            ($bobot['C5'] * ($p->c5 / $totalC5)) +
-                                                            ($bobot['C6'] * ($p->c6 / $totalC6));
+                                                            ($bobot['K048'] * ($p->c1 / $totalC1)) +
+                                                            ($bobot['K049'] * ($nilai_C2 / $totalC2)) +
+                                                            ($bobot['K050'] * ($p->c3 / $totalC3)) +
+                                                            ($bobot['K051'] * ($nilai_C4 / $totalC4)) +
+                                                            ($bobot['K052'] * ($p->c5 / $totalC5)) +
+                                                            ($bobot['K056'] * ($p->c6 / $totalC6));
 
                                                         echo number_format($total_nilai, 5);
                                                         ?>
@@ -461,12 +464,12 @@
 
                                             // Menghitung nilai optimal S_0
                                             $S0 = 
-                                                ($bobot['C1'] * (4 / $totalC1)) +
-                                                ($bobot['C2'] * (1 / $totalC2)) +
-                                                ($bobot['C3'] * (4 / $totalC3)) +
-                                                ($bobot['C4'] * (1 / $totalC4)) +
-                                                ($bobot['C5'] * (4 / $totalC5)) +
-                                                ($bobot['C6'] * (4 / $totalC6));
+                                                ($bobot['K048'] * (4 / $totalC1)) +
+                                                ($bobot['K049'] * (1 / $totalC2)) +
+                                                ($bobot['K050'] * (4 / $totalC3)) +
+                                                ($bobot['K051'] * (1 / $totalC4)) +
+                                                ($bobot['K052'] * (4 / $totalC5)) +
+                                                ($bobot['K056'] * (4 / $totalC6));
 
                                             // Inisialisasi array untuk menyimpan nilai Ki dan ranking
                                             $data_ranking = [];
@@ -480,12 +483,12 @@
 
                                                     // Menghitung Si
                                                     $Si = 
-                                                        ($bobot['C1'] * ($p->c1 / $totalC1)) +
-                                                        ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
-                                                        ($bobot['C3'] * ($p->c3 / $totalC3)) +
-                                                        ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
-                                                        ($bobot['C5'] * ($p->c5 / $totalC5)) +
-                                                        ($bobot['C6'] * ($p->c6 / $totalC6));
+                                                        ($bobot['K048'] * ($p->c1 / $totalC1)) +
+                                                        ($bobot['K049'] * ($nilai_C2 / $totalC2)) +
+                                                        ($bobot['K050'] * ($p->c3 / $totalC3)) +
+                                                        ($bobot['K051'] * ($nilai_C4 / $totalC4)) +
+                                                        ($bobot['K052'] * ($p->c5 / $totalC5)) +
+                                                        ($bobot['K056'] * ($p->c6 / $totalC6));
 
                                                     // Menghitung Ki
                                                     $Ki = $Si / $S0;

@@ -34,6 +34,9 @@
         padding: 3px 10px; /* Ukuran tombol kecil */
         font-size: 12px;   /* Ukuran teks kecil */
     }
+    #content {
+        margin-top: 110px; /* Jarak antara topbar dan konten */
+    }
 </style>
 
 </head>
@@ -73,7 +76,7 @@
                             <div>
                             <!-- Tampilkan data hanya jika tahun dipilih -->
                             <?php if (isset($selected_year)): ?>
-                                <h6 id="judul-laporan" class="font-weight-bold text-center mb-3 mt-4">DATA LAPORAN TAHUN <?= $selected_year ?></h6>
+                                <h6 id="judul-laporan" class="font-weight-bold text-center mb-3 mt-4">DATA LAPORAN PENERIMA BANTUAN TAHUN <?= $selected_year ?></h6>
                                 <div class="d-flex justify-content-end mb-3">
                                 <a href="<?= site_url('hasil/print2?year=' . $selected_year); ?>" class="btn btn-secondary btn-sm" target="_blank">Cetak Laporan</a>
                                 </div>

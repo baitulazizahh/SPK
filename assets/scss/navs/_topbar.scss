@@ -1,6 +1,11 @@
-// Topbar
 .topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
   height: $topbar-base-height;
+  
   #sidebarToggleTop {
     height: 2.5rem;
     width: 2.5rem;
@@ -11,6 +16,7 @@
       background-color: $gray-300;
     }
   }
+
   .navbar-search {
     width: 25rem;
     input {
@@ -18,12 +24,14 @@
       height: auto;
     }
   }
+
   .topbar-divider {
     width: 0;
     border-right: 1px solid $border-color;
     height: calc(#{$topbar-base-height} - 2rem);
     margin: auto 1rem;
   }
+
   .nav-item {
     .nav-link {
       height: $topbar-base-height;
@@ -38,6 +46,7 @@
       outline: none;
     }
   }
+
   .dropdown {
     position: static;
     .dropdown-menu {
@@ -45,6 +54,7 @@
       right: $grid-gutter-width / 2;
     }
   }
+
   .dropdown-list {
     padding: 0;
     border: none;
@@ -92,6 +102,7 @@
       }
     }
   }
+
   @include media-breakpoint-up(sm) {
     .dropdown {
       position: relative;
@@ -105,38 +116,6 @@
       .dropdown-item {
         .text-truncate {
           max-width: 13.375rem;
-        }
-      }
-    }
-  }
-}
-
-.topbar.navbar-dark {
-  .navbar-nav {
-    .nav-item {
-      .nav-link {
-        color: fade-out($white, 0.2);
-        &:hover {
-          color: $white;
-        }
-        &:active {
-          color: $white;
-        }
-      }
-    }
-  }
-}
-
-.topbar.navbar-light {
-  .navbar-nav {
-    .nav-item {
-      .nav-link {
-        color: $gray-400;
-        &:hover {
-          color: $gray-500;
-        }
-        &:active {
-          color: $gray-600;
         }
       }
     }
