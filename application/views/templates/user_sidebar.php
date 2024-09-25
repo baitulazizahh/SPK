@@ -1,5 +1,5 @@
  <!-- Sidebar -->
- <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+ <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar" style="position: fixed; top: 0; left: 0; height: 100vh; width: 250px; z-index: 1030; overflow-y: auto;">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="">
@@ -32,3 +32,8 @@
                     <span>Log out</span></a>
             </li>
         </ul>
+
+        <!-- Main Content Wrapper -->
+<div id="content-wrapper" style="margin-left: -1570px;  width: calc(100% - 1000px);">
+    <!-- Content here -->
+</div>
