@@ -80,7 +80,7 @@
                                     <tbody>
                                         <?php 
                                         $no = 1; 
-                                        $totalC1 = 4; // Awalnya dari A0
+                                        $totalC1 = 4; 
                                         $totalC2 = 1;
                                         $totalC3 = 4;
                                         $totalC4 = 1;
@@ -117,9 +117,9 @@
                                                 <?php
                                                 // Menambahkan nilai ke total masing-masing kolom
                                                 $totalC1 += $p->c1;
-                                                $totalC2 += $p->c2;
+                                                $totalC2 += 1 / $p->c2;
                                                 $totalC3 += $p->c3;
-                                                $totalC4 += $p->c4;
+                                                $totalC4 += 1 / $p->c4;
                                                 $totalC5 += $p->c5;
                                                 $totalC6 += $p->c6;
                                                 ?>
@@ -161,14 +161,6 @@
                                         <?php 
                                         $no = 1; 
 
-                                            
-                                        // Total dari setiap kolom berdasarkan hasil matriks keputusan
-                                        $totalC1 = 38; // Ini berasal dari total C1 pada matriks sebelumnya
-                                        $totalC2 = 4.25;
-                                        $totalC3 = 30;
-                                        $totalC4 = 5.667;
-                                        $totalC5 = 34;
-                                        $totalC6 = 41;
                                         ?>
 
                                         <!-- Baris Alternatif Optimal (A0) -->

@@ -60,6 +60,7 @@ class Permohonan extends CI_Controller {
 		// Periksa apakah id_alternatif diisi
 		if (empty($id_permohonan)) {
 			// Redirect atau tampilkan pesan kesalahan jika id_alternatif kosong
+			$this->session->set_flashdata('error', 'ID Permohonan tidak ditemukan.');
 			redirect('permohonan/index');
 			return;
 		}

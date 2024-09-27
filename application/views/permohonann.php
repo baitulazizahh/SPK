@@ -110,7 +110,7 @@
                                                         <?php else: ?>
                                                             <!-- Tombol Tambah jika data belum ada, tapi hanya aktif jika semua checkbox di modal sudah dicentang -->
                                                             <!-- <button id="tambahButton_<?= $data->id_permohonan ?>" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-sm"></i></button> -->
-                                                            <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" data-toggle="modal" data-target="#exampleModal" data-id="<?php $data->id_permohonan; ?>" disabled><i class="fa fa-plus fa-sm"></i></button>
+                                                            <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" data-toggle="modal" data-target="#exampleModal" data-id="<?= $data->id_permohonan; ?>" disabled><i class="fa fa-plus fa-sm"></i></button>
                                                             <!-- <button class="btn btn-primary btn-sm" id="btnTambah_<?= $data->id_permohonan ?>" disabled>Tambah</button> -->
 
                                                             <?php endif; ?>
@@ -303,6 +303,13 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).on('click', '[id^=btnTambah_]', function() {
+            var id_permohonan = $(this).data('id');
+        $('#id_permohonan').val(id_permohonan); // Isi nilai id_permohonan ke input hidden
+        });
+
+    </script>
     <script>
         $(document).ready(function() {
             $('#exampleModal').on('show.bs.modal', function (event) {
