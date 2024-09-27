@@ -69,12 +69,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -149,12 +149,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -227,12 +227,12 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -281,12 +281,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
