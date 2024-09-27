@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>README - SPK Bantuan Modal Usaha Mikro</title>
+
 </head>
 <body>
 
-<h1>Sistem Pendukung Keputusan (SPK) Bantuan Modal Usaha Mikro</h1>
+<h1>Sistem Pendukung Keputusan (SPK) Bantuan Modal Usaha Mikro Menggunakan Metode Additive Ratio Assessment (ARAS)</h1>
 
 <p>Aplikasi ini merupakan Sistem Pendukung Keputusan (SPK) yang bertujuan untuk membantu menentukan penerima bantuan modal bagi pelaku usaha mikro. Aplikasi ini dikembangkan untuk Badan Amil Zakat Nasional (BAZNAS) Kabupaten Padang Pariaman sebagai sarana untuk mendukung penyaluran bantuan modal secara tepat sasaran.</p>
 
