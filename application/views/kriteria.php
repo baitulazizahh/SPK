@@ -39,15 +39,19 @@
 
             <!-- Main Content -->
             <div id="content">
-                
                 <div class="container-fluid"> 
-
+                    
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Kriteria</h1>
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
                     </div>
-                    
+                    <!-- // Alert -->
+                    <?php if ($this->session->flashdata('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php echo $this->session->flashdata('error'); ?>
+                        </div>
+                    <?php endif; ?>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -97,7 +101,7 @@
     </div>
    
 <!-- Modal Tambah-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-success">
@@ -242,6 +246,7 @@
             <?php endif; ?>
         });
     </script>
+    
 
 </body>
 

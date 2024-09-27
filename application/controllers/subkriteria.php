@@ -82,7 +82,12 @@ class Subkriteria extends CI_Controller {
 			// Validasi form
 			$this->form_validation->set_rules('id_kriteria', 'Id kiteria', 'required|trim');
 			$this->form_validation->set_rules('nama_subkriteria', 'Nama kriteria', 'required|trim');
-			$this->form_validation->set_rules('nilai', 'Nilai', 'required|trim');
+			$this->form_validation->set_rules('nilai', 'Nilai', 'required|trim|numeric|greater_than[0]|less_than_equal_to[9]', [
+				'greater_than' => 'Bobot harus lebih dari 0!',
+				'less_than_equal_to' => 'Bobot harus 1 digit',
+				'numeric' => 'Bobot harus berupa angka!'
+			]);
+			$this->form_validation->set_message('required', '{field} harus diisi!');
 		
 			if ($this->form_validation->run() == false) {
 				// Jika validasi gagal, muat ulang tampilan dengan pesan kesalahan
@@ -140,11 +145,7 @@ class Subkriteria extends CI_Controller {
 			$this->load->model('m_subkriteria');
 			$update = $this->m_subkriteria->update_data($id_subkriteria, $data);
 		
-			// if ($update) {
-			// 	$this->session->set_flashdata('message', 'Data berhasil diperbarui.');
-			// } else {
-			// 	$this->session->set_flashdata('message', 'Gagal memperbarui data.');
-			// }
+			
 		
 			redirect('subkriteria');
 		}
