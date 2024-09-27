@@ -59,7 +59,7 @@
                             <div class="card-body  " style="padding: 2px;">
                                 <div class="">
                                     <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
-                                        Timeline pendaftaran berakhir pada <br>
+                                        Batas waktu pengajuan permohonan bantuan 1 Juni 2024  - 31 Agustus 2024 <br>
                                     </p>
                                 </div>
                             </div>
@@ -76,7 +76,9 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 TOTAL USER</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php echo $total_users; ?> 
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-users fa-2x text-primary"></i>
@@ -93,7 +95,9 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 TOTAL KRITERIA</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php echo $total_kriteria; ?> 
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cubes fa-2x text-warning"></i>
@@ -110,10 +114,12 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 PERMOHONAN MASUK</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <?php echo $total_permohonan; ?> 
+                                            </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-file fa-2x text-success"></i>
+                                            <i class="fas fa-fw fa-file-alt fa-2x text-success"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +136,9 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    <?php echo $total_penilaian; ?> 
+                                                    </div>
                                                 </div>
                                                 
                                             </div>

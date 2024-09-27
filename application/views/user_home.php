@@ -38,13 +38,25 @@
         <div id="content">
         <div class="container-fluid"> 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-3">
                         <h1 class="h3 mb-0 text-gray-800"> Home</h1>
                     </div>
-                
-                   <div class="row">
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                    <!-- Timeline -->
+                    <div class="">
+                    <div class="card shadow  shadow h-100 py-2" style="padding: 10px;  background-color: #D1E9F6;" >
+                            <div class="card-body  " style="padding: 2px;">
+                                <div class="">
+                                    <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
+                                        Batas waktu  pengajuan permohonan bantuan 1 Juni 2024  - 31 Agustus 2024 <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                   <div class="row ">
+                        <div class="col-xl-8 col-lg-7 mt-3">
+                            <div class="card shadow mb-4 ">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-success">Petunjuk Pengajuan Permohonan</h6>
                                 </div>
@@ -68,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-4 col-lg-5">
+                        <div class="col-xl-4 col-lg-5 mt-3">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-success">Template Berkas Permohonan</h6>
@@ -82,6 +94,7 @@
                             </div>
                         </div>
                     </div>
+                    
             </div>
             <!-- End content -->
         </div>

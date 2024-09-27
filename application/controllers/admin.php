@@ -3,33 +3,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html
-	 */
+	public function __construct() {
+        parent::__construct();
+        $this->load->model('m_home');
+		
+    }
+	 
 	public function index()
 	{
 		// $this->load->model('m_home');
 		// $data['nilai'] = $this->m_penilaian->tampil_data()->result();
-		$data['title']= 'Admin';
+		$title['title']= 'Admin';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
-		$this->load->view('templates/header',$data);
+		// Mengambil total user
+		$data['total_users'] = $this->m_home->total_user();
+		$data['total_kriteria'] = $this->m_home->total_kriteria();
+		$data['total_permohonan'] = $this->m_home->total_permohonan();
+		$data['total_penilaian'] = $this->m_home->total_penilaian();
+
+
+		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar',$user);
-		$this->load->view('home');
+		$this->load->view('home', $data);
 		// $this->load->view('templates/footer');
 		
 	}

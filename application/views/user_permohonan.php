@@ -107,8 +107,20 @@
                                                                         </td>
                                                                         <td class="text-center"><?php echo $data->created ?></td>
                                                                         <td class="text-center">
-                                                                        <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" href="" class="btn btn-primary btn-sm"><i class="fa fa-info-circle fa-sm"></i></a>
-                                                                        <a data-toggle="modal" data-target="#delete<?= $data->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>user/permohonan/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>
+                                                                            <!-- Tombol Detail -->
+                                                                            <a data-toggle="modal" data-target="#detailModal<?= $data->id_permohonan;?>" data-placement="bottom" title="Detail Data" href="" class="btn btn-primary btn-sm">
+                                                                                <i class="fa fa-info-circle fa-sm"></i>
+                                                                            </a>
+                                                                            <!-- Tombol Hapus -->
+                                                                            <?php if (strtolower($data->status) == 'diterima' || strtolower($data->status) == 'ditolak'): ?>
+                                                                                <!-- Tombol hapus di-disable jika status 'diterima' atau 'ditolak' -->
+                                                                                <button class="btn btn-danger btn-sm" disabled><i class="fa fa-trash fa-sm"></i></button>
+                                                                            <?php else: ?>
+                                                                                <!-- Tombol hapus aktif jika status 'diproses' -->
+                                                                                <a data-toggle="modal" data-target="#delete<?= $data->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>user/permohonan/hapus_data/<?= $data->id_permohonan;?>" class="btn btn-danger btn-sm">
+                                                                                    <i class="fa fa-trash fa-sm"></i>
+                                                                                </a>
+                                                                            <?php endif; ?>
                                                                         </td>
                                                                     </tr>
                                                                 <?php endforeach; ?>
