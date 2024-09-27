@@ -1,4 +1,4 @@
-Sistem Pendukung Keputusan (SPK) Bantuan Modal Usaha Mikro
+Sistem Pendukung Keputusan (SPK) Bantuan Modal Usaha Mikro Menggunakan Metode Additive Ratio Assessment (ARAS)
 Aplikasi ini merupakan Sistem Pendukung Keputusan (SPK) yang bertujuan untuk membantu menentukan penerima bantuan modal bagi para pelaku usaha mikro. Aplikasi ini dikembangkan untuk Badan Amil Zakat Nasional (BAZNAS) Kabupaten Padang Pariaman sebagai sarana untuk mendukung penyaluran bantuan modal secara tepat sasaran.
 
 Teknologi yang Digunakan
