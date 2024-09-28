@@ -20,6 +20,7 @@ class Permohonan extends CI_Controller {
 		$data['title']= 'User';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
+		$data['periode'] = $this->M_periode->get_periode_terbaru();
 
 		// Ambil id_permohonan dari session
 		$id_user = $this->session->userdata('id_user');

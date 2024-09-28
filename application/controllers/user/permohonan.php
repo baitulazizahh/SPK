@@ -32,6 +32,18 @@ class Permohonan extends CI_Controller {
 	public function upload(){
 		$id_user =$this->session->userdata('id_user');
 		
+		// Ambil periode yang sedang aktif
+		$current_date = date('Y-m-d');
+		$this->load->model('M_periode');
+		$periode_aktif = $this->M_periode->get_active_periode($current_date);
+		
+		// Cek apakah ada periode yang aktif
+		if (!$periode_aktif) {
+			$this->session->set_flashdata('error', 'Mohon maaf periode  pengajuan bantuan sudah berakhir.');
+			redirect('user/permohonan');
+			return;
+		}
+
 		// Validasi input form
 		$this->form_validation->set_rules('nik', 'NIK', 'required');
 		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required');
@@ -152,7 +164,8 @@ class Permohonan extends CI_Controller {
  		}
 	
 		$data=[
-			'id_user' => $id_user, 
+			'id_user' => $id_user,
+			//'id_periode' => $periode_aktif->id_periode,
 			'nik'=> $nik,
             'nama_usaha' => $nama_usaha,
             'pendapatan' => $pendapatan,
