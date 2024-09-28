@@ -6,6 +6,7 @@ class Admin extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('m_home');
+		$this->load->model('m_periode');
 		
     }
 	 
@@ -16,6 +17,7 @@ class Admin extends CI_Controller {
 		$title['title']= 'Admin';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
+		$data['periode'] = $this->m_periode->get_periode_terbaru_by_id();
 
 		// Mengambil total user
 		$data['total_users'] = $this->m_home->total_user();

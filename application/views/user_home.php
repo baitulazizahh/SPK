@@ -45,11 +45,19 @@
                     <div class="">
                     <div class="card shadow  shadow h-100 py-2" style="padding: 10px;  background-color: #D1E9F6;" >
                             <div class="card-body  " style="padding: 2px;">
-                                <div class="">
+                            <div class="">
+                                <?php if (!empty($periode)): ?>
                                     <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
-                                        Batas waktu  pengajuan permohonan bantuan 1 Juni 2024  - 31 Agustus 2024 <br>
+                                        Batas waktu pengajuan permohonan 
+                                        <?= date('d F Y', strtotime($periode->tgl_mulai)); ?> - 
+                                        <?= date('d F Y', strtotime($periode->tgl_akhir)); ?>
                                     </p>
-                                </div>
+                                <?php else: ?>
+                                    <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
+                                        Tidak ada periode aktif saat ini.
+                                    </p>
+                                <?php endif; ?>
+                            </div>
                             </div>
                         </div>
                     </div>

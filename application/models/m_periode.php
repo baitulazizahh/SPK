@@ -29,12 +29,14 @@ class M_periode extends CI_Model {
         return $this->db->delete('tb_periode');
     }
 
-    public function get_periode_terbaru() {
-        $this->db->where('tgl_mulai <=', date('Y-m-d'));
-        $this->db->where('tgl_akhir >=', date('Y-m-d'));
-        $this->db->order_by('tgl_akhir', 'DESC');
-        $query = $this->db->get('tb_periode');
-        return $query->row(); // Mengambil satu periode terbaru
+    // Ambil data periode dengan ID terbesar (terbaru)
+    public function get_periode_terbaru_by_id() {
+        $this->db->order_by('id_periode', 'DESC'); // Urutkan dari ID terbesar
+        $this->db->limit(1); // Batasi hanya satu hasil
+        $query = $this->db->get('tb_periode'); // Ambil data dari tabel tb_periode
+        return $query->row(); // Mengambil satu row (periode terbaru)
     }
+
+
 }
 ?>

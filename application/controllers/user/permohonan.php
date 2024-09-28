@@ -7,6 +7,7 @@ class Permohonan extends CI_Controller {
         parent::__construct();
         $this->load->model('m_pengguna');
 		$this->load->model('m_permohonan');
+		$this->load->model('m_periode');
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->library('upload');
@@ -15,14 +16,15 @@ class Permohonan extends CI_Controller {
 
 	public function index()
 	{
-		$data['title']= 'User';
+		$title['title']= 'User';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 
 		$id_user = $this->session->userdata('id_user');
 		$data['permohonan'] = $this->m_permohonan->getPermohonan($id_user);
+		
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$title);
 		$this->load->view('templates/user_sidebar');
 		$this->load->view('templates/topbar',$user);
 		$this->load->view('user_permohonan', $data);
@@ -39,7 +41,7 @@ class Permohonan extends CI_Controller {
 		
 		// Cek apakah ada periode yang aktif
 		if (!$periode_aktif) {
-			$this->session->set_flashdata('error', 'Mohon maaf periode  pengajuan bantuan sudah berakhir.');
+			$this->session->set_flashdata('error', 'Mohon maaf waktu pengajuan permohonan sudah berakhir.');
 			redirect('user/permohonan');
 			return;
 		}

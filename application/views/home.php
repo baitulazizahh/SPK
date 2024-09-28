@@ -60,7 +60,7 @@
                             <div class="">
                                 <?php if (!empty($periode)): ?>
                                     <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
-                                        Batas waktu pengajuan permohonan bantuan 
+                                        Batas waktu pengajuan permohonan 
                                         <?= date('d F Y', strtotime($periode->tgl_mulai)); ?> - 
                                         <?= date('d F Y', strtotime($periode->tgl_akhir)); ?>
                                     </p>

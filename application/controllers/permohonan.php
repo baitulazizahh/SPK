@@ -16,11 +16,12 @@ class Permohonan extends CI_Controller {
     }
 
 	public function index()
-	{
-		$data['title']= 'User';
+	{	
+		$title['title']= 'User';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
-		$data['periode'] = $this->M_periode->get_periode_terbaru();
+	
+		
 
 		// Ambil id_permohonan dari session
 		$id_user = $this->session->userdata('id_user');
@@ -36,7 +37,7 @@ class Permohonan extends CI_Controller {
 		$data['id_permohonan'] = $id_permohonan;
 
 		
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar',$user);
 		$this->load->view('permohonann', $data);
