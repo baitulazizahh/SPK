@@ -43,7 +43,7 @@
                     </div>
                     <!-- Timeline -->
                     <div class="">
-                    <div class="card shadow  shadow h-100 py-2" style="padding: 10px;  background-color: #D1E9F6;" >
+                        <div class="card shadow  shadow h-100 py-2" style="padding: 10px;  background-color: #D1E9F6;" >
                             <div class="card-body  " style="padding: 2px;">
                             <div class="">
                                 <?php if (!empty($periode)): ?>

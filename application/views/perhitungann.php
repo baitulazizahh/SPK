@@ -432,7 +432,7 @@
 
 
                     <!-- Nilai Akhir dan Perangkingan -->
-                    <form action="<?= base_url('perhitungan/simpanHasil') ?>" method="POST">
+                    <form id="form-perhitungan" action="<?= base_url('perhitungan/simpanHasil') ?>" method="POST">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Hasil Akhir dan Perangkingan</h6>
@@ -526,9 +526,20 @@
                                     </table>
 
                                     <!-- Tombol di bawah tabel -->
-                                <div class="text-center mt-3">
-                                    <button type="submit" class="btn btn-success">Simpan Data</button>
-                                </div>
+                                    <div class="text-center mt-3">
+                                        <div class="d-inline-block">
+                                            <button type="submit" class="btn btn-success btn-sm">Simpan Data</button>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="submitFinish()">Finish</button>
+                                                <script>
+                                                    function submitFinish() {
+                                                        document.getElementById('form-perhitungan').action = "<?= base_url('perhitungan/simpanPenerima') ?>";
+                                                        document.getElementById('form-perhitungan').submit();
+                                                    }
+                                                </script>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>

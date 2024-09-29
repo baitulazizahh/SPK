@@ -54,6 +54,18 @@
                         <h1 class="h3 mb-0 text-gray-800"> Data Permohonan</h1>
                         <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button> -->
                     </div>
+                    <div class="mb-3">
+                        <div class="card shadow  shadow h-100 py-2" style="padding: 10px;  background-color: #FFEAC5;" >
+                            <div class="card-body  " style="padding: 2px;">
+                            <div class="">
+                            <p class="m-0 text-dark" style="margin: 0; padding: 0px;">
+                                <strong>PERHATIAN!</strong>  Pastikan data yang diinputkan sudah benar! Data yang telah tersimpan tidak dapat diubah.  
+                            </p>
+                               
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- // Alert -->
                     <?php if ($this->session->flashdata('error')): ?>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
