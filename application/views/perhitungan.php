@@ -72,9 +72,7 @@
                                         <option value="<?= $year->year ?>" <?= set_select('tahun_periode', $year->year, $selected_year == $year->year ? true : false); ?>><?= $year->year ?></option>
                                     <?php endforeach; ?>
                                 </select>
-
-                                    <div class="text-white"> jar</div>
-                                    <button type="submit" class="btn btn-primary btn-sm ">Pilih</button>
+                                    <button type="submit" class="btn btn-primary btn-sm  ml-4">Pilih</button>
                                 </form>
                             </div>
                         </div>
