@@ -1,34 +1,113 @@
-<div class="container-fluid"> 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SPK Bantuan</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="<?php echo base_url() ?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="<?php echo base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    .modal-body .row {
+        margin-bottom: 15px; /* Memberi jarak antara setiap baris */
+    }
+    .modal-body strong {
+        font-weight: 600; /* Mempertebal label */
+    }
+    .btn-info.btn-sm {
+        padding: 3px 10px; /* Ukuran tombol kecil */
+        font-size: 12px;   /* Ukuran teks kecil */
+    }
+    #content {
+        margin-top: 100px; /* Jarak antara topbar dan konten */  
+    }
+</style>
+
+</head>
+
+<body id="page-top">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                
+                <div class="container-fluid"> 
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Data Perhitungan</h1>
                     </div>
-                    
-                   <!-- Tabel Perhitungan -->
-                    <div class="card shadow mb-4">
+                     <!-- DataTales Example -->
+                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Matriks Keputusan</h6>
+                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-list-alt text-successy"></i> Proses Perhitungan</h6>
                         </div>
                         
                         <div class="card-body">
-                            <div class="table-responsive" >
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
-                                    <thead class="text-center bg-success text-white">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="tahun_periode" class="form-label">Pilih Tahun Periode</label>
+                                <form method="post" action="<?= base_url('perhitungan/index'); ?>" class="d-flex align-items-end">
+                                <select class="form-control me-3" id="tahun_periode" name="tahun_periode" required>
+                                    <option value="">-- Pilih Tahun --</option>
+                                    <?php foreach ($years as $year): ?>
+                                        <option value="<?= $year->year ?>" <?= set_select('tahun_periode', $year->year, $selected_year == $year->year ? true : false); ?>><?= $year->year ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                    <div class="text-white"> jar</div>
+                                    <button type="submit" class="btn btn-primary btn-sm ">Pilih</button>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Matriks Keputusan-->
+                    <?php if (isset($selected_year)): ?>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-successy"></i> Matriks Keputusan</h6>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10" >
+                            <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                         $no = 1; 
-                                        $totalC1 = 4; // Awalnya dari A0
+                                        $totalC1 = 4; 
                                         $totalC2 = 1;
                                         $totalC3 = 4;
                                         $totalC4 = 1;
@@ -65,9 +144,9 @@
                                                 <?php
                                                 // Menambahkan nilai ke total masing-masing kolom
                                                 $totalC1 += $p->c1;
-                                                $totalC2 += $p->c2;
+                                                $totalC2 += 1 / $p->c2;
                                                 $totalC3 += $p->c3;
-                                                $totalC4 += $p->c4;
+                                                $totalC4 += 1 / $p->c4;
                                                 $totalC5 += $p->c5;
                                                 $totalC6 += $p->c6;
                                                 ?>
@@ -82,41 +161,34 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- End Matriks Keputusan -->
 
-
-                    <!-- Matriks Normalisasi -->
+                    <!-- Normalisasi Matriks Keputusan-->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Normalisasi Matriks Keputusan</h6>
+                        <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-successy"></i> Normalisasi Matriks Keputusan</h6>
                         </div>
-
+                        
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
-                                    <thead class="text-center bg-success text-white">
+                                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="10" >
+                                <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                         $no = 1; 
 
-                                            
-                                        // Total dari setiap kolom berdasarkan hasil matriks keputusan
-                                        $totalC1 = 38; // Ini berasal dari total C1 pada matriks sebelumnya
-                                        $totalC2 = 4.25;
-                                        $totalC3 = 30;
-                                        $totalC4 = 5.667;
-                                        $totalC5 = 34;
-                                        $totalC6 = 41;
                                         ?>
 
                                         <!-- Baris Alternatif Optimal (A0) -->
@@ -162,7 +234,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Matriks Normalisasi -->
+                    <!-- End Normalisasi Matriks Keputusan -->
 
 
                     <!-- Bobot Kriteria -->
@@ -175,24 +247,24 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         // Initialize variables to store bobot values
                                         $bobot = [
-                                            'C1' => 'N/A',
-                                            'C2' => 'N/A',
-                                            'C3' => 'N/A',
-                                            'C4' => 'N/A',
-                                            'C5' => 'N/A',
-                                            'C6' => 'N/A'
+                                            'K048' => 'N/A',
+                                            'K049' => 'N/A',
+                                            'K050' => 'N/A',
+                                            'K051' => 'N/A',
+                                            'K052' => 'N/A',
+                                            'K056' => 'N/A'
                                         ];
 
                                         // Populate the bobot values from the data array
@@ -201,12 +273,12 @@
                                         }
                                         ?>
                                         <tr class="text-center">
-                                            <td><?php echo $bobot['C1']; ?></td>
-                                            <td><?php echo $bobot['C2']; ?></td>
-                                            <td><?php echo $bobot['C3']; ?></td>
-                                            <td><?php echo $bobot['C4']; ?></td>
-                                            <td><?php echo $bobot['C5']; ?></td>
-                                            <td><?php echo $bobot['C6']; ?></td>
+                                            <td><?php echo $bobot['K048']; ?></td>
+                                            <td><?php echo $bobot['K049']; ?></td>
+                                            <td><?php echo $bobot['K050']; ?></td>
+                                            <td><?php echo $bobot['K051']; ?></td>
+                                            <td><?php echo $bobot['K052']; ?></td>
+                                            <td><?php echo $bobot['K056']; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -215,8 +287,8 @@
                     </div>
                     <!-- End Bobot Kriteria -->
 
-                    
-                     <!-- Matriks Normalisasi -->
+
+                    <!-- Matriks Normalisasi -->
                      <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Bobot Matriks Normalisasi</h6>
@@ -224,17 +296,17 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                <table class="table table-bordered" id="dataTable3" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemohon</th>
-                                            <th>C1</th>
-                                            <th>C2</th>
-                                            <th>C3</th>
-                                            <th>C4</th>
-                                            <th>C5</th>
-                                            <th>C6</th>
+                                            <th class="text-center align-middle">Jenis Usaha</th>
+                                            <th class="text-center align-middle">Riwayat Bantuan</th>
+                                            <th class="text-center align-middle">Tanggungan</th>
+                                            <th class="text-center align-middle">Pendapatan</th>
+                                            <th class="text-center align-middle">Persyaratan</th>
+                                            <th class="text-center align-middle">SKU</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -242,12 +314,12 @@
                                         <tr class="bg-light">
                                             <td class="text-center font-weight-bold">-</td>
                                             <td class="font-weight-bold">Alternatif Optimal</td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C1']* (4 / $totalC1)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C2'] * (1 / $totalC2)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C3'] * (4 / $totalC3)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C4']* (1 / $totalC4)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C5'] * (4 / $totalC5)), 5); ?></td>
-                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['C6'] * (4 / $totalC6)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K048']* (4 / $totalC1)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K049'] * (1 / $totalC2)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K050'] * (4 / $totalC3)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K051']* (1 / $totalC4)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K052'] * (4 / $totalC5)), 5); ?></td>
+                                            <td class="text-center font-weight-bold"><?php echo number_format(($bobot['K056'] * (4 / $totalC6)), 5); ?></td>
                                         </tr>
                                          <!-- Baris Penilaian Normalisasi -->
                                       <?php 
@@ -263,12 +335,12 @@
                                                 <tr>
                                                     <td class="text-center"><?php echo $no++; ?></td>
                                                     <td><?php echo $p->nama; ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5); ?></td>
-                                                    <td class="text-center"><?php echo number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K048'] * ($p->c1 / $totalC1)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K049'] * ($nilai_C2 / $totalC2)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K050'] * ($p->c3 / $totalC3)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K051'] * ($nilai_C4 / $totalC4)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K052'] * ($p->c5 / $totalC5)), 5); ?></td>
+                                                    <td class="text-center"><?php echo number_format(($bobot['K056'] * ($p->c6 / $totalC6)), 5); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         <?php else: ?>
@@ -276,23 +348,23 @@
                                                 <td colspan="8" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         <?php endif; ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End Matriks Normalisasi -->
-                    
-                                        
-                   <!-- Nilai utilitas -->
-                    <div class="card shadow mb-4">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Matriks Normalisasi -->
+
+
+                     <!-- Nilai utilitas -->
+                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Nilai Utilitas (Si)</h6>
                         </div>
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="10">
                                     <thead class="text-center bg-success text-white">
                                         <tr>
                                             <th>No</th>
@@ -313,23 +385,23 @@
                                             <td class="text-center font-weight-bold">
                                                 SUM(
                                                 <?php 
-                                                echo number_format(($bobot['C1'] * (4 / $totalC1)), 5) . " + " .
-                                                    number_format(($bobot['C2'] * (1 / $totalC2)), 5) . " + " .
-                                                    number_format(($bobot['C3'] * (4 / $totalC3)), 5) . " + " .
-                                                    number_format(($bobot['C4'] * (1 / $totalC4)), 5) . " + " .
-                                                    number_format(($bobot['C5'] * (4 / $totalC5)), 5) . " + " .
-                                                    number_format(($bobot['C6'] * (4 / $totalC6)), 5);
+                                                echo number_format(($bobot['K048'] * (4 / $totalC1)), 5) . " + " .
+                                                    number_format(($bobot['K049'] * (1 / $totalC2)), 5) . " + " .
+                                                    number_format(($bobot['K050'] * (4 / $totalC3)), 5) . " + " .
+                                                    number_format(($bobot['K051'] * (1 / $totalC4)), 5) . " + " .
+                                                    number_format(($bobot['K052'] * (4 / $totalC5)), 5) . " + " .
+                                                    number_format(($bobot['K056'] * (4 / $totalC6)), 5);
                                                 ?>)
                                             </td>
                                             <td class="text-center font-weight-bold">
                                                 <?php 
                                                 $total_optimal = 
-                                                    ($bobot['C1'] * (4 / $totalC1)) +
-                                                    ($bobot['C2'] * (1 / $totalC2)) +
-                                                    ($bobot['C3'] * (4 / $totalC3)) +
-                                                    ($bobot['C4'] * (1 / $totalC4)) +
-                                                    ($bobot['C5'] * (4 / $totalC5)) +
-                                                    ($bobot['C6'] * (4 / $totalC6));
+                                                    ($bobot['K048'] * (4 / $totalC1)) +
+                                                    ($bobot['K049'] * (1 / $totalC2)) +
+                                                    ($bobot['K050'] * (4 / $totalC3)) +
+                                                    ($bobot['K051'] * (1 / $totalC4)) +
+                                                    ($bobot['K052'] * (4 / $totalC5)) +
+                                                    ($bobot['K056'] * (4 / $totalC6));
 
                                                 echo number_format($total_optimal, 5); 
                                                 ?>
@@ -350,23 +422,23 @@
                                                     <td class="text-center">
                                                         SUM(
                                                         <?php 
-                                                        echo number_format(($bobot['C1'] * ($p->c1 / $totalC1)), 5) . " + " .
-                                                            number_format(($bobot['C2'] * ($nilai_C2 / $totalC2)), 5) . " + " .
-                                                            number_format(($bobot['C3'] * ($p->c3 / $totalC3)), 5) . " + " .
-                                                            number_format(($bobot['C4'] * ($nilai_C4 / $totalC4)), 5) . " + " .
-                                                            number_format(($bobot['C5'] * ($p->c5 / $totalC5)), 5) . " + " .
-                                                            number_format(($bobot['C6'] * ($p->c6 / $totalC6)), 5);
+                                                        echo number_format(($bobot['K048'] * ($p->c1 / $totalC1)), 5) . " + " .
+                                                            number_format(($bobot['K049'] * ($nilai_C2 / $totalC2)), 5) . " + " .
+                                                            number_format(($bobot['K050'] * ($p->c3 / $totalC3)), 5) . " + " .
+                                                            number_format(($bobot['K051'] * ($nilai_C4 / $totalC4)), 5) . " + " .
+                                                            number_format(($bobot['K052'] * ($p->c5 / $totalC5)), 5) . " + " .
+                                                            number_format(($bobot['K056'] * ($p->c6 / $totalC6)), 5);
                                                         ?>)
                                                     </td>
                                                     <td class="text-center">
                                                         <?php 
                                                         $total_nilai = 
-                                                            ($bobot['C1'] * ($p->c1 / $totalC1)) +
-                                                            ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
-                                                            ($bobot['C3'] * ($p->c3 / $totalC3)) +
-                                                            ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
-                                                            ($bobot['C5'] * ($p->c5 / $totalC5)) +
-                                                            ($bobot['C6'] * ($p->c6 / $totalC6));
+                                                            ($bobot['K048'] * ($p->c1 / $totalC1)) +
+                                                            ($bobot['K049'] * ($nilai_C2 / $totalC2)) +
+                                                            ($bobot['K050'] * ($p->c3 / $totalC3)) +
+                                                            ($bobot['K051'] * ($nilai_C4 / $totalC4)) +
+                                                            ($bobot['K052'] * ($p->c5 / $totalC5)) +
+                                                            ($bobot['K056'] * ($p->c6 / $totalC6));
 
                                                         echo number_format($total_nilai, 5);
                                                         ?>
@@ -375,7 +447,7 @@
                                             <?php endforeach; ?>
                                         <?php else: ?>
                                             <tr>
-                                                <td colspan="3" class="text-center">Data tidak ditemukan</td>
+                                                <td colspan="4" class="text-center">Data tidak ditemukan</td>
                                             </tr>
                                         <?php endif; ?>
                                     </tbody>
@@ -385,10 +457,10 @@
                     </div>
 
                     <!-- Nilai Akhir -->
-                    
-                                      
+
+
                     <!-- Nilai Akhir dan Perangkingan -->
-                    <form action="<?= base_url('perhitungan/simpanHasil') ?>" method="POST">
+                    <form id="form-perhitungan" action="<?= base_url('perhitungan/simpanHasil') ?>" method="POST">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-calculator text-success"></i> Hasil Akhir dan Perangkingan</h6>
@@ -396,7 +468,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                    <table class="table table-bordered" id="dataTable5" width="100%" cellspacing="10">
                                         <thead class="text-center bg-success text-white">
                                             <tr>
                                                 <th>No</th>
@@ -412,12 +484,12 @@
 
                                             // Menghitung nilai optimal S_0
                                             $S0 = 
-                                                ($bobot['C1'] * (4 / $totalC1)) +
-                                                ($bobot['C2'] * (1 / $totalC2)) +
-                                                ($bobot['C3'] * (4 / $totalC3)) +
-                                                ($bobot['C4'] * (1 / $totalC4)) +
-                                                ($bobot['C5'] * (4 / $totalC5)) +
-                                                ($bobot['C6'] * (4 / $totalC6));
+                                                ($bobot['K048'] * (4 / $totalC1)) +
+                                                ($bobot['K049'] * (1 / $totalC2)) +
+                                                ($bobot['K050'] * (4 / $totalC3)) +
+                                                ($bobot['K051'] * (1 / $totalC4)) +
+                                                ($bobot['K052'] * (4 / $totalC5)) +
+                                                ($bobot['K056'] * (4 / $totalC6));
 
                                             // Inisialisasi array untuk menyimpan nilai Ki dan ranking
                                             $data_ranking = [];
@@ -431,12 +503,12 @@
 
                                                     // Menghitung Si
                                                     $Si = 
-                                                        ($bobot['C1'] * ($p->c1 / $totalC1)) +
-                                                        ($bobot['C2'] * ($nilai_C2 / $totalC2)) +
-                                                        ($bobot['C3'] * ($p->c3 / $totalC3)) +
-                                                        ($bobot['C4'] * ($nilai_C4 / $totalC4)) +
-                                                        ($bobot['C5'] * ($p->c5 / $totalC5)) +
-                                                        ($bobot['C6'] * ($p->c6 / $totalC6));
+                                                        ($bobot['K048'] * ($p->c1 / $totalC1)) +
+                                                        ($bobot['K049'] * ($nilai_C2 / $totalC2)) +
+                                                        ($bobot['K050'] * ($p->c3 / $totalC3)) +
+                                                        ($bobot['K051'] * ($nilai_C4 / $totalC4)) +
+                                                        ($bobot['K052'] * ($p->c5 / $totalC5)) +
+                                                        ($bobot['K056'] * ($p->c6 / $totalC6));
 
                                                     // Menghitung Ki
                                                     $Ki = $Si / $S0;
@@ -482,9 +554,20 @@
                                     </table>
 
                                     <!-- Tombol di bawah tabel -->
-                                <div class="text-center mt-3">
-                                    <button type="submit" class="btn btn-success">Simpan Data</button>
-                                </div>
+                                    <div class="text-center mt-3">
+                                        <div class="d-inline-block">
+                                            <button type="submit" class="btn btn-success btn-sm">Simpan Data</button>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="submitFinish()">Finish</button>
+                                                <script>
+                                                    function submitFinish() {
+                                                        document.getElementById('form-perhitungan').action = "<?= base_url('perhitungan/simpanPenerima') ?>";
+                                                        document.getElementById('form-perhitungan').submit();
+                                                    }
+                                                </script>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -498,8 +581,17 @@
                             }
                         ?>
                     </form>
-                       
-
+                    <!-- End -->
+                    
+                    <?php endif; ?>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+   
+    <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -515,5 +607,17 @@
 
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url() ?>assets/js/demo/datatables-demo.js"></script>
-                                    
-                                    <!-- /.container-fluid -->
+      <!-- Inisialisasi DataTable untuk kedua tabel -->
+      <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();   
+            $('#dataTable2').DataTable();  
+            $('#dataTable3').DataTable(); 
+            $('#dataTable4').DataTable(); 
+            $('#dataTable5').DataTable(); 
+        });
+    </script>
+</body>
+
+</html>
+    

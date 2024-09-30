@@ -7,9 +7,46 @@ class Perhitungan extends CI_Controller {
         parent::__construct();
        $this->load->model('m_perhitungan');
        $this->load->model('m_permohonan');
-	   $this->load->model('m_data');	
+	   $this->load->model('m_data');
+      		
     }
 	public function index()
+	{
+		
+		$title['title']= 'Perhitungan';
+		$user['user'] = $this->db->get_where('tb_user',['email'=>
+		$this->session->userdata('email')])->row_array();
+
+        $years = $this->m_perhitungan->get_periode();
+        $bobot_kriteria = $this->m_data->getBobotKriteria();
+        
+         // Inisialisasi data untuk dikirim ke view
+        $data = [
+            'years' => $years,
+            'selected_year' => null,
+            'penilaian' => [], // Data penilaian akan diisi jika tahun dipilih
+            'bobot_kriteria' => $bobot_kriteria
+        ];
+        
+        // Mengecek apakah tahun dipilih dari dropdown
+		if ($this->input->post('tahun_periode')) {
+			$selected_year = $this->input->post('tahun_periode');
+			
+			// Ambil data hasil berdasarkan tahun yang dipilih
+			$penilaian = $this->m_perhitungan->get_penilaian_with_name($selected_year);
+	
+			  // Perbarui data untuk dikirim ke view
+              $data['selected_year'] = $selected_year;
+              $data['penilaian'] = $penilaian; // Data hasil diisi berdasarkan tahun yang dipilih
+		} 
+       
+		$this->load->view('templates/header',$title);
+		$this->load->view('templates/sidebar');
+		$this->load->view('templates/topbar', $user);
+		$this->load->view('perhitungan', $data);
+		
+	}
+    public function index2()
 	{
 		
 		$title['title']= 'Perhitungan';
@@ -23,9 +60,11 @@ class Perhitungan extends CI_Controller {
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);
-		$this->load->view('perhitungann', $data);
+		$this->load->view('perhitungan', $data);
 		
 	}
+
+
     
     public function simpanHasil() {
         // Pastikan Anda memuat model terlebih dahulu
