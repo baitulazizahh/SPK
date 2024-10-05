@@ -45,7 +45,17 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"> Periode Pengajuan</h1>
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>      Tambah data</button>
+                        <?php if ($jumlah_periode == 0): ?> 
+                            <!-- Tampilkan tombol tambah jika tidak ada periode -->
+                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa fa-plus"></i> Tambah Data
+                            </button>
+                        <?php else: ?>
+                            <!-- Tombol dinonaktifkan jika sudah ada data periode -->
+                            <button class="btn btn-primary btn-sm" disabled>
+                                <i class="fa fa-plus"></i> Tambah Data
+                            </button>
+                        <?php endif; ?>
                     </div>
                     
                     <!-- DataTales Example -->
@@ -165,7 +175,7 @@
         <div class="modal-content">
         <div class="modal-header bg-success">
         <!-- <h4 class="m-0 font-weight-bold text-success"><i class="fas fa-fw fa-list-alt text-successy"></i> Data Kriteria</h4> -->
-            <h4 class="modal-title text-white text-center " id="exampleModalLabel" > <i class="fas fa-fw fa-edit text-successy"></i> Edit Data Kriteria</h4>
+            <h4 class="modal-title text-white text-center " id="exampleModalLabel" > <i class="fas fa-fw fa-edit text-successy"></i> Edit Data Periode</h4>
             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>

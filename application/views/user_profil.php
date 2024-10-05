@@ -22,7 +22,7 @@
     <style>
         #content {
             margin-top: 100px; /* Jarak antara topbar dan konten */
-            margin-left: -10px;
+            margin-left: 5px;
             
         }
     </style>
@@ -57,6 +57,10 @@
                                             <div class="mb-3">
                                                 <label>Nama Lengkap</label>
                                                 <input type="text" name="nama" class="form-control" value="<?= $user->nama; ?>"> 
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>NIK</label>
+                                                <input type="text" name="nik" class="form-control" value="<?= $user->nik;?>"> 
                                             </div>
                                             <div class="mb-3">  
                                                 <label>Email</label>

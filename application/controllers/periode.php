@@ -14,6 +14,7 @@ class Periode extends CI_Controller {
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
         $data['periode'] = $this->M_periode->get_all_periode();
+        $data['jumlah_periode'] = count($data['periode']);
 
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/sidebar');

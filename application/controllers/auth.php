@@ -79,10 +79,18 @@ class Auth extends CI_Controller {
             'is_unique' => 'Email sudah terdaftar!',
             'valid_email' => 'Email tidak valid!',
         ]);
-        $this->form_validation->set_rules('no_hp', 'No_hp', 'required|trim|min_length[10]|max_length[13]',[
+        $this->form_validation->set_rules('no_hp', 'No_hp', 'required|trim|numeric|min_length[10]|max_length[13]',[
             'required' => 'No HP harus diisi!',
+            'numeric' => 'No HP harus dalam bentuk angka',
             'min_length' => 'No HP minimal 10 digit',
             'max_length' => 'No HP maksimal 13 digit',
+        ]);
+        $this->form_validation->set_rules('nik', 'Nik', 'required|trim|numeric|min_length[16]|max_length[16]|is_unique[tb_user.nik]',[
+            'required' => 'NIK harus diisi!',
+            'is_unique' => 'NIK sudah terdaftar!',
+            'numeric' => 'NIK harus dalam bentuk angka',
+            'min_length' => 'NIK harus 16 digit',
+            'max_length' => 'NIK harus 16 digit',
         ]);
         $this->form_validation->set_rules('alamat', 'alamat', 'required|trim',[
             'required' => 'Alamat harus diisi!',
@@ -109,6 +117,7 @@ class Auth extends CI_Controller {
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),  
                 'email' =>  htmlspecialchars($this->input->post('email', true)), 
                 'no_hp' =>  htmlspecialchars($this->input->post('no_hp', true)), 
+                'nik' =>  htmlspecialchars($this->input->post('nik', true)), 
                 'alamat' =>  htmlspecialchars($this->input->post('alamat', true)),      
                 'date_created' => time()
             ];

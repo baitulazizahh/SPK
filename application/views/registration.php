@@ -26,6 +26,11 @@
                                         <?= form_error('no_hp','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="nik" name="nik"
+                                        placeholder="NIK" value="<?= set_value('nik');?>">
+                                        <?= form_error('nik','<small class="text-danger pl-3">','</small>'); ?>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
                                         placeholder="Alamat" value="<?= set_value('alamat');?>">
                                         <?= form_error('alamat','<small class="text-danger pl-3">','</small>'); ?>

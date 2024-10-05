@@ -61,7 +61,10 @@ class M_permohonan extends CI_Model{
     
         return $query->num_rows() > 0;
     }
-    
+    public function get_by_id($id_permohonan) {
+        return $this->db->get_where('tb_permohonan', ['id_permohonan' => $id_permohonan])->row();
+    }
+
     
 
 

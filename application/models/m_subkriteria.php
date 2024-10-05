@@ -35,6 +35,24 @@ class M_subkriteria extends CI_Model{
             $this->db->where('id_subkriteria', $id_subkriteria);
             return $this->db->update('tb_subkriteria', $data);
         }
+
+        public function getSubkriteriaByNama($nama_kriteria)
+        {
+            $this->db->select('*');
+            $this->db->from('tb_subkriteria');
+            $this->db->join('tb_kriteria', 'tb_subkriteria.id_kriteria = tb_kriteria.id');
+            $this->db->where('tb_kriteria.nama_kriteria', $nama_kriteria);
+            $query = $this->db->get();
+            return $query->result();
+        }
+
+        public function get_by_kriteria_and_nilai($id_kriteria, $nilai) {
+            $this->db->where('id_kriteria', $id_kriteria);
+            $this->db->where('nama_subkriteria', $nilai); // Misalkan nilai permohonan cocok dengan nama subkriteria
+            return $this->db->get('tb_subkriteria')->row();
+        }
+        
+
         
     
 }

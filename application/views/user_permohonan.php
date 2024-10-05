@@ -72,16 +72,25 @@
                             <?php echo $this->session->flashdata('error'); ?>
                         </div>
                     <?php endif; ?>
+                    <?php if ($periode_status == 'inactive'): ?>
+                        <div class="alert alert-danger mt-2">
+                            Mohon maaf, periode pengajuan permohonan telah berakhir.
+                        </div>
+                    <?php endif; ?>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between align-items-center">
                     <h6 class="m-0 font-weight-bold text-success">
                         <i class="fas fa-fw fa-file-alt text-success"></i> Data Permohonan
                     </h6>
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+
+                    <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                          Ajukan Permohonan
+                    </button> -->
+                    <button class="btn btn-primary btn-sm" id="btnAjukan" data-toggle="modal" data-target="#exampleModal" 
+                        <?php if ($periode_status == 'inactive'): ?> disabled <?php endif; ?>>
+                        Ajukan Permohonan
                     </button>
-   
                     </div>
                         
                                             <div class="card-body">
@@ -163,7 +172,7 @@
                             <?php echo form_open('user/permohonan/upload', ['enctype' => 'multipart/form-data',  'method' => 'post']); ?>
                                 <div class="form-group">
                                     <label for="">NIK / No.KTP</label>
-                                    <input type="text" name="nik" class="form-control"  value="<?= set_value('nik');?>"> 
+                                    <input type="text" name="nik" class="form-control" value="<?= $user->nik; ?>" readonly> 
                                     <?= form_error('nik','<small class="text-danger pl-1">','</small>'); ?>
                                 </div>
                                 <div class="form-group">
@@ -179,15 +188,15 @@
                                     <label for="">Pendapatan</label>
                                     <select class=" form-control" name="pendapatan" value="<?= set_value('pendapatan')?>">
                                         <option>Kurang dari Rp 1.000.000</option>
-                                        <option>Rp 1.000.000 - Kurang dari Rp 1.500.000 </option>
-                                        <option>Rp 1.500.000 - Kurang dari Rp 2.000.000</option>
+                                        <option>Rp 1.000.000 - Rp 1.499.999</option>
+                                        <option>Rp 1.500.000 - Rp 1.999.999</option>
                                         <option>Lebih dari Rp 2.000.000</option>  
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Jumlah Tanggungan</label>
                                     <select class=" form-control" name="tanggungan" value="<?= set_value('tanggungan')?>">
-                                        <option>Lebih 4 orang</option>
+                                        <option>Lebih dari 4 orang</option>
                                         <option>4 orang</option>
                                         <option>3 orang</option>
                                         <option>1-2 orang</option>  
@@ -227,7 +236,8 @@
                         </div>
                         </div>
                     </div>
-                    </div>     
+                    </div>    
+                  
                     <!-- End Modal Tambah  -->
 
                     <!-- Modal Hapus-->

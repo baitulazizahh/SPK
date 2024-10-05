@@ -21,9 +21,19 @@ class Permohonan extends CI_Controller {
 		$this->session->userdata('email')])->row_array();
 
 		$id_user = $this->session->userdata('id_user');
+		$data['user'] = $this->m_pengguna->getUser($id_user);
 		$data['permohonan'] = $this->m_permohonan->getPermohonan($id_user);
 		
-
+		// Cek apakah periode masih aktif
+		$current_date = date('Y-m-d');
+		$this->load->model('m_periode');
+		$periode_aktif = $this->m_periode->get_active_periode($current_date);
+	
+		if ($periode_aktif) {
+			$data['periode_status'] = 'active'; // Periode masih aktif
+		} else {
+			$data['periode_status'] = 'inactive'; // Periode sudah berakhir
+		}
 		$this->load->view('templates/header',$title);
 		$this->load->view('templates/user_sidebar');
 		$this->load->view('templates/topbar',$user);
@@ -34,18 +44,6 @@ class Permohonan extends CI_Controller {
 	public function upload(){
 		$id_user =$this->session->userdata('id_user');
 		
-		// Ambil periode yang sedang aktif
-		$current_date = date('Y-m-d');
-		$this->load->model('M_periode');
-		$periode_aktif = $this->M_periode->get_active_periode($current_date);
-		
-		// Cek apakah ada periode yang aktif
-		if (!$periode_aktif) {
-			$this->session->set_flashdata('error', 'Mohon maaf waktu pengajuan permohonan sudah berakhir.');
-			redirect('user/permohonan');
-			return;
-		}
-
 		// Validasi input form
 		$this->form_validation->set_rules('nik', 'NIK', 'required');
 		$this->form_validation->set_rules('nama_usaha', 'Nama Usaha', 'required');
@@ -152,7 +150,7 @@ class Permohonan extends CI_Controller {
 		 }
 
 
-		//$nik = $this->input->post('nik', TRUE);
+		$nik = $this->input->post('nik', TRUE);
 		$nama_usaha = $this->input->post('nama_usaha', TRUE);
 		$pendapatan = $this->input->post('pendapatan', TRUE);
 		$tanggungan = $this->input->post('tanggungan', TRUE);
