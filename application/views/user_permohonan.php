@@ -215,6 +215,18 @@
                                     <small class="font-italic">*Dokumen dalam format pdf</small>
                                 </div>
                                 <div class="form-group">
+                                    <label>Surat Keterangan Tidak Mampu </label>
+                                    <input type="file" name="sktm" class="form-control">
+                                    <?= form_error('sktm', '<small class="text-danger pl-1">', '</small>'); ?>
+                                    <small class="font-italic">*Dokumen dalam format pdf</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Surat Keterangan Jamaah Masjid </label>
+                                    <input type="file" name="skjm" class="form-control">
+                                    <?= form_error('skjm', '<small class="text-danger pl-1">', '</small>'); ?>
+                                    <small class="font-italic">*Dokumen dalam format pdf</small>
+                                </div>
+                                <div class="form-group">
                                     <label>Foto Kartu Keluarga</label>
                                     <input type="file" name="kk" class="form-control">
                                     <?= form_error('kk', '<small class="text-danger pl-1">', '</small>'); ?>
@@ -300,7 +312,7 @@
                                         <?php if (file_exists('./uploads/proposal/' . $data->proposal) && !empty($data->proposal)) : ?>
                                             <a href=" <?php echo base_url() . 'uploads/proposal/' . $data->proposal; ?>" class="btn btn-info btn-sm">Lihat</a>
                                         <?php else : ?>
-                                            <span class="badge badge-danger">Proposal tidak ditemukan</span>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
                                         <?php endif; ?>                
                                     </div>
                                 </div>
@@ -310,7 +322,27 @@
                                         <?php if (file_exists('./uploads/sku/' . $data->sku) && !empty($data->sku)) : ?>
                                             <a href=" <?php echo base_url() . 'uploads/sku/' . $data->sku; ?>" class="btn btn-info btn-sm">Lihat</a>
                                         <?php else : ?>
-                                            <span class="badge badge-danger">SKU tidak ditemukan</span>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>Surat Keterangan Tidak Mampu</strong></div>
+                                    <div class="col-6">
+                                        <?php if (file_exists('./uploads/sktm/' . $data->sktm) && !empty($data->sktm)) : ?>
+                                            <a href=" <?php echo base_url() . 'uploads/sktm/' . $data->sktm; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                        <?php else : ?>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"><strong>Surat Keterangan Jamaah Masjid</strong></div>
+                                    <div class="col-6">
+                                        <?php if (file_exists('./uploads/skjm/' . $data->skjm) && !empty($data->skjm)) : ?>
+                                            <a href=" <?php echo base_url() . 'uploads/skjm/' . $data->skjm; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                        <?php else : ?>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -320,7 +352,7 @@
                                         <?php if (file_exists('./uploads/kk/' . $data->kk) && !empty($data->kk)) : ?>
                                             <a href=" <?php echo base_url() . 'uploads/kk/' . $data->kk ?>" class="btn btn-info btn-sm">Lihat</a>
                                         <?php else : ?>
-                                            <span class="badge badge-danger">Foto KK tidak ditemukan</span>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -330,7 +362,7 @@
                                         <?php if (file_exists('./uploads/ktp/' . $data->ktp) && !empty($data->ktp)) : ?>
                                             <a href=" <?php echo base_url() . 'uploads/ktp/' . $data->ktp; ?>" class="btn btn-info btn-sm">Lihat</a>
                                         <?php else : ?>
-                                            <span class="badge badge-danger">Foto KTP tidak ditemukan</span>
+                                            <span class="badge badge-danger">File tidak ditemukan</span>
                                         <?php endif; ?>
                                     </div>
                                 </div>

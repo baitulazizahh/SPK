@@ -129,6 +129,40 @@ class Permohonan extends CI_Controller {
 			$sku = $sku_upload['file_name'];
 		}
 
+		//Upload SKTM
+		$sktm_config = array(
+			'upload_path' 	=> './uploads/sktm/',
+			'allowed_types' => 'pdf',
+			'max_size' 		=> 5000 
+		);
+		$this->upload->initialize($sktm_config);
+
+		if (!$this->upload->do_upload('sktm')) {
+			$upload_errors[] = "SKTM harus dalam format PDF: " . $this->upload->display_errors('', '');
+			$sktm = NULL;
+		} 
+		else {
+			$sktm_upload = $this->upload->data();
+			$sktm = $sktm_upload['file_name'];
+		}
+
+		//Upload SKJM
+		$skjm_config = array(
+			'upload_path' 	=> './uploads/skjm/',
+			'allowed_types' => 'pdf',
+			'max_size' 		=> 5000 
+		);
+		$this->upload->initialize($skjm_config);
+
+		if (!$this->upload->do_upload('skjm')) {
+			$upload_errors[] = "Surat Pernyataan Jamaah Masjid harus dalam format PDF: " . $this->upload->display_errors('', '');
+			$skjm = NULL;
+		} 
+		else {
+			$skjm_upload = $this->upload->data();
+			$skjm = $skjm_upload['file_name'];
+		}
+
 		// Jika ada error dalam upload, tampilkan pesan error di bawah form
 		if (!empty($upload_errors)) {
 			$this->session->set_flashdata('upload_errors', implode('<br>', $upload_errors));
@@ -172,6 +206,8 @@ class Permohonan extends CI_Controller {
             'tanggungan' => $tanggungan,
             'proposal' => $proposal,
             'sku' => $sku,
+			'sktm' => $sktm,
+            'skjm' => $skjm,
             'kk' => $kk,
             'ktp' => $ktp,
 			'status' => $status,

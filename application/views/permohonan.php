@@ -180,7 +180,7 @@
                                 <a href=" <?php echo base_url() . 'uploads/proposal/' . $data->proposal; ?>" class="btn btn-info btn-sm">Lihat</a>
                                 <input type="checkbox" id="verify_proposal_<?= $data->id_permohonan ?>" name="verify_proposal_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
-                                <span class="badge badge-danger">Proposal tidak ditemukan</span>
+                                <span class="badge badge-danger">File tidak ditemukan</span>
                             <?php endif; ?>                
                         </div>
                     </div>
@@ -191,7 +191,29 @@
                                 <a href=" <?php echo base_url() . 'uploads/sku/' . $data->sku; ?>" class="btn btn-info btn-sm">Lihat</a>
                                 <input type="checkbox" id="verify_sku_<?= $data->id_permohonan ?>" name="verify_sku_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
-                                <span class="badge badge-danger">Foto SKU tidak ditemukan</span>
+                                <span class="badge badge-danger">File tidak ditemukan</span>
+                            <?php endif; ?>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Surat Keterangan Tidak Mampu</strong></div>
+                        <div class="col-5">
+                            <?php if (file_exists('./uploads/sktm/' . $data->sktm) && !empty($data->sktm)) : ?>
+                                <a href=" <?php echo base_url() . 'uploads/sktm/' . $data->sktm; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                <input type="checkbox" id="verify_sktm_<?= $data->id_permohonan ?>" name="verify_sktm_<?= $data->id_permohonan ?>"> Verifikasi
+                            <?php else : ?>
+                                <span class="badge badge-danger">File tidak ditemukan</span>
+                            <?php endif; ?>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5"><strong>Surat Keterangan Jamaah Masjid</strong></div>
+                        <div class="col-5">
+                            <?php if (file_exists('./uploads/skjm/' . $data->skjm) && !empty($data->skjm)) : ?>
+                                <a href=" <?php echo base_url() . 'uploads/skjm/' . $data->skjm; ?>" class="btn btn-info btn-sm">Lihat</a>
+                                <input type="checkbox" id="verify_skjm_<?= $data->id_permohonan ?>" name="verify_skjm_<?= $data->id_permohonan ?>"> Verifikasi
+                            <?php else : ?>
+                                <span class="badge badge-danger">File tidak ditemukan</span>
                             <?php endif; ?>                
                         </div>
                     </div>
@@ -202,7 +224,7 @@
                                 <a href=" <?php echo base_url() . 'uploads/kk/' . $data->kk; ?>" class="btn btn-info btn-sm">Lihat</a>
                                 <input type="checkbox" id="verify_kk_<?= $data->id_permohonan ?>" name="verify_kk_<?= $data->id_permohonan ?>"> Verifikasi
                             <?php else : ?>
-                                <span class="badge badge-danger"> Foto KK tidak ditemukan</span>
+                                <span class="badge badge-danger"> File tidak ditemukan</span>
                             <?php endif; ?>                
                         </div>
                     </div>
@@ -213,7 +235,7 @@
                                 <a href=" <?php echo base_url() . 'uploads/ktp/' . $data->ktp; ?>" class="btn btn-info btn-sm">Lihat</a>
                                 <input type="checkbox" id="verify_ktp_<?= $data->id_permohonan ?>" name="verify_ktp_<?= $data->id_permohonan ?>"> Verifikasi
                                 <?php else : ?>
-                                <span class="badge badge-danger">Foto KTP tidak ditemukan</span>
+                                <span class="badge badge-danger">File tidak ditemukan</span>
                             <?php endif; ?>                
                         </div>
                     </div>
@@ -340,6 +362,8 @@
             let checkboxes = [
                 '#verify_proposal_<?= $data->id_permohonan ?>',
                 '#verify_sku_<?= $data->id_permohonan ?>',
+                '#verify_sktm_<?= $data->id_permohonan ?>',
+                '#verify_skjm_<?= $data->id_permohonan ?>',
                 '#verify_kk_<?= $data->id_permohonan ?>',
                 '#verify_ktp_<?= $data->id_permohonan ?>',
                 '#verify_usaha_<?= $data->id_permohonan ?>',
