@@ -73,8 +73,7 @@
                                             <th class="text-center align-middle">Riwayat Bantuan</th>
                                             <th class="text-center align-middle">Tanggungan</th>
                                             <th class="text-center align-middle">Pendapatan</th>
-                                            <th class="text-center align-middle">Persyaratan</th>
-                                            <th class="text-center align-middle">SKU</th>
+                                            <th class="text-center align-middle">Status Usaha</th>
                                             <th class="text-center align-middle">Aksi</th>
                                         </tr>
                                        
@@ -91,7 +90,6 @@
                                             <td class="text-center"><?php echo $p->c3; ?></td>
                                             <td class="text-center"><?php echo $p->c4; ?></td>
                                             <td class="text-center"><?php echo $p->c5; ?></td>
-                                            <td class="text-center"><?php echo $p->c6; ?></td>
                                             <td class="text-center">
                                                 <!-- <a data-toggle="modal" data-id_permohonan="<?php echo $p->id_permohonan; ?>"  data-target="#updateModal" data-placement="bottom" title="Update Data" href="<?php echo base_url()?>penilaian/update_penilaian/" class="btn btn-warning btn-sm"><i class="fa fa-edit fa-sm"></i></a> -->
                                                 <a data-toggle="modal" data-target="#delete<?= $p->id_permohonan;?>" data-placement="bottom" title="Hapus Data" href="<?php echo base_url()?>penilaian/hapus_data/" class="btn btn-danger btn-sm"><i class="fa fa-trash fa-sm"></i></a>

@@ -28,53 +28,7 @@ class Penilaian extends CI_Controller {
 		
 	}
 
-	public function edit_penilaian($id_permohonan)
-	{
-			// Ambil data kriteria
-			$data['kriteria'] = $this->db->get('tb_kriteria')->result();
-			
-			// Ambil data subkriteria
-			$data['subkriteria'] = $this->db->get('tb_subkriteria')->result();
-
-			// Ambil data penilaian berdasarkan id_permohonan
-			$data['penilaian'] = $this->db->get_where('tb_penilaian', ['id_permohonan' => $id_permohonan])->row();
-			
-			// Load view dan kirim data
-			$this->load->view('penilaiann', $data);
-		
-		
-	}
-
-	public function update_penilaian()
-
-	{
-	// Ambil data kriteria
-	$data['kriteria'] = $this->db->get('tb_kriteria')->result();
-				
-	// Ambil data subkriteria
-	$data['subkriteria'] = $this->db->get('tb_subkriteria')->result();
-
-	// Ambil data penilaian berdasarkan id_permohonan
-	$data['penilaian'] = $this->db->get_where('tb_penilaian', ['id_permohonan' => $id_permohonan])->row();
-
-// Load view dan kirim data
-$this->load->view('penilaiann', $data);
-
-		$id_permohonan = $this->input->post('id_permohonan');
-		
-		// Update data penilaian berdasarkan id_permohonan
-		$data = array(
-			'subkriteria_1' => $this->input->post('subkriteria_1'),
-			'subkriteria_2' => $this->input->post('subkriteria_2'),
-			// Tambahkan kolom lainnya sesuai kebutuhan
-		);
-
-		$this->db->where('id_permohonan', $id_permohonan);
-		$this->db->update('tb_penilaian', $data);
-		
-		// Redirect atau tampilkan pesan sukses
-		redirect('permohonan/data_penilaian');
-	}
+	
 
 	public function hapus($id_permohonan){
         $where =  array ('id_permohonan'=> $id_permohonan);

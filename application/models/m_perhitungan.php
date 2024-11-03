@@ -6,12 +6,11 @@ class M_perhitungan extends CI_Model{
     {
         $this->db->select('tb_user.nama, tb_penilaian.id_kriteria, tb_penilaian.nilai, tb_penilaian.id_permohonan,
         
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 48 THEN tb_penilaian.nilai END) AS c1,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 49 THEN tb_penilaian.nilai END) AS c2,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 50 THEN tb_penilaian.nilai END) AS c3,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 51 THEN tb_penilaian.nilai END) AS c4,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 52 THEN tb_penilaian.nilai END) AS c5,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 56 THEN tb_penilaian.nilai END) AS c6');
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 1 THEN tb_penilaian.nilai END) AS c1,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 2 THEN tb_penilaian.nilai END) AS c2,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 3 THEN tb_penilaian.nilai END) AS c3,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 4 THEN tb_penilaian.nilai END) AS c4,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 5 THEN tb_penilaian.nilai END) AS c5');
 
         $this->db->from('tb_penilaian');
         // Join ke tb_permohonan untuk mendapatkan id_user
@@ -29,12 +28,11 @@ class M_perhitungan extends CI_Model{
     {
         $this->db->select('tb_user.nama, tb_penilaian.id_kriteria, tb_penilaian.nilai, tb_penilaian.id_permohonan,
         
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 48 THEN tb_penilaian.nilai END) AS c1,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 49 THEN tb_penilaian.nilai END) AS c2,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 50 THEN tb_penilaian.nilai END) AS c3,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 51 THEN tb_penilaian.nilai END) AS c4,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 52 THEN tb_penilaian.nilai END) AS c5,
-        MAX(CASE WHEN tb_penilaian.id_kriteria = 56 THEN tb_penilaian.nilai END) AS c6');
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 1 THEN tb_penilaian.nilai END) AS c1,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 2 THEN tb_penilaian.nilai END) AS c2,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 3 THEN tb_penilaian.nilai END) AS c3,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 4 THEN tb_penilaian.nilai END) AS c4,
+        MAX(CASE WHEN tb_penilaian.id_kriteria = 5 THEN tb_penilaian.nilai END) AS c5');
 
         $this->db->from('tb_penilaian');
         // Join ke tb_permohonan untuk mendapatkan id_user

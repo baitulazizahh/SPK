@@ -178,10 +178,10 @@
                                 <div class="form-group">
                                     <label for="">Jenis Usaha</label>
                                     <select class=" form-control" name="nama_usaha" value="<?= set_value('nama_usaha')?>">
-                                        <option>Usaha Kuliner</option>
-                                        <option>Usaha Jasa </option>
+                                        <option>Usaha Makanan/Minuman Rumahan</option>
+                                        <option>Usaha Kebutuhan Harian</option>
                                         <option>Usaha Pertanian/Peternakan</option>
-                                        <option>Usaha Lainnya</option>  
+                                        <option>Usaha Jasa</option>  
                                     </select>
                                 </div> 
                                 <div class="form-group">
@@ -196,10 +196,10 @@
                                 <div class="form-group">
                                     <label for="">Jumlah Tanggungan</label>
                                     <select class=" form-control" name="tanggungan" value="<?= set_value('tanggungan')?>">
-                                        <option>Lebih dari 4 orang</option>
-                                        <option>4 orang</option>
+                                        <option>4 orang atau lebih</option>
                                         <option>3 orang</option>
-                                        <option>1-2 orang</option>  
+                                        <option>2 orang</option>
+                                        <option>1 orang</option>  
                                     </select>
                                 </div>
                                 <div class="form-group">

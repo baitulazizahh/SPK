@@ -276,27 +276,14 @@
                         <label for="">Riwayat Bantuan</label>
                         <input type="text" name="riwayat_bantuan" class="form-control" value="<?= $data->riwayat_bantuan;?>"> 
                     </div>
-                     <!-- Dropdown Persyaratan dari Subkriteria -->
+                     <!-- Dropdown Status Usaha dari Subkriteria -->
                     <div class="form-group">
-                        <label for="">Persyaratan</label>
-                        <select class="form-control" name="subkriteria_52" required>
+                        <label for="">Status Usaha</label>
+                        <select class="form-control" name="subkriteria_5" required>
                             <option value="">--Pilih--</option>
-                            <?php foreach($subkriteria_persyaratan as $sub): ?>
+                            <?php foreach($subkriteria_status as $sub): ?>
                                 <option value="<?php echo $sub->id_subkriteria.','.$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
                             <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">SKU</label>
-                        <select class="form-control" name="subkriteria_56" required>
-                            <option value="">--Pilih--</option>
-                            <?php if(!empty($subkriteria_sku)): ?>
-                                <?php foreach($subkriteria_sku as $sub): ?>
-                                    <option value="<?php echo $sub->id_subkriteria.','.$sub->nilai; ?>"><?php echo $sub->nama_subkriteria; ?></option>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <option value="">Subkriteria tidak tersedia</option>
-                            <?php endif; ?>
                         </select>
                     </div>
                     <div class="modal-footer">
