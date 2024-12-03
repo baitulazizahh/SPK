@@ -36,7 +36,6 @@ class Auth extends CI_Controller {
         $password = $this->input->post('password');
     
        
-    
         // Mengambil data user dari database
         $user = $this->db->get_where('tb_user', ['email' => $email])->row_array();
         

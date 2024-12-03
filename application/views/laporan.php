@@ -135,7 +135,7 @@
     </table>
 
     <div class="signature">
-        <p>Padang, <?= date('d M Y'); ?></p>
+        <p>Nan Sabaris, <?= date('d M Y'); ?></p>
         <p>Mengetahui,<br>Kepala BAZNAS Padang Pariaman</p>
         <br><br>
         <p><b>Dr. H. Rahmat Tk Sulaiman, MM</b></p>

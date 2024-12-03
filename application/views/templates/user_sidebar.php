@@ -27,7 +27,7 @@
                     <span>Profil</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('auth/logout')?>">
+                <a class="nav-link" href="<?= base_url('auth/logout')?>" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-fw fa-sign-out-alt text-white"></i>
                     <span>Log out</span></a>
             </li>
@@ -35,5 +35,21 @@
 
         <!-- Main Content Wrapper -->
 <div id="content-wrapper" style="margin-left: -1570px;  width: calc(100% - 1000px);">
-    <!-- Content here -->
+     <!-- Modal Konfirmasi Logout -->
+     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">Apakah anda yakin ingin logout?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                        <a href="<?= base_url('auth/logout'); ?>" class="btn btn-primary">Ya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>

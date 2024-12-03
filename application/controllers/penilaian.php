@@ -36,10 +36,6 @@ class Penilaian extends CI_Controller {
         redirect('penilaian/index');
 
     }
-
-
-
-	
 		
 }
 	
