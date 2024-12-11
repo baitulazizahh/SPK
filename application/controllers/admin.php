@@ -12,8 +12,7 @@ class Admin extends CI_Controller {
 	 
 	public function index()
 	{
-		// $this->load->model('m_home');
-		// $data['nilai'] = $this->m_penilaian->tampil_data()->result();
+		
 		$title['title']= 'Admin';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();

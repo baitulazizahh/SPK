@@ -7,10 +7,6 @@ class Profil extends CI_Controller {
         parent::__construct();
         $this->load->model('m_pengguna');
 		$this->load->library('form_validation');
-		//  // Pastikan session user sudah ada sebelum mengakses fungsi-fungsi berikut
-		//  if (!$this->session->userdata('id_user')) {
-        //     redirect('login'); // Redirect ke halaman login jika belum login
-        // }
     }
 
 	public function index()
@@ -35,6 +31,7 @@ class Profil extends CI_Controller {
 		$id_user = $this->input->post('id_user');
 		$id_role = $this->input->post('id_role');
 		$nama = $this->input->post('nama');
+		$email = $this->input->post('email');
 		$no_hp = $this->input->post('no_hp');
 		$alamat = $this->input->post('alamat');
 		$password = $this->input->post('password');
@@ -55,6 +52,7 @@ class Profil extends CI_Controller {
 			'id_user' => $id_user,
 			'id_role' => $id_role,
 			'nama' => $nama,
+			'email' => $email,
 			'no_hp' => $no_hp,
 			'alamat' => $alamat,
 			'password' => $hashed_password,

@@ -12,8 +12,7 @@ class Hasil extends CI_Controller {
     }
 	public function index()
 	{
-		// $this->load->model('m_perhitungan');
-		// $data['alternatif'] = $this->m_perhitungan->tampil_data()->result();
+		
 		$title['title']= 'Hasil akhir';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
@@ -55,8 +54,6 @@ class Hasil extends CI_Controller {
 	}
 	public function index2()
 	{
-		// $this->load->model('m_perhitungan');
-		// $data['alternatif'] = $this->m_perhitungan->tampil_data()->result();
 		$title['title']= 'Hasil akhir';
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
@@ -85,7 +82,6 @@ class Hasil extends CI_Controller {
 			];
 		}
 		
-
 		$this->load->view('templates/header', $title);
 		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar', $user);

@@ -18,8 +18,8 @@ class M_data extends CI_Model{
         $this->db->update($table, $data);
     }
     public function getBobotKriteria() {
-        $query = $this->db->get('tb_kriteria'); // Adjust the table name if necessary
-        return $query->result_array(); // Return as associative array
+        $query = $this->db->get('tb_kriteria'); 
+        return $query->result_array(); 
     }
     public function get_last_kriteria_id()
     {

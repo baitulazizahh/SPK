@@ -52,8 +52,7 @@ class Pengguna extends CI_Controller {
 				'nama' => $nama,
 				'email' => $email,
 				'password' => $password,
-				'id_role' => $id_role,
-				// 'is_active' =>1,  
+				'id_role' => $id_role, 
                 'date_created' => time()
 			);
 	

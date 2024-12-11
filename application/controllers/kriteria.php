@@ -22,7 +22,7 @@ class Kriteria extends CI_Controller {
 		->row_array();
 
 		$new_id_number = $last_kriteria ? $last_kriteria['id'] + 1 : 1;
-		$new_id_kriteria = 'K' . str_pad($new_id_number, 3, '0', STR_PAD_LEFT); // Contoh: K001, K002, dst.
+		$new_id_kriteria = 'K' . str_pad($new_id_number, 3, '0', STR_PAD_LEFT); // Contoh: K001
 
 		$data['id_kriteria'] = $new_id_kriteria;
 		$data['kriteria'] = $this->m_data->tampil_data();

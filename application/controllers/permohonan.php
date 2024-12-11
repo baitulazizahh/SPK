@@ -20,15 +20,11 @@ class Permohonan extends CI_Controller {
 		$user['user'] = $this->db->get_where('tb_user',['email'=>
 		$this->session->userdata('email')])->row_array();
 	
-		
-
 		// Ambil id_permohonan dari session
 		$id_user = $this->session->userdata('id_user');
     	$id_permohonan = $this->session->userdata('id_permohonan'); 
-
 		
-		
-		// $data['id_permohonan'] 	= $id_permohonan; 
+	 
 		$data['kriteria'] 	= $this->m_data->tampil_data(); 
 		$data['subkriteria']= $this->m_subkriteria->get_all_subkriteria_grouped();
 		$data['permohonan'] = $this->m_permohonan->tampil_data();
